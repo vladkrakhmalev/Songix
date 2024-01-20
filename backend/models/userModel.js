@@ -19,10 +19,9 @@ const userSchema = new Schema({
       type: String,
     },
     name: String,
-    text: [{
-      type: {type: String},
-      value: String
-    }],
+    text: {
+      type: String,
+    },
   }]
 })
 
