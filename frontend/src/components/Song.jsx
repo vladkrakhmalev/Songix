@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate, useOutletContext } from "react-router-dom";
 import { sendRequest } from "../services/apiServices";
-import SongText from "./SongText";
+import ContentEditable from "react-contenteditable";
 
 export default function Song({isNew}) {
   const [songs, setSongs, updateOpenMenu] = useOutletContext()
@@ -19,15 +19,14 @@ export default function Song({isNew}) {
     setSong(newSong)
   }
 
+  console.log(song)
+
   function generateSong() {
     setSong({
       isFavorite: false,
       category: '',
       name: '',
-      text: [{
-        type: '',
-        value: '',
-      }],
+      text: '',
     })
     setDisabled(false)
   }
@@ -91,7 +90,7 @@ export default function Song({isNew}) {
 
   
   
-  return song ? <>
+  return (
     <div className='song'>
       <div className="song__header">
         <div className="panel__open-menu" onClick={updateOpenMenu}></div>
@@ -121,8 +120,8 @@ export default function Song({isNew}) {
             {deleteButton}
           </div>
         </div>
-
       </div>
+
       <div className="song__subheader">
         <select
           className={'song__select' + disabledClass}
@@ -135,12 +134,14 @@ export default function Song({isNew}) {
           )}
         </select>
       </div>
-      <SongText
-        blocks={song.text}
-        sizeText={sizeText}
+
+      <ContentEditable
+        className={'song__text' + disabledClass}
         disabled={disabled}
-        handleChange={handleChange}
+        html={song.text}
+        style={{fontSize: sizeText}}  
+        onChange={e => handleChange(e.target.value, 'text')}
       />
     </div>
-  </> : ''
+  )
 }
