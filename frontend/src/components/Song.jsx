@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate, useOutletContext } from "react-router-dom";
 import { sendRequest } from "../services/apiServices";
+import { decorateSong, transposeSong } from "../services/transpositionServices";
 import ContentEditable from "react-contenteditable";
 
 export default function Song({isNew}) {
@@ -13,13 +14,24 @@ export default function Song({isNew}) {
   const disabledClass = disabled ? " _disabled" : ''
   const categories = ['Хлебопреломление','Жатва','Рождество']
 
-  function handleChange(value, prop) {
+  function handleChange(e, prop) {
     const newSong = {...song}
-    newSong[prop] = value
+    newSong[prop] = e.target.value
     setSong(newSong)
   }
 
-  console.log(song)
+  function handlePaste(e) {
+    e.preventDefault()
+    const text = e.clipboardData.getData('text/plain')
+    const newSong = {...song}
+    newSong.text = text
+    setSong(newSong)
+  }
+
+  function handleTranspose(isUp) {
+    const newSong = transposeSong(song, isUp)
+    setSong(newSong)
+  }
 
   function generateSong() {
     setSong({
@@ -42,9 +54,11 @@ export default function Song({isNew}) {
     }
   }
 
-  async function addSong(song) {
+  async function addSong() {
     setDisabled(!disabled)
-    const result = await sendRequest('/api/song', 'POST', song)
+    const newSong = decorateSong(song)
+    setSong(newSong)
+    const result = await sendRequest('/api/song', 'POST', newSong)
     if (result.success) {
       songs.push(result.song)
       setSongs(songs)
@@ -54,17 +68,21 @@ export default function Song({isNew}) {
     }
   }
 
-  async function editSong(song) {
+  async function editSong() {
     setDisabled(!disabled)
-    return await sendRequest('/api/song/' + song._id, 'PUT', song)
+    const newSong = decorateSong(song)
+    setSong(newSong)
+    sendRequest('/api/song/' + song._id, 'PUT', newSong)
   }
 
-  async function deleteSong(id) {
-    const index = songs.findIndex(song => song._id == id)
-    songs.splice(index, 1)
-    setSongs(songs)
+  async function deleteSong() {
+    if (!isNew) {
+      const index = songs.findIndex(curSong => curSong._id == song._id)
+      songs.splice(index, 1)
+      setSongs(songs)
+      sendRequest('/api/song/' + song._id, 'DELETE', song)
+    }
     navigate('/songs')
-    await sendRequest('/api/song/' + song._id, 'DELETE', song)
   }
 
   useEffect(() => {
@@ -80,68 +98,67 @@ export default function Song({isNew}) {
 
   const saveButton = <div
     className="panel__btn _small _light _save"
-    onClick={() => isNew ? addSong(song) : editSong(song)}
+    onClick={() => isNew ? addSong() : editSong()}
   >Сохранить</div>
 
   const deleteButton = <div
     className="panel__btn _small _light _delete"
-    onClick={() => deleteSong(song._id)}
+    onClick={() => deleteSong()}
   >Удалить</div>
 
   
   
-  return (
-    <div className='song'>
-      <div className="song__header">
-        <div className="panel__open-menu" onClick={updateOpenMenu}></div>
+  return <div className='song'>
+    <div className="song__header">
+      <div className="panel__open-menu" onClick={updateOpenMenu}></div>
 
-        <textarea
-          className={'song__name' + disabledClass}
-          value={song.name}
-          readOnly={disabled}
-          onChange={e => handleChange(e.target.value, 'name')}
-          rows={1}
-          placeholder="Название песни"
-        />
+      <textarea
+        className={'song__name' + disabledClass}
+        value={song.name}
+        readOnly={disabled}
+        onChange={e => handleChange(e, 'name')}
+        rows={1}
+        placeholder="Название песни"
+      />
 
-        <div className="panel__menu menu">
-          <div className="menu__wrapper">
-            <div className="menu__tonality">
-              <div className="menu__tonality-btn" onClick={() => setSizeText(sizeText-2)}>-</div>
-              <div className="menu__tonality-btn" onClick={() => setSizeText(sizeText+2)}>+</div>
-              <div className="menu__tonality-name">Изменить размер</div>
-            </div>
-            <div className="menu__tonality">
-              <div className="menu__tonality-btn" onClick={() => transpose(false)}>-</div>
-              <div className="menu__tonality-btn" onClick={() => transpose(true)}>+</div>
-              <div className="menu__tonality-name">Транспонировать</div>
-            </div>
-            {disabled ? editButton : saveButton}
-            {deleteButton}
+      <div className="panel__menu menu">
+        <div className="menu__wrapper">
+          <div className="menu__tonality">
+            <div className="menu__tonality-btn" onClick={() => setSizeText(sizeText-2)}>-</div>
+            <div className="menu__tonality-btn" onClick={() => setSizeText(sizeText+2)}>+</div>
+            <div className="menu__tonality-name">Изменить размер</div>
           </div>
+          <div className="menu__tonality">
+            <div className="menu__tonality-btn" onClick={() => handleTranspose(false)}>-</div>
+            <div className="menu__tonality-btn" onClick={() => handleTranspose(true)}>+</div>
+            <div className="menu__tonality-name">Транспонировать</div>
+          </div>
+          {disabled ? editButton : saveButton}
+          {deleteButton}
         </div>
       </div>
-
-      <div className="song__subheader">
-        <select
-          className={'song__select' + disabledClass}
-          defaultValue={song.category}
-          onChange={e => handleChange(e.target.value, 'category')}
-        >
-          <option value=''>Выберете категорию</option>
-          {categories.map((category, id) => 
-            <option value={category} key={id}>{category}</option>
-          )}
-        </select>
-      </div>
-
-      <ContentEditable
-        className={'song__text' + disabledClass}
-        disabled={disabled}
-        html={song.text}
-        style={{fontSize: sizeText}}  
-        onChange={e => handleChange(e.target.value, 'text')}
-      />
     </div>
-  )
+
+    <div className="song__subheader">
+      <select
+        className={'song__select' + disabledClass}
+        defaultValue={song.category}
+        onChange={e => handleChange(e, 'category')}
+      >
+        <option value=''>Выберете категорию</option>
+        {categories.map((category, id) => 
+          <option value={category} key={id}>{category}</option>
+        )}
+      </select>
+    </div>
+
+    <ContentEditable
+      className={'song__text' + disabledClass}
+      disabled={disabled}
+      html={song.text || ''}
+      style={{fontSize: sizeText}}  
+      onChange={e => handleChange(e, 'text')}
+      onPaste={handlePaste}
+    />
+  </div>
 }

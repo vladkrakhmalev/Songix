@@ -404,7 +404,7 @@ div, p, a, button, input {
 }
 
 .song__chord {
-  font-weight: bold;
+  font-weight: 700;
 }
 
 @media (max-width: 860px) {
