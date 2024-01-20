@@ -1,13 +1,8 @@
-import { useState } from "react";
 import ContentEditable from "react-contenteditable";
 
-
-
-export default function SongText({blocks, disabled, handleChange, sizeText}) {
-
-  const [dragBlock, setDragBlock] = useState(null)
-
-
+export default function SongText({blocks, sizeText, disabled, handleChange}) {
+  const disabledClass = disabled ? " _disabled" : ''
+  let countBlock = 0
 
   function handleChangeText(index, prop, e) {
     blocks[index][prop] = e.target.value
@@ -22,51 +17,15 @@ export default function SongText({blocks, disabled, handleChange, sizeText}) {
   function deleteBlock(index) {
     blocks.splice(index, 1)
     handleChange(blocks, 'text')
-  }
-
-  function dragStartHandler(e, block) {
-    setDragBlock(block)
-    e.dataTransfer.effectAllowed = "move";
-  }
-
-  function dragOverHandler(e, dropBlock) {
-    e.preventDefault()
-
-    const elem = e.target.closest('.song__text')
-    const blockHeight = elem.clientHeight
-    const cursorOnBlock = e.clientY - elem.getBoundingClientRect().top
-
-    const dragBlockId = blocks.findIndex(block => block === dragBlock)
-    const dropBlockId = blocks.findIndex(block => block === dropBlock)
-
-    if (cursorOnBlock <= blockHeight && dragBlockId !== dropBlockId) {
-      blocks.splice(dragBlockId, 1)
-      blocks.splice(dropBlockId, 0, dragBlock)
-      handleChange(blocks, 'text')
-    }
-  }
-
-
-
-  const disabledClass = disabled ? " _disabled" : ''
-  let countBlock = 0
+  }  
   
   return <div className="song__texts">
-
     {blocks.map((block, index) =>
 
-      <div
-        key={index}
-        draggable={!disabled}
-        onDragStart={e => dragStartHandler(e, block)}
-        onDragOver={e => dragOverHandler(e, block)}
-        className={'song__text' + disabledClass}>
+      <div key={index} className={'song__text' + disabledClass}>
         
         {disabled
-        ? <div
-            className={'song__text-type' + disabledClass}
-            style={{fontSize: sizeText}}  
-          >
+        ? <div className={'song__text-type' + disabledClass}>
             {(block.type === 'Куплет' ? ++countBlock + ' ' : '') + block.type}
           </div>
         : <div className="song__text-header">

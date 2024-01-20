@@ -1,32 +1,31 @@
-import ListItem from './ListItem';
+import { Link } from "react-router-dom"
+import { sendRequest } from "../services/apiServices"
 
+export default function List({songs, updateOpenMenu, updateSongs}) {
 
-function List(props) {
-
-
-  const filterSong = songs => {
-    if (props.activeCategory !== 'Все') {
-      props.activeCategory === 'Избранное' ?
-        songs = songs.filter(song => song.isFavorite) :
-        songs = songs.filter(song => song.category.match(props.activeCategory))
-    }
-    if (props.searchText) songs = songs.filter(song => song.name.match(props.searchText))
-    return songs
+  function changeFavorite(song) {
+    song.isFavorite = !song.isFavorite
+    const index = songs.indexOf(song)
+    songs[index] = song
+    updateSongs(songs)
+    sendRequest('/api/song/' + song._id, 'PUT', song)
   }
   
-
   return (
     <div className='list'>
-      {filterSong(props.songs).map(song =>
-        <ListItem
-          key={song._id}
-          song={song}
-          {...props}
-        />
+      {songs.map(song => 
+        <div className='list__item' key={song._id}>
+          <Link
+            onClick={updateOpenMenu}
+            className="list__name"
+            to={song._id}
+          >{song.name}</Link>
+          <div
+            className={'favorite' + (song.isFavorite ? ' _active' : '')}
+            onClick={() => changeFavorite(song)}
+          ></div>
+        </div>
       )}
     </div>
   )
 }
-
-
-export default List

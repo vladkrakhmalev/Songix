@@ -5,8 +5,8 @@ import Auth from './pages/Auth';
 import NotFound from './pages/NotFound';
 import './index.css'
 
-import Layout from './testComponents/Layout'
-import Song from './testComponents/Song'
+import Layout from './pages/Layout'
+import Song from './components/Song'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(

@@ -1,6 +1,6 @@
 import { Outlet, useNavigate } from 'react-router-dom'
-import List from './List'
-import Navigation from './Navigation'
+import List from '../components/List'
+import Navigation from '../components/Navigation'
 import { useEffect, useState } from 'react'
 import { sendRequest } from '../services/apiServices'
 
