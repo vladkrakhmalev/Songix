@@ -1,6 +1,5 @@
 import { Outlet, useNavigate } from 'react-router-dom'
 import List from '../components/List'
-import Navigation from '../components/Navigation'
 import { useEffect, useState } from 'react'
 import { sendRequest } from '../services/apiServices'
 
@@ -8,6 +7,7 @@ export default function Layout() {
   const [songs, setSongs] = useState([])
   const [openMenu, setOpenMenu] = useState(true)
   const navigate = useNavigate()
+  const categories = ['Хлебопреломление','Жатва','Рождество']
 
   function updateOpenMenu() {
     setOpenMenu(!openMenu)
@@ -37,13 +37,17 @@ export default function Layout() {
   return (
     <div className="panel">
       <div className={'panel__column _left' + (openMenu ? '' : ' _hide')}>
-        <Navigation/>
-        <List songs={songs} updateOpenMenu={updateOpenMenu} updateSongs={updateSongs}/>
+        <List
+          categories={categories}
+          songs={songs}
+          updateOpenMenu={updateOpenMenu}
+          updateSongs={updateSongs}
+        />
         <div className="panel__btn _add" onClick={addSongHandler}>Добавить песню</div>
         <div className="panel__btn _light" onClick={logout}>Выйти</div>
       </div>
       <div className="panel__column _right">
-        <Outlet context={[songs, setSongs, updateOpenMenu]}/>
+        <Outlet context={[categories, songs, setSongs, updateOpenMenu]}/>
       </div>
     </div>
   )

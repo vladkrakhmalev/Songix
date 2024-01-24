@@ -1,18 +1,17 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate, useOutletContext } from "react-router-dom";
 import { sendRequest } from "../services/apiServices";
-import { decorateSong, transposeSong } from "../services/transpositionServices";
+import { transposeSong } from "../services/transpositionServices";
 import ContentEditable from "react-contenteditable";
 
 export default function Song({isNew}) {
-  const [songs, setSongs, updateOpenMenu] = useOutletContext()
+  const [categories, songs, setSongs, updateOpenMenu] = useOutletContext()
   const [song, setSong] = useState('')
   const [disabled, setDisabled] = useState(true)
   const [sizeText, setSizeText] = useState(18)
   const {id} = useParams() 
   const navigate = useNavigate()
   const disabledClass = disabled ? " _disabled" : ''
-  const categories = ['Хлебопреломление','Жатва','Рождество']
 
   function handleChange(e, prop) {
     const newSong = {...song}
@@ -56,9 +55,7 @@ export default function Song({isNew}) {
 
   async function addSong() {
     setDisabled(!disabled)
-    const newSong = decorateSong(song)
-    setSong(newSong)
-    const result = await sendRequest('/api/song', 'POST', newSong)
+    const result = await sendRequest('/api/song', 'POST', song)
     if (result.success) {
       songs.push(result.song)
       setSongs(songs)
@@ -70,9 +67,7 @@ export default function Song({isNew}) {
 
   async function editSong() {
     setDisabled(!disabled)
-    const newSong = decorateSong(song)
-    setSong(newSong)
-    sendRequest('/api/song/' + song._id, 'PUT', newSong)
+    sendRequest('/api/song/' + song._id, 'PUT', song)
   }
 
   async function deleteSong() {
