@@ -1,7 +1,7 @@
 import { Outlet, useNavigate } from 'react-router-dom'
 import List from '../components/List'
 import { useEffect, useState } from 'react'
-import { sendRequest } from '../services/apiServices'
+import apiServices from "../services/apiServices"
 
 export default function Layout() {  
   const [songs, setSongs] = useState([])
@@ -23,12 +23,12 @@ export default function Layout() {
   }
 
   async function getSongs() {
-    const result = await sendRequest('/api/songs/', 'GET')
+    const result = await apiServices.sendRequest('/api/songs/', 'GET')
     result.success ? setSongs(result.songs) : navigate('/auth')
   }
 
   async function logout() {
-    await sendRequest('/api/logout', 'POST')
+    await apiServices.sendRequest('/api/logout', 'POST')
     navigate('/auth')
   }
  

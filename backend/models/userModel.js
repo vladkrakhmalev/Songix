@@ -18,6 +18,12 @@ const userSchema = new Schema({
     category: {
       type: String,
     },
+    tonality: {
+      type: String,
+    },
+    temp: {
+      type: Number,
+    },
     name: String,
     text: {
       type: String,

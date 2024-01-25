@@ -31,6 +31,8 @@ class songController {
         category: req.body.category,
         name: req.body.name,
         text: req.body.text,
+        tonality: req.body.tonality,
+        temp: req.body.temp,
       })
       user.songs.push(song)
       await user.save()
@@ -47,6 +49,8 @@ class songController {
       song.name = req.body.name
       song.text = req.body.text
       song.category = req.body.category
+      song.tonality = req.body.tonality
+      song.temp = req.body.temp
       song.isFavorite = req.body.isFavorite
       await user.save()
       res.json({success:true, songs: user.songs})

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
-import { sendRequest } from "../services/apiServices"
 import { useState } from "react"
+import apiServices from "../services/apiServices"
 
 export default function List({categories, songs, updateOpenMenu, updateSongs}) {
   const [category, setCategory] = useState(null)
@@ -14,7 +14,7 @@ export default function List({categories, songs, updateOpenMenu, updateSongs}) {
       const index = songs.indexOf(song)
       songs[index] = song
       updateSongs([...songs])
-      sendRequest('/api/song/' + song._id, 'PUT', song)
+      apiServices.sendRequest('/api/song/' + song._id, 'PUT', song)
     }
   }
 

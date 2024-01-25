@@ -11,4 +11,4 @@ class apiServices {
 
 }
 
-module.exports = new apiServices()
+export default new apiServices()

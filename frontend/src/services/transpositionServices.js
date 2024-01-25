@@ -1,13 +1,27 @@
-const tonalities = ['H','A#','A','G#','G','F#','F','E','D#','D','C#','C',]
-
 class songServices {
+  #tonalities = ['H','B','A','G#','G','F#','F','E','D#','D','C#','C',]
+
+  #transposeChord(chord, isUp) {
+    let id = this.#tonalities.indexOf(chord)
+      
+    if (isUp) {
+      id = id === 0 ? this.#tonalities.length-1 : id-1
+    } else if (id !== -1) {
+      id = id === this.#tonalities.length-1 ? 0 : id+1
+    }
+  
+    return this.#tonalities[id]
+  }
+
+  getTonalities() {
+    return this.#tonalities
+  }
 
   decorateSong(oldSong) {
     const song = {...oldSong}
-    const regexp = new RegExp(`>?(${tonalities.join('m?7?|')}m?7?)`, 'g')
-
+    const regexp = new RegExp(`(${this.#tonalities.join('b?m?7?[\\s/]|')}b?m?7?[\\s/])`, 'g')
     song.text = oldSong.text.replaceAll(regexp, match => {
-      return match.match('>') === null ? `<span class='song__chord'>${match}</span>` : match
+      return `<span class='song__chord'>${match}</span>`
     })
 
     return song
@@ -15,23 +29,12 @@ class songServices {
   
   transposeSong(oldSong, isUp) {
     const song = {...oldSong}
-    const regexp = new RegExp(`${tonalities.join('|')}`, 'g')
-
-    song.text = oldSong.text.replaceAll(regexp, tonality => {
-      let id = tonalities.indexOf(tonality)
-        
-      if (isUp) {
-        id = id === 0 ? tonalities.length-1 : id-1
-      } else {
-        id = id === tonalities.length-1 ? 0 : id+1
-      }
-
-      return tonalities[id]
-    })
-
+    const regexp = new RegExp(`${this.#tonalities.join('|')}`, 'g')
+    song.text = oldSong.text.replaceAll(regexp, chord => this.#transposeChord(chord, isUp ))
+    song.tonality = this.#transposeChord(song.tonality, isUp)
     return song
   }
   
 }
 
-module.exports = new songServices()
+export default new songServices()

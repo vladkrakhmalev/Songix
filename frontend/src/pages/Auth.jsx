@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { sendRequest } from "../services/apiServices"
+import apiServices from "../services/apiServices"
 
 export default function Auth() {
   const [name, setName] = useState('')
@@ -9,12 +9,12 @@ export default function Auth() {
   const navigate = useNavigate();
 
   async function registration() {
-    const result = await sendRequest('/api/registration', 'POST', {name, password})
+    const result = await apiServices.sendRequest('/api/registration', 'POST', {name, password})
     result.success ? navigate('/songs') : setMessage(result.message)
   }
 
   async function login() {
-    const result = await sendRequest('/api/login', 'POST', {name, password})
+    const result = await apiServices.sendRequest('/api/login', 'POST', {name, password})
     result.success ? navigate('/songs') : setMessage(result.message)
   }
 

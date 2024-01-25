@@ -128,6 +128,7 @@ div, p, a, button, input {
   align-items: center;
   justify-content: center;
   text-decoration: none;
+  min-height: 30px;
 }
 
 .panel__btn:hover {
@@ -247,10 +248,12 @@ div, p, a, button, input {
   opacity: 0;
   z-index: -1;
   transition: .2s;
+  cursor: default;
 }
 
 .menu__item {
   transition: .2s;
+  cursor: pointer;
 }
 
 .menu__item:hover,
@@ -258,13 +261,13 @@ div, p, a, button, input {
   color: #777;
 }
 
-.menu__tonality {
+.menu__tool {
   display: flex;
   gap: 5px;
   align-items: center;
 }
 
-.menu__tonality-btn {
+.menu__tool-btn {
   width: 30px;
   height: 30px;
   border-radius: 5px;
@@ -274,10 +277,16 @@ div, p, a, button, input {
   background-color: #eee;
   transition: .2s;
   user-select: none;
+  cursor: pointer;
 }
 
-.menu__tonality-btn:hover {
+.menu__tool-btn:hover {
   background-color: #ddd;
+}
+
+.menu__tool-value {
+  width: 30px;
+  text-align: center;
 }
 
 .list {
@@ -352,6 +361,16 @@ div, p, a, button, input {
   align-items: center;
 }
 
+.song__subheader {
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.song__subheader._disabled {
+  display: none;
+}
+
 .song__name {
   font-weight: 600;
   font-size: 20px;
@@ -368,12 +387,6 @@ div, p, a, button, input {
   background-color: #fff;
 }
 
-.song__subheader {
-  display: flex;
-  gap: 15px;
-  flex-wrap: wrap;
-}
-
 .song__select {
   display: block;
   border: none;
@@ -382,20 +395,30 @@ div, p, a, button, input {
   padding: 5px;
   border-radius: 5px;
   font-size: 18px;
+  width: 100%;
 }
 
-.song__select._disabled {
-  display: none;
+.song__input {
+  font-size: 18px;
+  border: none;
+  background-color: #eee;
+  padding: 5px;
+  border-radius: 5px;
+  outline: none;
+}
+
+.song__name._disabled {
+  background-color: #fff;
 }
 
 .song__text {
-  overflow: auto;
+  overflow-y: auto;
   outline: none;
   background-color: #eee;
   padding: 20px;
   border-radius: 5px;
   transition: .1s;
-  white-space: pre;
+  white-space: pre-wrap;
 }
 
 .song__text._disabled {
@@ -426,6 +449,7 @@ div, p, a, button, input {
 
   .panel__column {
     border-radius: 0;
+    padding: 10px;
   }
 
   .panel__column._left {
@@ -447,5 +471,13 @@ div, p, a, button, input {
 
   .song__header {
     grid-template-columns: max-content 1fr max-content;
+  }
+
+  .song__subheader {
+    grid-template-columns: 1fr;
+  }
+
+  .song__text {
+    padding: 10px;
   }
 }

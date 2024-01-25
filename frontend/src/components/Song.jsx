@@ -1,34 +1,34 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate, useOutletContext } from "react-router-dom";
-import { sendRequest } from "../services/apiServices";
-import { transposeSong } from "../services/transpositionServices";
+import sanitizeHtml from 'sanitize-html'
 import ContentEditable from "react-contenteditable";
+import transpositionServices from "../services/transpositionServices"
+import apiServices from "../services/apiServices"
 
 export default function Song({isNew}) {
   const [categories, songs, setSongs, updateOpenMenu] = useOutletContext()
-  const [song, setSong] = useState('')
+  const [song, setSong] = useState(null)
   const [disabled, setDisabled] = useState(true)
   const [sizeText, setSizeText] = useState(18)
   const {id} = useParams() 
   const navigate = useNavigate()
   const disabledClass = disabled ? " _disabled" : ''
 
-  function handleChange(e, prop) {
-    const newSong = {...song}
-    newSong[prop] = e.target.value
+  
+
+  function handleDecorate(song) {
+    const newSong = transpositionServices.decorateSong(song)
     setSong(newSong)
   }
 
-  function handlePaste(e) {
-    e.preventDefault()
-    const text = e.clipboardData.getData('text/plain')
+  function handleChange(e, prop) {
     const newSong = {...song}
-    newSong.text = text
+    newSong[prop] = sanitizeHtml(e.target.value, {allowedTags: []})
     setSong(newSong)
   }
 
   function handleTranspose(isUp) {
-    const newSong = transposeSong(song, isUp)
+    const newSong = transpositionServices.transposeSong(song, isUp)
     setSong(newSong)
   }
 
@@ -38,6 +38,8 @@ export default function Song({isNew}) {
       category: '',
       name: '',
       text: '',
+      tonality: '',
+      temp: '',
     })
     setDisabled(false)
   }
@@ -45,17 +47,18 @@ export default function Song({isNew}) {
   async function getSong(id) {
     setDisabled(true)
     if (songs.length === 0) {
-      const result = await sendRequest('/api/song/' + id, 'GET')
-      result.success ? setSong(result.song) : console.log(result.message)
+      const result = await apiServices.sendRequest('/api/song/' + id, 'GET')
+      result.success ? handleDecorate(result.song) : console.log(result.message)
     } else {
       const song = songs.find(song => song._id == id)
-      setSong(song)
+      handleDecorate(song)
     }
   }
 
   async function addSong() {
     setDisabled(!disabled)
-    const result = await sendRequest('/api/song', 'POST', song)
+    handleDecorate(song)
+    const result = await apiServices.sendRequest('/api/song', 'POST', song)
     if (result.success) {
       songs.push(result.song)
       setSongs(songs)
@@ -67,7 +70,11 @@ export default function Song({isNew}) {
 
   async function editSong() {
     setDisabled(!disabled)
-    sendRequest('/api/song/' + song._id, 'PUT', song)
+    const oldSong = songs.find(x => x._id === song._id)
+    const index = songs.indexOf(oldSong)
+    songs[index] = song
+    setSongs([...songs])
+    apiServices.sendRequest('/api/song/' + song._id, 'PUT', song)
   }
 
   async function deleteSong() {
@@ -75,14 +82,14 @@ export default function Song({isNew}) {
       const index = songs.findIndex(curSong => curSong._id == song._id)
       songs.splice(index, 1)
       setSongs(songs)
-      sendRequest('/api/song/' + song._id, 'DELETE', song)
+      apiServices.sendRequest('/api/song/' + song._id, 'DELETE', song)
     }
     navigate('/songs')
   }
 
   useEffect(() => {
     isNew ? generateSong() : getSong(id)
-  },[id])
+  },[id, songs])
 
 
   
@@ -103,30 +110,34 @@ export default function Song({isNew}) {
 
   
   
-  return <div className='song'>
+  return song && <div className='song'>
     <div className="song__header">
       <div className="panel__open-menu" onClick={updateOpenMenu}></div>
 
-      <textarea
+      <input
         className={'song__name' + disabledClass}
         value={song.name}
         readOnly={disabled}
+        type="text"
         onChange={e => handleChange(e, 'name')}
-        rows={1}
-        placeholder="Название песни"
+        placeholder="Название"
+        required
       />
 
       <div className="panel__menu menu">
         <div className="menu__wrapper">
-          <div className="menu__tonality">
-            <div className="menu__tonality-btn" onClick={() => setSizeText(sizeText-2)}>-</div>
-            <div className="menu__tonality-btn" onClick={() => setSizeText(sizeText+2)}>+</div>
-            <div className="menu__tonality-name">Изменить размер</div>
+          <div className="menu__tool">
+            <div className="menu__tool-btn" onClick={() => setSizeText(sizeText-2)}>-</div>
+            <div className="menu__tool-value">{sizeText}</div>
+            <div className="menu__tool-btn" onClick={() => setSizeText(sizeText+2)}>+</div>
+            <div className="menu__tool-name">Размер</div>
           </div>
-          <div className="menu__tonality">
-            <div className="menu__tonality-btn" onClick={() => handleTranspose(false)}>-</div>
-            <div className="menu__tonality-btn" onClick={() => handleTranspose(true)}>+</div>
-            <div className="menu__tonality-name">Транспонировать</div>
+
+          <div className="menu__tool">
+            <div className="menu__tool-btn" onClick={() => handleTranspose(false)}>-</div>
+            <div className="menu__tool-value">{song.tonality}</div>
+            <div className="menu__tool-btn" onClick={() => handleTranspose(true)}>+</div>
+            <div className="menu__tool-name">Тональность</div>
           </div>
           {disabled ? editButton : saveButton}
           {deleteButton}
@@ -134,17 +145,39 @@ export default function Song({isNew}) {
       </div>
     </div>
 
-    <div className="song__subheader">
+    <div className={"song__subheader" + disabledClass}>
       <select
-        className={'song__select' + disabledClass}
-        defaultValue={song.category}
+        className='song__select'
+        value={song.category}
         onChange={e => handleChange(e, 'category')}
       >
-        <option value=''>Выберете категорию</option>
+        <option value=''>Категория</option>
         {categories.map((category, id) => 
           <option value={category} key={id}>{category}</option>
         )}
       </select>
+
+      <select
+        className='song__select'
+        value={song.tonality}
+        onChange={e => handleChange(e, 'tonality')}
+      >
+        <option value=''>Тональность</option>
+        {transpositionServices.getTonalities().map((tonality, id) => 
+          <option value={tonality} key={id}>{tonality}</option>
+        )}
+      </select>
+
+      <input
+        className='song__input'
+        value={song.temp || ''}
+        readOnly={disabled}
+        onChange={e => handleChange(e, 'temp')}
+        placeholder="Темп"
+        type='number'
+        min={0}
+        max={1000}
+      />
     </div>
 
     <ContentEditable
@@ -153,7 +186,6 @@ export default function Song({isNew}) {
       html={song.text || ''}
       style={{fontSize: sizeText}}  
       onChange={e => handleChange(e, 'text')}
-      onPaste={handlePaste}
     />
   </div>
 }
