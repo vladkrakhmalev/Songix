@@ -1,10 +1,8 @@
 {
-  "name": "songBook",
+  "name": "songix",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "express": "^4.18.2",
-    "path": "^0.12.7",
     "react": "^18.2.0",
     "react-contenteditable": "^3.3.7",
     "react-dom": "^18.2.0",
@@ -14,7 +12,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "node server.js",
+    "start": "react-scripts start",
     "build": "react-scripts build"
   },
   "browserslist": {

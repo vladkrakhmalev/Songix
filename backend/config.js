@@ -1,7 +1,5 @@
 module.exports = {
-  FRONTEND_URL: 'http://localhost:3000',
-  PORT: 3001,
-  JWT_TOKEN_KEY: 'jwt-secret-token-key',
-  loginDB: 'vladkrakhmalev',
-  passwordDB: '9NS-dPd-C5n-XMA',
+  PORT: 5000,
+  JWT_TOKEN_KEY: 'jwt-token-secret-key',
+  DB_CONECT: 'mongodb+srv://vladkrakhmalev:7iUO8JEjfBzBxFLu@cluster.zirubkr.mongodb.net/songs',
 }

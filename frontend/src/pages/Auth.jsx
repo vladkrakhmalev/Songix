@@ -20,7 +20,7 @@ export default function Auth() {
 
   return (
     <div className='panel__container'>
-      <h1 className=" ">SongBook</h1>
+      <h1 className=" ">Songix</h1>
       <p className='panel__title'>Сервис для хранения и использования песен с аккордами</p>
       <form className="panel__form">
         <input

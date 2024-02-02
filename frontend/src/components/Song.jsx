@@ -22,8 +22,11 @@ export default function Song({isNew}) {
   }
 
   function handleChange(e, prop) {
+    console.log(e.target.value)
     const newSong = {...song}
-    newSong[prop] = sanitizeHtml(e.target.value, {allowedTags: []})
+    newSong[prop] = sanitizeHtml(e.target.value, {
+      allowedTags: ['br', 'div']
+    })
     setSong(newSong)
   }
 
