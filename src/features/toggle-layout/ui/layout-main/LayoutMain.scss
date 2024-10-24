@@ -1,0 +1,49 @@
+.layout-main {
+  display: flex;
+  padding: 20px;
+  gap: 20px;
+  background-color: var(--bg-secondary);
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+
+  &__sidebar {
+    background-color: var(--bg-primary);
+    padding: 20px;
+    border-radius: 20px;
+    max-width: 400px;
+    min-width: 250px;
+    height: calc(100% - 40px);
+    position: absolute;
+
+    &._big {
+      width: 100%;
+    }
+  }
+
+  &__content {
+    background-color: var(--bg-primary);
+    padding: 30px;
+    border-radius: 20px;
+    width: 100%;
+    position: relative;
+    transition: .3s;
+
+    &-wrapper {
+      display: grid;
+      align-content: start;
+      gap: 20px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      height: 100%;
+    }
+  }
+
+  &__button {
+    top: 25px;
+    left: -40px;
+    position: absolute;
+    opacity: 1 !important;
+    z-index: 1;
+  }
+}

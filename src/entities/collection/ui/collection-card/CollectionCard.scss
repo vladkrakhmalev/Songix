@@ -1,0 +1,47 @@
+.collection-card {
+  background-color: var(--bg-blue-light);
+  padding: 20px;
+  border-radius: 20px;
+  min-height: 200px;
+  display: grid;
+  gap: 10px;
+  align-content: start;
+  transition: .2s;
+  text-decoration: none;
+
+  &:not(._load):hover {
+    cursor: pointer;
+    opacity: .7;
+  }
+
+  &._load &__title {
+    width: 70%;
+    height: 25px;
+    border-radius: 5px;
+    background-color: var(--bg-primary);
+  }
+
+  &._load &__count {
+    width: 50%;
+    height: 20px;
+    border-radius: 5px;
+    background-color: var(--bg-primary);
+  }
+
+  &__header {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    align-items: center;
+    gap: 5px;
+  }
+
+  &__action {
+    opacity: .2;
+    transition: .2s;
+    padding: 2px;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}

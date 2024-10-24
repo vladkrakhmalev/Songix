@@ -1,0 +1,24 @@
+.collection-list {
+  position: relative;
+
+  &__preloader,
+  &__content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    overflow-y: auto;
+  }
+
+  &__preloader {
+    position: absolute;
+    width: 100%;
+    opacity: 0;
+    transition: .3s;
+    visibility: hidden;
+
+    &._visible {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+}

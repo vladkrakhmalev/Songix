@@ -1,0 +1,17 @@
+.song-page {
+  overflow: auto;
+
+  &._full {
+    padding: 20px;
+    background-color: var(--bg-primary);
+    align-content: start;
+  }
+
+  &__buttons {
+    display: grid;
+    gap: 10px;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+  }
+}

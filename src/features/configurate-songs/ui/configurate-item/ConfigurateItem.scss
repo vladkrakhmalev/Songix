@@ -1,0 +1,17 @@
+.configurate-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: .2s;
+  width: max-content;
+  user-select: none;
+
+  &._with-hover:hover {
+    cursor: pointer;
+    opacity: .6;
+  }
+
+  &__icon {
+    line-height: 1;
+  }
+}

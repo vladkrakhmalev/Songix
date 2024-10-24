@@ -1,0 +1,11 @@
+.counter {
+  display: grid;
+  grid-template-columns: auto 30px auto;
+  gap: 5px;
+  align-items: center;
+  width: max-content;
+
+  &__value {
+    text-align: center;
+  }
+}

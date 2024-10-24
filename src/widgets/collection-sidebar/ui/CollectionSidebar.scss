@@ -1,0 +1,25 @@
+.collection-sidebar {
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+  gap: 20px;
+  height: 100%;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    min-height: 35px;
+  }
+
+  &__filters {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 10px;
+  }
+
+  &__tags {
+    grid-column: 1/-1;
+  }
+}

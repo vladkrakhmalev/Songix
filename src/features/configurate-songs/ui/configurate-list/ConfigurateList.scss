@@ -1,0 +1,20 @@
+.configurate-list {
+  display: grid;
+  gap: 10px;
+
+  &__popup {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+
+    &-title {
+      font-weight: bold;
+      font-size: var(--text-size-big);
+      grid-column: 1/-1;
+    }
+
+    &-text {
+      grid-column: 1/-1;
+    }
+  }
+}

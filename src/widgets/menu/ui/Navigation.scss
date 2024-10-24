@@ -1,0 +1,9 @@
+.navigation {
+  display: grid;
+  gap: 15px;
+  padding: 10px;
+
+  &__link {
+    font-size: var(--text-size);
+  }
+}

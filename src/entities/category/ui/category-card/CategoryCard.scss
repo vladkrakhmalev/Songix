@@ -1,0 +1,34 @@
+.category-card {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  line-height: 1;
+  width: max-content;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 5px 10px;
+  background-color: var(--bg-secondary);
+  transition: .2s;
+
+  &:hover {
+    background-color: var(--bg-blue-light);
+    transform: scale(1.02);
+  }
+
+  &._active{
+    background-color: var(--color-primary);
+    color: var(--text-white);
+
+    &:hover {
+      opacity: .8;
+      transform: scale(.98);
+    }
+  }
+
+  &__icon {
+    color: var(--text-white);
+    line-height: 1;
+    font-size: 15px;
+  }
+}

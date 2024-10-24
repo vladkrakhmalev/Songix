@@ -1,0 +1,32 @@
+.light-theme {
+  --color-primary: #5DB1FF;
+  --color-secondary: #F0F8FF;
+  --color-error: #FF8C8C;
+
+  --text-primary: #333333;
+  --text-secondary: #999999;
+  --text-light: #cccccc;
+  --text-white: #fff;
+
+  --bg-primary: #FFFFFF;
+  --bg-secondary: #F5F5F5;
+  --bg-blue-light: #F0F8FF;
+  --bg-positive: #d8ffe7;
+  --bg-negative: #ffcfcf;
+}
+
+._load {
+  animation: shimmer 2s infinite ease-in-out;
+}
+
+@keyframes shimmer {
+  0% {
+    background-color: #eee;
+  }
+  50% {
+    background-color: #f5f5f5;
+  }
+  100% {
+    background-color: #eee; 
+  }
+}

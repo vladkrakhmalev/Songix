@@ -1,0 +1,26 @@
+.link {
+	text-decoration: none;
+	color: var(--text-secondary);
+	font-size: var(--text-size-small);
+	transition: .2s;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	max-width: max-content;
+	gap: 5px;
+
+	&__icon {
+		margin-top: 3px;
+		color: var(--text-secondary);
+		transition: .2s;
+	}
+
+	&.active,
+	&:hover {
+		color: var(--text-primary);
+
+		.link__icon {
+			color: var(--text-primary);
+		}
+	}
+}

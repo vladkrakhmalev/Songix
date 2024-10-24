@@ -1,0 +1,1 @@
+export { LayoutMainTrigger } from './LayoutMainTrigger';

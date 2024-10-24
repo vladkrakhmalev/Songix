@@ -1,0 +1,18 @@
+@import '../fonts/unbounded/unbounded.scss';
+@import "@flaticon/flaticon-uicons/css/all/all";
+@import 'root.scss';
+@import './theme/light.scss';
+@import './theme/dark.scss';
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+  font-family: 'Unbounded', sans-serif;
+	line-height: 1.5;
+  color: var(--text-primary)
+}
+
+._hide {
+	display: none;
+}

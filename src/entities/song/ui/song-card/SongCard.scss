@@ -1,0 +1,37 @@
+.song-card {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 5px;
+  align-items: center;
+
+  &._load {
+    border-radius: 10px;
+    height: 30px;
+  }
+
+  &__link {
+    text-decoration: none;
+    transition: .2s;
+
+    &:hover {
+      opacity: .6;
+    }
+  }
+
+  &__favorite {
+    color: var(--bg-secondary);
+    cursor: pointer;
+    font-size: 20px;
+    transition: .1s;
+
+    &._active,
+    &:active,
+    &:hover {
+      color: var(--color-error);
+    }
+
+    &:active {
+      transform: scale(1.05);
+    }
+  }
+}

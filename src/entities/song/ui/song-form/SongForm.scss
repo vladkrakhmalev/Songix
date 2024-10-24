@@ -1,0 +1,28 @@
+.song-form {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto 1fr auto;
+  height: 100%;
+
+  &__title {
+    font-size: 20px;
+    grid-column: 1/-1;
+  }
+  
+  &__container {
+    grid-column: 1/-1;
+    display: grid;
+    gap: 10px;
+    align-content: start;
+    overflow-y: auto;
+  }
+  
+  &__textarea {
+    height: 100%;
+  }
+
+  &__button {
+    grid-column: span 1;
+  }
+}
