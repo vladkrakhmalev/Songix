@@ -1,5 +1,7 @@
 .song {
   display: grid;
+  grid-template-rows: auto 1fr;
+  height: 100%;
   gap: 20px;
 
   &__header {
@@ -17,5 +19,6 @@
   &__text {
     font-size: 16px;
     font-family: sans-serif;
+    overflow-y: auto;
   }
 }

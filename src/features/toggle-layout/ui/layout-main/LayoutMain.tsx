@@ -26,19 +26,14 @@ export const LayoutMain: FC<ILayoutMain> = ({sidebar, size}) => {
     }
   }, [sidebarRef.current, isHidden, size]);
 
-  const sidebarClass = clsx(
-    "layout-main__sidebar",
-    size && ('_' + size)
-  )
-
   const contentStyle = {
     marginLeft: sidebarWidth + 20 + 'px'
   }
   
   return (
-    <div className="layout-main">
+    <div className={clsx("layout-main", size && '_' + size)}>
 
-      <div className={sidebarClass} ref={sidebarRef}>
+      <div className="layout-main__sidebar" ref={sidebarRef}>
         {sidebar}
       </div>
 
