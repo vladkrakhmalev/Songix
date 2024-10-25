@@ -10,6 +10,7 @@ interface IInput {
   className?: string
   type?: 'text' | 'password' | 'search'
   value: string
+  bg?: 'light'
   onChange: (value: string) => void
 }
 
@@ -22,6 +23,7 @@ export const Input: FC<IInput> = (props) => {
     disabled = false,
     onChange,
     value,
+    bg,
   } = props
 
   const [fieldType, setFieldType] = useState(type)
@@ -40,8 +42,10 @@ export const Input: FC<IInput> = (props) => {
     onChange(event.target.value)
   }
 
+  const inputClass = clsx(className, 'input', error && '_error', bg && '_' + bg)
+
   return (
-    <div className={clsx(className, 'input', error && '_error')}>
+    <div className={inputClass}>
       <div className="input__wrapper">
         <input
           className='input__field'
@@ -57,6 +61,7 @@ export const Input: FC<IInput> = (props) => {
             color='grey'
             icon={clsx(fieldType === 'password' ? 'rr-eye' : 'rr-eye-crossed')}
             onClick={togglePassword}
+            className='input__button'
           />
         }
 
@@ -65,6 +70,7 @@ export const Input: FC<IInput> = (props) => {
             color='grey'
             icon='rr-cross-small'
             onClick={() => onChange('')}  
+            className='input__button'
           />
         }
       </div>
