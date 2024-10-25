@@ -1,0 +1,1 @@
+export { DeleteCollection } from './DeleteCollection';
