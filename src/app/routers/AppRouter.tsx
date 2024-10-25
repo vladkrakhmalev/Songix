@@ -44,10 +44,10 @@ export const router = createBrowserRouter([
         element: <CollectionsPage/>,
         errorElement: <NotFoundPage/>,
       },
-      {
-        path: "/profile",
-        errorElement: <NotFoundPage/>,
-      },
+      // {
+      //   path: "/profile",
+      //   errorElement: <NotFoundPage/>,
+      // },
       // {
       //   path: "/settings",
       //   errorElement: <NotFoundPage/>,

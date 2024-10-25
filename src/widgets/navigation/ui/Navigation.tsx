@@ -3,12 +3,26 @@ import { UILink } from "@shared/ui/link"
 
 export const Navigation = () => {
 
+  const links = [
+    // { id: 0, link: '/', icon: 'rr-apps', title: 'Главная' },
+    { id: 1, link: '/collections', icon: 'rr-music-alt', title: 'Сборники' },
+    { id: 2, link: '/profile', icon: 'rr-user', title: 'Профиль', soon: true },
+    { id: 3, link: '/settings', icon: 'rr-settings', title: 'Настройки', soon: true },
+  ]
+
   return (
     <nav className="navigation">
-      {/* <UILink className='navigation__link' nav={true} to="/" icon='rr-apps'>Главная</UILink> */}
-      <UILink className='navigation__link' nav={true} to="/collections" icon='rr-music-alt'>Сборники</UILink>
-      <UILink className='navigation__link' nav={true} to="/profile" icon='rr-user'>Профиль</UILink>
-      {/* <UILink className='navigation__link' nav={true} to="/settings" icon='rr-settings'>Настройки</UILink> */}
+      {links.map(item => 
+        <UILink
+          key={item.id}
+          className='navigation__link'
+          nav={true}
+          to={item.link}
+          icon={item.icon}
+          soon={item.soon}
+          onClick={event => event.preventDefault()}
+        >{item.title}</UILink>
+      )}
     </nav>
   )
 }
