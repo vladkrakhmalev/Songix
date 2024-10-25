@@ -18,6 +18,11 @@
     font-size: var(--text-size-small);
     font-family: sans-serif;
     overflow: auto;
+
+    & * {
+      font-size: var(--text-size-small);
+      font-family: sans-serif;
+    }
   }
 
   &__placeholder {
