@@ -54,6 +54,11 @@
       color: var(--color-secondary);
     }
   }
+  
+  &._white {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+  }
 
   &._small {
     padding: 12px 10px;

@@ -4,7 +4,7 @@ import clsx from 'clsx'
 import { useNavigate } from 'react-router-dom'
 
 interface IButton {
-  color?: 'light' | 'grey' | 'red' | null
+  color?: 'light' | 'grey' | 'red' | 'white' | null
   size?: 'small' | 'medium'
   children?: string
   disabled?: boolean
