@@ -6,7 +6,7 @@ import { ScrollSong } from "@features/scroll-song"
 import { OpenFullSong } from "@features/open-full-song"
 import { Song, useGetSongByIdQuery } from '@entities/song'
 import { useParams } from "react-router-dom"
-import { ConfigurateList } from "@features/configurate-songs"
+import { ConfigurateList } from "@widgets/configurate-list"
 
 export const SongPage: FC = () => {
 
