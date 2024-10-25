@@ -1,4 +1,4 @@
-import { CollectionList } from "@entities/collection"
+import { CollectionList } from "@widgets/collection-list"
 
 export const CollectionsPage = () => {
 

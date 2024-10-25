@@ -1,9 +1,8 @@
 import { FC } from 'react'
-import { collectionApi } from '../../api/collectionApi'
-import { CollectionCard } from '../collection-card/CollectionCard'
-import './CollectionList.scss'
-import { Button } from '@shared/ui/button'
 import clsx from 'clsx'
+import './CollectionList.scss'
+import { collectionApi, CollectionCard } from '@entities/collection'
+import { Button } from '@shared/ui/button'
 
 export const CollectionList: FC = () => {
 
