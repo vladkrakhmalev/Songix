@@ -26,7 +26,7 @@ export const Input: FC<IInput> = (props) => {
 
   const [fieldType, setFieldType] = useState(type)
 
-  const togglePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const togglePassword = (event: MouseEvent) => {
     event.preventDefault()
 
     if (fieldType === 'password') {
