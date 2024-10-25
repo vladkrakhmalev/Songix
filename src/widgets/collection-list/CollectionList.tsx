@@ -2,8 +2,7 @@ import { FC } from 'react'
 import clsx from 'clsx'
 import './CollectionList.scss'
 import { collectionApi, CollectionCard } from '@entities/collection'
-import { DeleteCollection, RenameCollection } from "@features/manage-collection"
-import { Button } from '@shared/ui/button'
+import { AddCollection, DeleteCollection, RenameCollection } from "@features/manage-collection"
 
 export const CollectionList: FC = () => {
 
@@ -29,7 +28,7 @@ export const CollectionList: FC = () => {
             editCollection={<RenameCollection collection={collection}/>} 
           />
         )}
-        <Button to='/collections/new'>+ Добавить</Button>
+        <AddCollection/>
       </div>}
     </div>
   )
