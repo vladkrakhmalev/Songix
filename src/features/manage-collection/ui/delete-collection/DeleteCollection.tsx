@@ -35,8 +35,8 @@ export const DeleteCollection: FC<IProps> = ({ collection }) => {
         <p className="configurate-list__popup-title">Удалить песню?</p>
         <p className="configurate-list__popup-text">Вы точно хотите удалить сборник "{collection.firstName}"?</p>
         <p className="configurate-list__popup-text">Это действие нельзя будет отменить</p>
-        <Button icon='rr-trash' color='red' onClick={handleDelete}>Удалить</Button>
-        <Button icon='rr-cross-small' color='light' onClick={handleCancel}>Отменить</Button>
+        <Button size='medium' icon='rr-trash' color='red' onClick={handleDelete}>Удалить</Button>
+        <Button size='medium' icon='rr-cross-small' color='light' onClick={handleCancel}>Отменить</Button>
       </div>
     </Popup>
   );
