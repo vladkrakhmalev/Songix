@@ -2,7 +2,7 @@ import { FC } from 'react';
 import './LayoutMainTrigger.scss'
 import { Button } from "@shared/ui/button"
 import { useAppDispatch } from '@shared/hooks';
-import { toggleHidden } from '../../model/toggleLayoutSlice';
+import { toggleHidden } from '@features/toggle-layout';
 
 interface ILayoutMainTrigger {
   className?: string
