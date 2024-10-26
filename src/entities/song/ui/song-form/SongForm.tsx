@@ -104,6 +104,7 @@ export const SongForm: FC<ISongForm> = ({ song = EMPTY_SONG_OBJ, isNew = false, 
       </div>
 
       <Button
+        size='medium'
         className='song-form__button'
         icon='rr-disk'
         onClick={handleSubmit}
@@ -111,6 +112,7 @@ export const SongForm: FC<ISongForm> = ({ song = EMPTY_SONG_OBJ, isNew = false, 
       >Сохарнить</Button>
 
       <Button
+        size='medium'
         className='song-form__button'
         icon='rr-cross-small'
         color='light'
