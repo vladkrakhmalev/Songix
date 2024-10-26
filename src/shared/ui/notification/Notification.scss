@@ -18,6 +18,12 @@
   opacity: 0;
   transform: translate(10%, 0);
 
+  @media (max-width: 768px) {
+    padding: 5px;
+    top: 20px;
+    right: 10px;
+  }
+
   &._open {
     visibility: visible;
     opacity: 1;
