@@ -1,6 +1,8 @@
 import { LayoutMainTrigger, toggleHidden } from '@features/toggle-layout'
 import './Navigation.scss'
 import { UILink } from "@shared/ui/link"
+import { MouseEvent } from 'react'
+import { useAppDispatch } from '@shared/hooks'
 
 export const Navigation = () => {
 
@@ -10,6 +12,16 @@ export const Navigation = () => {
     { id: 2, link: '/profile', icon: 'rr-user', title: 'Профиль', soon: true },
     { id: 3, link: '/settings', icon: 'rr-settings', title: 'Настройки', soon: true },
   ]
+
+  const dispatch = useAppDispatch()
+
+  const handleRedirect = (event: MouseEvent, isSoon?: boolean) => {
+    if (isSoon) {
+      event.preventDefault()
+    } else {
+      dispatch(toggleHidden())
+    }
+  }
 
   return (
     <nav className="navigation">
@@ -25,7 +37,7 @@ export const Navigation = () => {
           to={item.link}
           icon={item.icon}
           soon={item.soon}
-          onClick={event => event.preventDefault()}
+          onClick={(event) => handleRedirect(event, item.soon)}
         >{item.title}</UILink>
       )}
     </nav>

@@ -1,17 +1,24 @@
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { SongList } from '@entities/song'
 import { Filter, FilterTags, Search } from '@features/filter-songs'
 import './CollectionSidebar.scss'
 import { Button } from '@shared/ui/button'
 import { useGetSongsByCollectionIdQuery } from '@entities/song'
-import { useAppSelector } from '@shared/hooks'
+import { useAppDispatch, useAppSelector } from '@shared/hooks'
 import { ISong } from "@entities/song";
 import { CollectionSelect } from '@entities/collection'
-import { LayoutMainTrigger } from '@features/toggle-layout'
+import { LayoutMainTrigger, toggleHidden } from '@features/toggle-layout'
 
 export const CollectionSidebar = () => {
 
   const { categories, search } = useAppSelector(state => state.filterSongs)
+  const navigate = useNavigate()
+  const dispatch = useAppDispatch()
+
+  const handleRedirect = () => {
+    navigate('/')
+    dispatch(toggleHidden())
+  }
 
   const { collectionId } = useParams()
   const formatCollectionId = Number(collectionId)
@@ -30,7 +37,7 @@ export const CollectionSidebar = () => {
   return (
     <div className='collection-sidebar'>
       <div className="collection-sidebar__header">
-        <Button color='grey' icon='rr-home' to='/'/>
+        <Button color='grey' icon='rr-home' onClick={handleRedirect}/>
         <CollectionSelect/>
         <LayoutMainTrigger/>
       </div>

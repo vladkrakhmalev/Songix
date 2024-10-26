@@ -1,7 +1,9 @@
 import { FC, ReactNode, } from 'react'
 import './CollectionCard.scss'
 import { ICollection } from '../../model/collectionType'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import { useAppDispatch } from '@shared/hooks'
+import { toggleHidden } from '@features/toggle-layout'
 
 interface IProps {
   collection?: ICollection
@@ -11,6 +13,16 @@ interface IProps {
 
 export const CollectionCard: FC<IProps> = ({ collection, deleteCollection, editCollection, }) => {
 
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate()
+
+  const handleRedirect = () => {
+    if (collection) {
+      navigate(`/collections/${collection.id}/songs`)
+      dispatch(toggleHidden())
+    }
+  }
+
   if (!collection) return (
     <div className="collection-card _load">
       <h3 className="collection-card__title"></h3>
@@ -19,12 +31,12 @@ export const CollectionCard: FC<IProps> = ({ collection, deleteCollection, editC
   )
 
   return (
-    <Link to={`/collections/${collection.id}/songs`} className="collection-card">
+    <div onClick={handleRedirect} className="collection-card">
       <div className="collection-card__header">
         {editCollection}
         {deleteCollection}
       </div>
       <p className="collection-card__count">Песен: {collection.age}</p>
-    </Link>
+    </div>
   )
 }
