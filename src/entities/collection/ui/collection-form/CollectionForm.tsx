@@ -16,8 +16,8 @@ export const CollectionForm: FC<IProps> = ({ onCreate, onCancel }) => {
     <div className='collection-form'>
       <h3 className='collection-form__title'>Создать новый сборник</h3>
       <Input value={name} onChange={setName} bg='light' className='collection-form__input'>Название</Input>
-      <Button onClick={() => onCreate(name)}>Создать</Button>
-      <Button onClick={onCancel} color='white'>Отменить</Button>
+      <Button size='medium' onClick={() => onCreate(name)}>Создать</Button>
+      <Button size='medium' onClick={onCancel} color='white'>Отменить</Button>
     </div>
   );
 };
