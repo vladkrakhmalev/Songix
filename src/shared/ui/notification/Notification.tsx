@@ -10,12 +10,23 @@ interface INotification {
   description?: string
   icon?: string
   type?: 'default' | 'positive' | 'negative'
+  onToggle?: (value: boolean) => void
 }
 
-export const Notification: FC<INotification> = ({ isOpen: isVisible, title, description, icon, type, }) => {
+export const Notification: FC<INotification> = (props) => {
+  const {
+    isOpen: isVisible,
+    title,
+    description,
+    icon,
+    type,
+    onToggle,
+  } = props
 
-  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [isOpen, setIsOpen] = useState<boolean>(isVisible)
+
   const rootElem = document.getElementById('main')
+
   const notificationClass = clsx(
     'notification',
     type && '_' + type,
@@ -25,29 +36,32 @@ export const Notification: FC<INotification> = ({ isOpen: isVisible, title, desc
 
   useEffect(() => {
     setIsOpen(isVisible)
-    const timer = setTimeout(() => setIsOpen(false), 5000)
+    const timer = setTimeout(() => handleClose(), 3000)
     return () => clearTimeout(timer)
   }, [isVisible])
 
-  return (
-    <>
-      {createPortal(
-        <div className={notificationClass}>
-          {icon && <i className={'notification__icon fi fi-' + icon}></i>}
-          <div className="notification__content">
-            <p className="notification__title">{title}</p>
-            {description && <p className="notification__description">{description}</p> }
-          </div>
-          <Button
-            className='notification__close'
-            size='small'
-            color='light'
-            icon='rr-cross-small'
-            onClick={() => setIsOpen(false)}
-          ></Button>
-        </div>,
-        rootElem
-      )}
-    </>
-  );
+  const handleClose = () => {
+    setIsOpen(false)
+    if (onToggle) onToggle(false)
+  }
+
+  if (!rootElem) return
+
+  return createPortal(
+    <div className={notificationClass}>
+      {icon && <i className={'notification__icon fi fi-' + icon}></i>}
+      <div className="notification__content">
+        <p className="notification__title">{title}</p>
+        {description && <p className="notification__description">{description}</p> }
+      </div>
+      <Button
+        className='notification__close'
+        size='small'
+        color='light'
+        icon='rr-cross-small'
+        onClick={handleClose}
+      ></Button>
+    </div>,
+    rootElem
+  )
 }

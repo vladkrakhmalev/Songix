@@ -28,6 +28,10 @@
     }
   }
 
+  &__button {
+    background-color: transparent !important;
+  }
+
   &._error {
     border: 1px solid var(--color-error);
   }
@@ -44,5 +48,9 @@
     margin-top: 5px;
     color: var(--color-error);
     font-size: var(--text-size-smaller);
+  }
+  
+  &._light {
+    background-color: var(--bg-primary);
   }
 }

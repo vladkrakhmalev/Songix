@@ -54,12 +54,22 @@
       color: var(--color-secondary);
     }
   }
+  
+  &._white {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+  }
 
   &._small {
     padding: 12px 10px;
     line-height: 1;
     height: 12px;
     border-radius: 5px;
+  }
+
+  &._medium {
+    padding: 12px 10px;
+    line-height: 1;
   }
 
   &:disabled {

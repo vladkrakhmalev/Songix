@@ -12,9 +12,19 @@ interface ISongProps {
   configurate: ReactNode
   textSize: ICounterItem
   actionButtons: ReactNode
+  toggleLayout?: ReactNode
 }
 
-export const Song: FC<ISongProps> = ({ song, isFetching, configurate, textSize, actionButtons, }) => {
+export const Song: FC<ISongProps> = (props) => {
+
+  const {
+    song,
+    isFetching,
+    configurate,
+    textSize,
+    actionButtons,
+    toggleLayout,
+  } = props
 
   const dispatch = useAppDispatch()
   const { isEdit } = useAppSelector(state => state.song)
@@ -25,11 +35,17 @@ export const Song: FC<ISongProps> = ({ song, isFetching, configurate, textSize, 
 
   if (!song || isFetching) return <Spinner/>
 
-  if (isEdit) return <SongForm song={song}/>
+  if (isEdit) return (
+    <SongForm
+      toggleLayout={toggleLayout}
+      song={song}
+    />
+  )
 
   return (
     <div className="song">
       <div className="song__header">
+        {toggleLayout}
         <h1 className="song__title">{song.title}</h1>
         {configurate}
       </div>

@@ -6,7 +6,7 @@ import { SongPage } from "@pages/song";
 import { LayoutAuth } from "@shared/ui/layout-auth";
 import { LayoutMain } from "@features/toggle-layout";
 import { CollectionsPage } from "@pages/collections";
-import { Navigation } from "@widgets/menu"
+import { Navigation } from "@widgets/navigation"
 import { CollectionSidebar } from "@widgets/collection-sidebar";
 import { SongNewPage } from "@pages/song-new";
 
@@ -44,10 +44,10 @@ export const router = createBrowserRouter([
         element: <CollectionsPage/>,
         errorElement: <NotFoundPage/>,
       },
-      {
-        path: "/profile",
-        errorElement: <NotFoundPage/>,
-      },
+      // {
+      //   path: "/profile",
+      //   errorElement: <NotFoundPage/>,
+      // },
       // {
       //   path: "/settings",
       //   errorElement: <NotFoundPage/>,

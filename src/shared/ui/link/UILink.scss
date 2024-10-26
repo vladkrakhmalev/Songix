@@ -9,6 +9,28 @@
 	max-width: max-content;
 	gap: 5px;
 
+	&._soon {
+		color: var(--text-secondary) !important;
+
+		&::after {
+			content: 'Скоро';
+			background-color: var(--color-primary);
+			color: var(--text-white);
+			padding: 2px 5px;
+			border-radius: 5px;
+			font-size: var(--text-size-smaller);
+		}
+
+		&.active,
+		&:hover {
+			cursor: default;
+
+			.link__icon {
+				color: var(--text-secondary);
+			}
+		}
+	}
+
 	&__icon {
 		margin-top: 3px;
 		color: var(--text-secondary);

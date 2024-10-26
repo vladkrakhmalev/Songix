@@ -1,9 +1,8 @@
 import { FC } from 'react'
-import { collectionApi } from '../../api/collectionApi'
-import { CollectionCard } from '../collection-card/CollectionCard'
-import './CollectionList.scss'
-import { Button } from '@shared/ui/button'
 import clsx from 'clsx'
+import './CollectionList.scss'
+import { collectionApi, CollectionCard } from '@entities/collection'
+import { AddCollection, DeleteCollection, RenameCollection } from "@features/manage-collection"
 
 export const CollectionList: FC = () => {
 
@@ -22,9 +21,14 @@ export const CollectionList: FC = () => {
 
       {collections && <div className="collection-list__content">
         {collections.map(collection => 
-          <CollectionCard key={collection.id} collection={collection}/>
+          <CollectionCard
+            key={collection.id}
+            collection={collection}
+            deleteCollection={<DeleteCollection collection={collection}/>}
+            editCollection={<RenameCollection collection={collection}/>} 
+          />
         )}
-        <Button to='/collections/new'>+ Добавить</Button>
+        <AddCollection/>
       </div>}
     </div>
   )

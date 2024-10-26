@@ -1,0 +1,21 @@
+.navigation {
+  display: grid;
+  gap: 15px;
+  padding: 10px;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: space-between;
+  }
+
+  &__logo {
+    font-weight: bold;
+    font-size: 20px;
+  }
+
+  &__link {
+    font-size: var(--text-size);
+  }
+}

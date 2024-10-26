@@ -1,4 +1,4 @@
-import { FC, MouseEvent, ReactNode, useState } from 'react'
+import { FC, MouseEvent, ReactNode, useEffect, useState } from 'react'
 import { useOutsideClick } from '@shared/hooks'
 import './Popup.scss'
 import clsx from 'clsx'
@@ -10,19 +10,38 @@ interface IPopup {
   size?: 'full' | 'small' | 'medium'
   align?: 'right' | 'left' | 'center'
   className?: string
+  isOpen?: boolean
+  onToggle?: (value: boolean) => void
 }
 
-export const Popup: FC<IPopup> = ({ trigger, children, size, align = 'left', className, }) => {
+export const Popup: FC<IPopup> = (props) => {
+  const { 
+    trigger, 
+    children, 
+    size, 
+    align = 'left', 
+    className, 
+    isOpen,
+    onToggle,
+  } = props
 
-  const [open, setOpen] = useState<boolean>(false)
+  const [open, setOpen] = useState<boolean>(isOpen ? true : false)
+
+  useEffect(() => {
+    setOpen(isOpen ? true : false)
+  }, [isOpen])
+
+
 
   const ref = useOutsideClick(() => {
     setOpen(false)
+    if (onToggle) onToggle(false)
   })
 
   const handleOpen = (event: MouseEvent) => {
-    event.preventDefault()
+    event.stopPropagation()
     setOpen(true)
+    if (onToggle) onToggle(true)
   }
 
   const rootElem = document.getElementById('main')
@@ -30,8 +49,14 @@ export const Popup: FC<IPopup> = ({ trigger, children, size, align = 'left', cla
   
 
   const popup = (
-    <div className={clsx("popup__wrapper", open && '_open', size && '_' + size)}>
-      <div className={clsx('popup', '_' + align)} ref={ref}>
+    <div
+      className={clsx("popup__wrapper", open && '_open', size && '_' + size)}
+      onClick={event => event.stopPropagation()}
+    >
+      <div
+        ref={ref}
+        className={clsx('popup', '_' + align)}
+      >
         {children}
       </div>
     </div>
@@ -43,7 +68,10 @@ export const Popup: FC<IPopup> = ({ trigger, children, size, align = 'left', cla
         {trigger}
       </div>
 
-      {size === 'full' ? createPortal(popup, rootElem) : popup}
+      {size === 'full' && rootElem
+        ? createPortal(popup, rootElem)
+        : popup
+      }
     </div>
   )
 }

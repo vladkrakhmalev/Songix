@@ -1,0 +1,1 @@
+export { RenameCollection } from './RenameCollection';

@@ -13,6 +13,19 @@
   color: var(--text-primary)
 }
 
+.fi {
+	margin-top: 3px;
+	display: block;
+}
+
 ._hide {
 	display: none;
+}
+
+h1 {
+	font-size: var(--text-size-big);
+	
+	@media (max-width: 768px) {
+		font-size: var(--text-size);
+	}
 }

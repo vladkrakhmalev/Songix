@@ -1,11 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit"
+import { isMobail } from "@shared/utils/is-mobail";
 
 interface toggleLayoutState {
   isHidden: boolean
 }
 
 const initialState: toggleLayoutState = {
-  isHidden: false
+  isHidden: isMobail()
 }
 
 const toggleLayoutSlice = createSlice({
