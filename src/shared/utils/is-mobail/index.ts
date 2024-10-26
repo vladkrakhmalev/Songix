@@ -1,0 +1,1 @@
+export { isMobail } from './isMobail';
