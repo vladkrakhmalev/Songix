@@ -21,3 +21,11 @@
 ._hide {
 	display: none;
 }
+
+h1 {
+	font-size: var(--text-size-big);
+	
+	@media (max-width: 768px) {
+		font-size: var(--text-size);
+	}
+}
