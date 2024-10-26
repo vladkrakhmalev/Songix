@@ -67,6 +67,11 @@
     border-radius: 5px;
   }
 
+  &._medium {
+    padding: 12px 10px;
+    line-height: 1;
+  }
+
   &:disabled {
     background-color: var(--color-secondary);
     color: var(--text-light);
