@@ -31,6 +31,8 @@ export const LayoutMain: FC<ILayoutMain> = ({sidebar, size}) => {
   const contentStyle = {
     marginLeft: isMobail() ? 0 : sidebarWidth + 20 + 'px'
   }
+
+  const layoutMainTrigger = isMobail() && <div><LayoutMainTrigger/></div>
   
   return (
     <div className={clsx("layout-main", size && '_' + size)}>
@@ -43,7 +45,7 @@ export const LayoutMain: FC<ILayoutMain> = ({sidebar, size}) => {
         {isHidden && <LayoutMainTrigger className="layout-main__button"/>}
 
         <div className="layout-main__content-wrapper">
-          {outlet ? <Outlet/> : <div><LayoutMainTrigger/></div>}
+          {outlet ? <Outlet/> : layoutMainTrigger}
         </div>
       </div>
 
