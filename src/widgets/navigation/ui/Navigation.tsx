@@ -1,3 +1,4 @@
+import { LayoutMainTrigger, toggleHidden } from '@features/toggle-layout'
 import './Navigation.scss'
 import { UILink } from "@shared/ui/link"
 
@@ -12,6 +13,10 @@ export const Navigation = () => {
 
   return (
     <nav className="navigation">
+      <div className="navigation__header">
+        <div className="navigation__logo">Songix</div>
+        <LayoutMainTrigger/>
+      </div>
       {links.map(item => 
         <UILink
           key={item.id}
