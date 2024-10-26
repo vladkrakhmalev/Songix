@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import type { ISong } from '@entities/song';
 import { useAppDispatch } from '@shared/hooks';
 import { toggleHidden } from '@features/toggle-layout';
+import { isMobail } from '@shared/utils/is-mobail';
 
 interface ISongCard {
   song?: ISong
@@ -19,7 +20,7 @@ export const SongCard: FC<ISongCard> = ({ song, collectionId, }) => {
     if (song && collectionId) {
       const link = `/collections/${collectionId}/songs/${song.id}`
       navigate(link)
-      dispatch(toggleHidden())
+      if (isMobail()) dispatch(toggleHidden())
     }
   }
 

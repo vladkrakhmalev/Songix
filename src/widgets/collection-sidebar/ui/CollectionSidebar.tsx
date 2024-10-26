@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from '@shared/hooks'
 import { ISong } from "@entities/song";
 import { CollectionSelect } from '@entities/collection'
 import { LayoutMainTrigger, toggleHidden } from '@features/toggle-layout'
+import { isMobail } from '@shared/utils/is-mobail'
 
 export const CollectionSidebar = () => {
 
@@ -17,7 +18,7 @@ export const CollectionSidebar = () => {
 
   const handleRedirect = () => {
     navigate('/')
-    dispatch(toggleHidden())
+    if (isMobail()) dispatch(toggleHidden())
   }
 
   const { collectionId } = useParams()

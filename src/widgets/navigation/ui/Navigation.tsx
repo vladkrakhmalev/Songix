@@ -3,6 +3,7 @@ import './Navigation.scss'
 import { UILink } from "@shared/ui/link"
 import { MouseEvent } from 'react'
 import { useAppDispatch } from '@shared/hooks'
+import { isMobail } from '@shared/utils/is-mobail'
 
 export const Navigation = () => {
 
@@ -18,7 +19,8 @@ export const Navigation = () => {
   const handleRedirect = (event: MouseEvent, isSoon?: boolean) => {
     if (isSoon) {
       event.preventDefault()
-    } else {
+      
+    } else if (isMobail()) {
       dispatch(toggleHidden())
     }
   }
