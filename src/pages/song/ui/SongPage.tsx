@@ -7,6 +7,8 @@ import { OpenFullSong } from "@features/open-full-song"
 import { Song, useGetSongByIdQuery } from '@entities/song'
 import { useParams } from "react-router-dom"
 import { ConfigurateList } from "@widgets/configurate-list"
+import { LayoutMainTrigger } from '@features/toggle-layout'
+import { isMobail } from '@shared/utils/is-mobail'
 
 export const SongPage: FC = () => {
 
@@ -33,6 +35,7 @@ export const SongPage: FC = () => {
         song={song}
         isFetching={isFetching}
         configurate={<ConfigurateList/>}
+        toggleLayout={isMobail() && <LayoutMainTrigger/>}
       />
     </div>
   )

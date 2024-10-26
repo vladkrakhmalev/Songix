@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, ReactNode, useEffect, useState } from 'react';
 import './SongForm.scss'
 import { EMPTY_SONG_OBJ, ISong } from '@entities/song';
 import { Button } from '@shared/ui/button';
@@ -12,10 +12,11 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 interface ISongForm {
   song?: ISong
-  isNew?: boolean 
+  isNew?: boolean
+  toggleLayout?: ReactNode
 }
 
-export const SongForm: FC<ISongForm> = ({ song = EMPTY_SONG_OBJ, isNew = false,  }) => {
+export const SongForm: FC<ISongForm> = ({ song = EMPTY_SONG_OBJ, isNew = false, toggleLayout, }) => {
 
   const navigate = useNavigate()
   const { collectionId } = useParams()
@@ -68,7 +69,10 @@ export const SongForm: FC<ISongForm> = ({ song = EMPTY_SONG_OBJ, isNew = false, 
 
   return (
     <div className="song-form">
-      <h1 className="song-form__title">{title}</h1>
+      <div className="song-form__header">
+        {toggleLayout}
+        <h1 className="song-form__title">{title}</h1>
+      </div>
       <div className="song-form__container">
         <Input
           value={form.title ?? initialData.title}

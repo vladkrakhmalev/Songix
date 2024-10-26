@@ -4,11 +4,21 @@
   height: 100%;
   gap: 20px;
 
+  @media (max-width: 768px) {
+    gap: 10px;
+  }
+
   &__header {
     display: grid;
     grid-template-columns: 1fr auto;
     align-items: start;
     gap: 10px;
+
+    @media (max-width: 768px) {
+      grid-template-columns: auto 1fr auto;
+      text-align: center;
+      align-items: center;
+    }
   }
 
   &__title {

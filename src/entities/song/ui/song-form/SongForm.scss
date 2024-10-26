@@ -5,9 +5,11 @@
   grid-template-rows: auto 1fr auto;
   height: 100%;
 
-  &__title {
-    font-size: 20px;
+  &__header {
     grid-column: 1/-1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
   }
   
   &__container {
