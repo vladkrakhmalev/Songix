@@ -7,6 +7,10 @@
   height: 100vh;
   position: relative;
 
+  @media (max-width: 768px) {
+    padding: 0;
+  }
+
   &._big &__sidebar {
     width: 100%;
   }
@@ -23,6 +27,20 @@
     min-width: 250px;
     height: calc(100% - 40px);
     position: absolute;
+
+    @media (max-width: 768px) {
+      border-radius: 0;
+      height: 100%;
+      z-index: 3;
+      max-width: none;
+      width: 100%;
+      transform: translate(0);
+      transition: .3s;
+
+      &._hidden {
+        transform: translate(-100%);
+      }
+    }
   }
 
   &__content {
@@ -32,6 +50,11 @@
     width: 100%;
     position: relative;
     transition: .3s;
+
+    @media (max-width: 768px) {
+      border-radius: 0;
+      padding: 15px;
+    }
 
     &-wrapper {
       display: grid;
@@ -49,5 +72,9 @@
     position: absolute;
     opacity: 1 !important;
     z-index: 1;
+
+    @media (max-width: 768px) {
+      display: none;
+    }
   }
 }

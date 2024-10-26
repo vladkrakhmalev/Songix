@@ -1,9 +1,10 @@
 import { FC, ReactNode, useEffect, useRef, useState } from "react"
 import './LayoutMain.scss'
 import clsx from "clsx"
-import { Outlet } from "react-router-dom"
+import { Outlet, useOutlet } from "react-router-dom"
 import { useAppSelector } from "@shared/hooks"
 import { LayoutMainTrigger } from "../layout-main-trigger"
+import { isMobail } from "@shared/utils/is-mobail"
 
 interface ILayoutMain {
   sidebar: ReactNode
@@ -15,6 +16,7 @@ export const LayoutMain: FC<ILayoutMain> = ({sidebar, size}) => {
   const { isHidden } = useAppSelector(state => state.toggleLayout)
   const [sidebarWidth, setSidebarWidth] = useState(size ? 400 : 250)
   const sidebarRef = useRef<HTMLDivElement>(null)
+  const outlet = useOutlet()
 
   useEffect(() => {
     if (sidebarRef.current) {
@@ -27,13 +29,13 @@ export const LayoutMain: FC<ILayoutMain> = ({sidebar, size}) => {
   }, [sidebarRef.current, isHidden, size]);
 
   const contentStyle = {
-    marginLeft: sidebarWidth + 20 + 'px'
+    marginLeft: isMobail() ? 0 : sidebarWidth + 20 + 'px'
   }
   
   return (
     <div className={clsx("layout-main", size && '_' + size)}>
 
-      <div className="layout-main__sidebar" ref={sidebarRef}>
+      <div className={clsx("layout-main__sidebar", isHidden && '_hidden')} ref={sidebarRef}>
         {sidebar}
       </div>
 
@@ -41,7 +43,7 @@ export const LayoutMain: FC<ILayoutMain> = ({sidebar, size}) => {
         {isHidden && <LayoutMainTrigger className="layout-main__button"/>}
 
         <div className="layout-main__content-wrapper">
-          <Outlet/>
+          {outlet ? <Outlet/> : <div><LayoutMainTrigger/></div>}
         </div>
       </div>
 
