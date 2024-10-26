@@ -13,7 +13,7 @@ export const RenameCollection: FC<IProps> = ({ collection }) => {
   const [title, setTitle] = useState<string>(collection.firstName)
 
   const handleClick = (event: MouseEvent) => {
-    event.preventDefault()
+    event.stopPropagation()
     setIsEdit(true)
   }
 

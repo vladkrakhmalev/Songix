@@ -53,7 +53,7 @@ export const Input: FC<IInput> = (props) => {
   const inputClass = clsx(className, 'input', error && '_error', bg && '_' + bg)
 
   return (
-    <div className={inputClass} onClick={event => event.preventDefault()}>
+    <div className={inputClass} onClick={event => event.stopPropagation()}>
       <div className="input__wrapper">
         <input
           className='input__field'
