@@ -4,6 +4,7 @@ import { UILink } from "@shared/ui/link"
 import { MouseEvent } from 'react'
 import { useAppDispatch } from '@shared/hooks'
 import { isMobail } from '@shared/utils/is-mobail'
+import { Button } from '@shared/ui/button'
 
 export const Navigation = () => {
 
@@ -29,6 +30,7 @@ export const Navigation = () => {
     <nav className="navigation">
       <div className="navigation__header">
         <div className="navigation__logo">Songix</div>
+        <Button color='grey' icon='rr-sign-out-alt'/>
         <LayoutMainTrigger/>
       </div>
       {links.map(item => 
