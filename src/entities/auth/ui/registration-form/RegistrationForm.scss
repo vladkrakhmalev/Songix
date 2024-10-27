@@ -6,4 +6,25 @@
   &__error {
     color: var(--color-error);
   }
+
+  &__message {
+    font-size: var(--text-size-smaller);
+    color: var(--text-secondary);
+  }
+
+  &__link {
+    display: inline;
+    padding-left: 4px;
+    cursor: pointer;
+    transition: .2s;
+    max-width: max-content;
+
+    &:hover {
+      opacity: .7;
+    }
+  }
+
+  &__pre {
+    white-space: pre-wrap;
+  }
 }
