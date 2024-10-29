@@ -11,6 +11,13 @@ export const CollectionList: FC = () => {
 
   const preloaderArray = [0,1,2,3,4]
 
+  if (!isLoading && collections?.length == 0) {
+    return (<>
+      Cборников нет
+      <AddCollection/>
+    </>)
+  }
+
   return (
     <div className='collection-list'>
       <div className={clsx('collection-list__preloader', isLoading && '_visible')}>
