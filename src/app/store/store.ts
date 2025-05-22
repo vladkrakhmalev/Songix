@@ -5,18 +5,20 @@ import { configurateSongsReducer } from "@features/configurate-songs";
 import { songApi } from "@entities/song";
 import { toggleLayoutReducer } from "@features/toggle-layout";
 import { songReducer } from "@entities/song/model/songSlice";
+import { authApi } from "@entities/auth";
 
 export const store = configureStore({
   reducer: {
     [collectionApi.reducerPath]: collectionApi.reducer,
     [songApi.reducerPath]: songApi.reducer,
+    [authApi.reducerPath]: authApi.reducer,
     filterSongs: filterSongsReducer,
     configurateSongs: configurateSongsReducer,
     toggleLayout: toggleLayoutReducer,
     song: songReducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(collectionApi.middleware, songApi.middleware)
+    getDefaultMiddleware().concat(collectionApi.middleware, songApi.middleware, authApi.middleware)
 })
 
 export type RootState = ReturnType<typeof store.getState>

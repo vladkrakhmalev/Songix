@@ -2,15 +2,16 @@ import { Button } from "@shared/ui/button"
 import { Input } from "@shared/ui/input";
 import { useState } from "react";
 import './RegistrationForm.scss'
-import { register, IRegistration } from "@entities/auth";
 import { useNavigate } from "react-router-dom";
 import { Popup } from "@shared/ui/popup";
 import { PRIVACY_POLICY_TEXT } from "@shared/config/privacy-policy";
+import { useRegisterMutation } from "@entities/auth/api/authApi";
 
 export const RegistrationForm = () => {
   const navigate = useNavigate()
+  const [register, {data, isSuccess}] = useRegisterMutation()
 
-  const [form, setForm] = useState<IRegistration>({
+  const [form, setForm] = useState({
     email: '',
     password: '',
     repeatPassword: '',
@@ -21,12 +22,12 @@ export const RegistrationForm = () => {
 
   const handlerSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    const response = await register(form)
+    await register(form)
 
-    if (response.success) {
+    if (isSuccess) {
       navigate('/collections')
     } else {
-      setError(response.error)
+      setError(data)
     }
   }
 
