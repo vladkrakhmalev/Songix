@@ -1,16 +1,16 @@
 .light-theme {
-  --color-primary: #5DB1FF;
-  --color-secondary: #F0F8FF;
-  --color-error: #FF8C8C;
+  --color-primary: #5db1ff;
+  --color-secondary: #f0f8ff;
+  --color-error: #ff8c8c;
 
   --text-primary: #333333;
   --text-secondary: #999999;
   --text-light: #cccccc;
   --text-white: #fff;
 
-  --bg-primary: #FFFFFF;
-  --bg-secondary: #F5F5F5;
-  --bg-blue-light: #F0F8FF;
+  --bg-primary: #ffffff;
+  --bg-secondary: #f5f5f5;
+  --bg-blue-light: #f0f8ff;
   --bg-positive: #d8ffe7;
   --bg-negative: #ffcfcf;
 }
@@ -27,6 +27,6 @@
     background-color: #f5f5f5;
   }
   100% {
-    background-color: #eee; 
+    background-color: #eee;
   }
 }

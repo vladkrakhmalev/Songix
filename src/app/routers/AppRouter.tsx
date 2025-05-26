@@ -6,43 +6,43 @@ import { SongPage } from "@pages/song";
 import { LayoutAuth } from "@shared/ui/layout-auth";
 import { LayoutMain } from "@features/toggle-layout";
 import { CollectionsPage } from "@pages/collections";
-import { Navigation } from "@widgets/navigation"
+import { Navigation } from "@widgets/navigation";
 import { CollectionSidebar } from "@widgets/collection-sidebar";
 import { SongNewPage } from "@pages/song-new";
 
-export const router = createBrowserRouter([
+const router = createBrowserRouter([
   {
-    element: <LayoutAuth/>,
+    element: <LayoutAuth />,
     children: [
       {
         path: "/login",
-        element: <LoginPage/>,
-        errorElement: <NotFoundPage/>,
+        element: <LoginPage />,
+        errorElement: <NotFoundPage />,
       },
       {
         path: "/registration",
-        element: <RegistrationPage/>,
-        errorElement: <NotFoundPage/>,
+        element: <RegistrationPage />,
+        errorElement: <NotFoundPage />,
       },
       // {
       //   path: "/reset-password",
       //   element: <ResetPasswordPage/>,
       //   errorElement: <NotFoundPage/>,
       // },
-    ]
+    ],
   },
   {
-    element: <LayoutMain sidebar={<Navigation/>}/>,
+    element: <LayoutMain sidebar={<Navigation />} />,
     children: [
       {
         path: "/",
-        element: <CollectionsPage/>,
-        errorElement: <NotFoundPage/>,
+        element: <CollectionsPage />,
+        errorElement: <NotFoundPage />,
       },
       {
         path: "/collections",
-        element: <CollectionsPage/>,
-        errorElement: <NotFoundPage/>,
+        element: <CollectionsPage />,
+        errorElement: <NotFoundPage />,
       },
       // {
       //   path: "/profile",
@@ -52,26 +52,26 @@ export const router = createBrowserRouter([
       //   path: "/settings",
       //   errorElement: <NotFoundPage/>,
       // },
-    ]
+    ],
   },
   {
     path: "/collections/:collectionId/songs",
-    element: <LayoutMain size='big' sidebar={<CollectionSidebar/>}/>,
+    element: <LayoutMain size="big" sidebar={<CollectionSidebar />} />,
     children: [
       {
         path: "/collections/:collectionId/songs/:songId",
-        element: <SongPage/>,
-        errorElement: <NotFoundPage/>,
+        element: <SongPage />,
+        errorElement: <NotFoundPage />,
       },
       {
         path: "/collections/:collectionId/songs/new",
-        element: <SongNewPage/>,
-        errorElement: <NotFoundPage/>,
+        element: <SongNewPage />,
+        errorElement: <NotFoundPage />,
       },
     ],
   },
 ]);
 
 export const AppRouter = () => {
-	return <RouterProvider router={router} />
-}
+  return <RouterProvider router={router} />;
+};

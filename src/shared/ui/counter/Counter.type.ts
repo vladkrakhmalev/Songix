@@ -1,4 +1,4 @@
 export interface ICounterItem {
-  value: number | string
-  title: string
+  value: number | string;
+  title: string;
 }

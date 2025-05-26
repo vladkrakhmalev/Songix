@@ -1,1 +1,1 @@
-export { EMPTY_SONG_OBJ } from './consts';
+export { EMPTY_SONG_OBJ } from "./consts";

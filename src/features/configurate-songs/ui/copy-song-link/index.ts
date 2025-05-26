@@ -1,1 +1,1 @@
-export { CopySongLink } from './CopySongLink';
+export { CopySongLink } from "./CopySongLink";

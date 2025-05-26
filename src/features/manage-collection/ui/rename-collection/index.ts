@@ -1,1 +1,1 @@
-export { RenameCollection } from './RenameCollection';
+export { RenameCollection } from "./RenameCollection";

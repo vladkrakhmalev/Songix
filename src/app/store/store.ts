@@ -18,8 +18,12 @@ export const store = configureStore({
     song: songReducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(collectionApi.middleware, songApi.middleware, authApi.middleware)
-})
+    getDefaultMiddleware().concat(
+      collectionApi.middleware,
+      songApi.middleware,
+      authApi.middleware,
+    ),
+});
 
-export type RootState = ReturnType<typeof store.getState>
-export type AppDispatch = typeof store.dispatch
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;

@@ -1,1 +1,1 @@
-export { DeleteCollection } from './DeleteCollection';
+export { DeleteCollection } from "./DeleteCollection";

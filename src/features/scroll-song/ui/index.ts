@@ -1,1 +1,1 @@
-export { ScrollSong } from './ScrollSong.tsx';
+export { ScrollSong } from "./ScrollSong.tsx";

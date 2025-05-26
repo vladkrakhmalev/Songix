@@ -1,1 +1,1 @@
-export { ConfigurateItem } from './ConfigurateItem';
+export { ConfigurateItem } from "./ConfigurateItem";

@@ -1,5 +1,5 @@
 export interface ICollection {
-  id: number
-  firstName: string
-  age: number
+  id: number;
+  firstName: string;
+  age: number;
 }

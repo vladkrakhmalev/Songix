@@ -1,22 +1,21 @@
-import { FC, ReactNode, useEffect } from 'react';
-import './Song.scss'
-import { ISong, SongForm } from "@entities/song"
-import { Spinner } from "@shared/ui/spinner"
-import { ICounterItem } from '@shared/ui/counter';
-import { useAppDispatch, useAppSelector } from '@shared/hooks';
-import { toggleEdit } from '@entities/song';
+import { FC, ReactNode, useEffect } from "react";
+import "./Song.scss";
+import { ISong, SongForm } from "@entities/song";
+import { Spinner } from "@shared/ui/spinner";
+import { ICounterItem } from "@shared/ui/counter";
+import { useAppDispatch, useAppSelector } from "@shared/hooks";
+import { toggleEdit } from "@entities/song";
 
 interface ISongProps {
-  song: ISong | undefined
-  isFetching: boolean
-  configurate: ReactNode
-  textSize: ICounterItem
-  actionButtons: ReactNode
-  toggleLayout?: ReactNode
+  song: ISong | undefined;
+  isFetching: boolean;
+  configurate: ReactNode;
+  textSize: ICounterItem;
+  actionButtons: ReactNode;
+  toggleLayout?: ReactNode;
 }
 
 export const Song: FC<ISongProps> = (props) => {
-
   const {
     song,
     isFetching,
@@ -24,23 +23,18 @@ export const Song: FC<ISongProps> = (props) => {
     textSize,
     actionButtons,
     toggleLayout,
-  } = props
+  } = props;
 
-  const dispatch = useAppDispatch()
-  const { isEdit } = useAppSelector(state => state.song)
+  const dispatch = useAppDispatch();
+  const { isEdit } = useAppSelector((state) => state.song);
 
   useEffect(() => {
-    dispatch(toggleEdit(false))
-  }, [song])
+    dispatch(toggleEdit(false));
+  }, [song, dispatch]);
 
-  if (!song || isFetching) return <Spinner/>
+  if (!song || isFetching) return <Spinner />;
 
-  if (isEdit) return (
-    <SongForm
-      toggleLayout={toggleLayout}
-      song={song}
-    />
-  )
+  if (isEdit) return <SongForm toggleLayout={toggleLayout} song={song} />;
 
   return (
     <div className="song">
@@ -49,8 +43,10 @@ export const Song: FC<ISongProps> = (props) => {
         <h1 className="song__title">{song.title}</h1>
         {configurate}
       </div>
-      <p className="song__text" style={{fontSize: textSize.value + 'px'}}>{song.body}</p>
-      
+      <p className="song__text" style={{ fontSize: textSize.value + "px" }}>
+        {song.body}
+      </p>
+
       {actionButtons}
     </div>
   );
