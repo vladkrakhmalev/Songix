@@ -19,7 +19,10 @@ export const RenameCollection: FC<IProps> = ({ collection }) => {
   };
 
   const handleSave = (value: string) => {
-    renameCollection({ id: collection.id, data: { title: value } });
+    if (value !== collection.title) {
+      renameCollection({ id: collection.id, data: { title: value } });
+    }
+
     setIsEdit(false);
   };
 
