@@ -1,28 +1,45 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { API_URL } from "@shared/config";
-import { ICollection } from "../model/collectionType";
+import { ICollection, ICollectionBase } from "../model/collectionType";
 
-interface ICollectionResponse {
-  users: ICollection[];
-  limit: number;
-  skip: number;
-  total: number;
+export interface IUpdateCollectionRequest {
+  id: number;
+  data: Partial<ICollectionBase>;
 }
 
 export const collectionApi = createApi({
   reducerPath: "collectionApi",
   baseQuery: fetchBaseQuery({ baseUrl: API_URL }),
   endpoints: (builder) => ({
-    getCollections: builder.query<ICollectionResponse, number>({
+    getCollections: builder.query<ICollection[], number>({
       query: (limit) => ({
-        url: "/users",
+        url: "/collections",
         params: { limit },
       }),
     }),
-    getCollectionById: builder.query<ICollectionResponse, number>({
-      query: (userId) => ({
-        url: "/users",
-        params: { userId },
+    getCollection: builder.query<ICollection, number>({
+      query: (id) => ({
+        url: `/collections/${id}`,
+      }),
+    }),
+    addCollection: builder.mutation<ICollection, string>({
+      query: (title) => ({
+        url: "/collections",
+        method: "POST",
+        body: { title },
+      }),
+    }),
+    updateCollection: builder.mutation<ICollection, IUpdateCollectionRequest>({
+      query: ({ id, data }) => ({
+        url: `/collections/${id}`,
+        method: "PATCH",
+        body: data,
+      }),
+    }),
+    deleteCollection: builder.mutation<ICollection, number>({
+      query: (id) => ({
+        url: `/collections/${id}`,
+        method: "DELETE",
       }),
     }),
   }),

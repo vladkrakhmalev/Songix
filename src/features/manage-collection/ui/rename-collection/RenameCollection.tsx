@@ -1,6 +1,6 @@
 import { FC, MouseEvent, useState } from "react";
 import "./RenameCollection.scss";
-import { ICollection } from "@entities/collection";
+import { collectionApi, ICollection } from "@entities/collection";
 import { Input } from "@shared/ui/input";
 
 interface IProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -8,8 +8,10 @@ interface IProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export const RenameCollection: FC<IProps> = ({ collection }) => {
+  const [renameCollection] = collectionApi.useUpdateCollectionMutation();
+
   const [isEdit, setIsEdit] = useState<boolean>(false);
-  const [title, setTitle] = useState<string>(collection.firstName);
+  const [title, setTitle] = useState<string>(collection.title);
 
   const handleClick = (event: MouseEvent) => {
     event.stopPropagation();
@@ -17,8 +19,7 @@ export const RenameCollection: FC<IProps> = ({ collection }) => {
   };
 
   const handleSave = (value: string) => {
-    console.log(value);
-    // TODO Сделать отправку на сервер
+    renameCollection({ id: collection.id, data: { title: value } });
     setIsEdit(false);
   };
 

@@ -2,18 +2,19 @@ import { FC, useState } from "react";
 import "./DeleteCollection.scss";
 import { Popup } from "@shared/ui/popup";
 import { Button } from "@shared/ui/button";
-import { ICollection } from "@entities/collection";
+import { collectionApi, ICollection } from "@entities/collection";
 
 interface IProps {
   collection: ICollection;
 }
 
 export const DeleteCollection: FC<IProps> = ({ collection }) => {
+  const [deletteCollection] = collectionApi.useDeleteCollectionMutation();
+
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const handleDelete = () => {
-    console.log("Cборник удален");
-    // TODO Сделать удаление на сервере
+    deletteCollection(collection.id);
     setIsOpen(false);
   };
 
@@ -36,9 +37,9 @@ export const DeleteCollection: FC<IProps> = ({ collection }) => {
       trigger={trigger}
     >
       <div className="configurate-list__popup">
-        <p className="configurate-list__popup-title">Удалить песню?</p>
+        <p className="configurate-list__popup-title">Удалить сборник?</p>
         <p className="configurate-list__popup-text">
-          Вы точно хотите удалить сборник &quot;{collection.firstName}&quot;?
+          Вы точно хотите удалить сборник &quot;{collection.title}&quot;?
         </p>
         <p className="configurate-list__popup-text">
           Это действие нельзя будет отменить

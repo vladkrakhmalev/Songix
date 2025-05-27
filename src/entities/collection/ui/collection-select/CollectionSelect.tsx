@@ -9,8 +9,8 @@ export const CollectionSelect: FC = () => {
   const { collectionId } = useParams();
   const formatCollectionId = Number(collectionId);
 
-  const { data: response, isLoading } = collectionApi.useGetCollectionsQuery(0);
-  const collections = response ? response.users : [];
+  const { data: collections = [], isLoading } =
+    collectionApi.useGetCollectionsQuery(0);
   const aciveCollection = collections.find(
     (collection) => collection.id == formatCollectionId,
   );
@@ -24,7 +24,7 @@ export const CollectionSelect: FC = () => {
   const trigger = (
     <div className="collection-select__field">
       <p className="collection-select__field-title">
-        {aciveCollection?.firstName || "Выберите сборник"}
+        {aciveCollection?.title || "Выберите сборник"}
       </p>
       <i className="collection-select__field-icon fi fi-rr-caret-down"></i>
     </div>
@@ -38,7 +38,7 @@ export const CollectionSelect: FC = () => {
           className="collection-select__link"
           onClick={() => handlerClick(collection.id)}
         >
-          {collection.firstName}
+          {collection.title}
         </div>
       ))}
     </div>

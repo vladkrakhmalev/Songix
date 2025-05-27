@@ -41,7 +41,7 @@ export const CollectionCard: FC<IProps> = ({
         {editCollection}
         {deleteCollection}
       </div>
-      <p className="collection-card__count">Песен: {collection.age}</p>
+      <p className="collection-card__count">Песен: {collection.songsCount}</p>
     </div>
   );
 };

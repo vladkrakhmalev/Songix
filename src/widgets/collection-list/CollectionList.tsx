@@ -9,8 +9,8 @@ import {
 } from "@features/manage-collection";
 
 export const CollectionList: FC = () => {
-  const { data: response, isLoading } = collectionApi.useGetCollectionsQuery(6);
-  const collections = response && response.users;
+  const { data: collections = [], isLoading } =
+    collectionApi.useGetCollectionsQuery(6);
 
   const preloaderArray = [0, 1, 2, 3, 4];
 
