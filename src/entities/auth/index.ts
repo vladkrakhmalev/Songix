@@ -1,4 +1,4 @@
-export { LoginForm, RegistrationForm, ResetPassword } from "./ui";
+export { LoginForm, RegistrationForm, ResetPassword } from './ui'
 export {
   useLoginMutation,
   useRegisterMutation,
@@ -6,4 +6,4 @@ export {
   useGetUserQuery,
   useGetTokenQuery,
   authApi,
-} from "./api/authApi";
+} from './api/authApi'

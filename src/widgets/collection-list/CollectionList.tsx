@@ -1,18 +1,18 @@
-import { FC } from "react";
-import clsx from "clsx";
-import "./CollectionList.scss";
-import { collectionApi, CollectionCard } from "@entities/collection";
+import { FC } from 'react'
+import clsx from 'clsx'
+import './CollectionList.scss'
+import { collectionApi, CollectionCard } from '@entities/collection'
 import {
   AddCollection,
   DeleteCollection,
   RenameCollection,
-} from "@features/manage-collection";
+} from '@features/manage-collection'
 
 export const CollectionList: FC = () => {
   const { data: collections = [], isLoading } =
-    collectionApi.useGetCollectionsQuery(6);
+    collectionApi.useGetCollectionsQuery(6)
 
-  const preloaderArray = [0, 1, 2, 3, 4];
+  const preloaderArray = [0, 1, 2, 3, 4]
 
   if (!isLoading && collections?.length == 0) {
     return (
@@ -20,22 +20,22 @@ export const CollectionList: FC = () => {
         Cборников нет
         <AddCollection />
       </>
-    );
+    )
   }
 
   return (
-    <div className="collection-list">
+    <div className='collection-list'>
       <div
-        className={clsx("collection-list__preloader", isLoading && "_visible")}
+        className={clsx('collection-list__preloader', isLoading && '_visible')}
       >
-        {preloaderArray.map((id) => (
+        {preloaderArray.map(id => (
           <CollectionCard key={id} />
         ))}
       </div>
 
       {collections && (
-        <div className="collection-list__content">
-          {collections.map((collection) => (
+        <div className='collection-list__content'>
+          {collections.map(collection => (
             <CollectionCard
               key={collection.id}
               collection={collection}
@@ -47,5 +47,5 @@ export const CollectionList: FC = () => {
         </div>
       )}
     </div>
-  );
-};
+  )
+}

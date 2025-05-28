@@ -1,1 +1,1 @@
-export { CollectionForm } from "./CollectionForm";
+export { CollectionForm } from './CollectionForm'

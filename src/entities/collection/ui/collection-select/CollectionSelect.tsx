@@ -1,54 +1,54 @@
-import { FC } from "react";
-import "./CollectionSelect.scss";
-import { collectionApi } from "../../api/collectionApi";
-import { useNavigate, useParams } from "react-router-dom";
-import { Popup } from "@shared/ui/popup";
+import { FC } from 'react'
+import './CollectionSelect.scss'
+import { collectionApi } from '../../api/collectionApi'
+import { useNavigate, useParams } from 'react-router-dom'
+import { Popup } from '@shared/ui/popup'
 
 export const CollectionSelect: FC = () => {
-  const navigate = useNavigate();
-  const { collectionId } = useParams();
-  const formatCollectionId = Number(collectionId);
+  const navigate = useNavigate()
+  const { collectionId } = useParams()
+  const formatCollectionId = Number(collectionId)
 
   const { data: collections = [], isLoading } =
-    collectionApi.useGetCollectionsQuery(0);
+    collectionApi.useGetCollectionsQuery(0)
   const aciveCollection = collections.find(
-    (collection) => collection.id == formatCollectionId,
-  );
+    collection => collection.id == formatCollectionId
+  )
 
   const handlerClick = (id: number) => {
-    navigate(`/collections/${id}/songs`);
-  };
+    navigate(`/collections/${id}/songs`)
+  }
 
-  if (isLoading) return <div className="collection-select _load"></div>;
+  if (isLoading) return <div className='collection-select _load'></div>
 
   const trigger = (
-    <div className="collection-select__field">
-      <p className="collection-select__field-title">
-        {aciveCollection?.title || "Выберите сборник"}
+    <div className='collection-select__field'>
+      <p className='collection-select__field-title'>
+        {aciveCollection?.title || 'Выберите сборник'}
       </p>
-      <i className="collection-select__field-icon fi fi-rr-caret-down"></i>
+      <i className='collection-select__field-icon fi fi-rr-caret-down'></i>
     </div>
-  );
+  )
 
   const collectionList = (
-    <div className="collection-select__list">
-      {collections.map((collection) => (
+    <div className='collection-select__list'>
+      {collections.map(collection => (
         <div
           key={collection.id}
-          className="collection-select__link"
+          className='collection-select__link'
           onClick={() => handlerClick(collection.id)}
         >
           {collection.title}
         </div>
       ))}
     </div>
-  );
+  )
 
   return (
-    <div className="collection-select">
-      <Popup trigger={trigger} align="center">
+    <div className='collection-select'>
+      <Popup trigger={trigger} align='center'>
         {collectionList}
       </Popup>
     </div>
-  );
-};
+  )
+}

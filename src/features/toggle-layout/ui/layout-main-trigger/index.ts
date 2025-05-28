@@ -1,1 +1,1 @@
-export { LayoutMainTrigger } from "./LayoutMainTrigger";
+export { LayoutMainTrigger } from './LayoutMainTrigger'

@@ -1,1 +1,1 @@
-export { isMobail } from "./isMobail";
+export { isMobail } from './isMobail'

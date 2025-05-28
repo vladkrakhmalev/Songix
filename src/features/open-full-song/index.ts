@@ -1,1 +1,1 @@
-export { OpenFullSong } from "./ui/OpenFullSong";
+export { OpenFullSong } from './ui/OpenFullSong'

@@ -1,1 +1,1 @@
-export { CollectionList } from "./CollectionList";
+export { CollectionList } from './CollectionList'

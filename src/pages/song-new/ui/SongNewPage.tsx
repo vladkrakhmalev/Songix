@@ -1,6 +1,6 @@
-import "./SongNewPage.scss";
-import { SongForm } from "@entities/song";
+import './SongNewPage.scss'
+import { SongForm } from '@entities/song'
 
 export const SongNewPage = () => {
-  return <SongForm isNew={true} />;
-};
+  return <SongForm isNew={true} />
+}

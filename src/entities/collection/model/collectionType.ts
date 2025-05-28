@@ -1,8 +1,8 @@
 export interface ICollectionBase {
-  title: string;
-  songsCount: number;
+  title: string
+  songsCount: number
 }
 
 export interface ICollection extends ICollectionBase {
-  id: number;
+  id: number
 }

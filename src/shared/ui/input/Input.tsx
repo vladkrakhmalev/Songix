@@ -1,67 +1,62 @@
-import "./Input.scss";
-import { FC, useState, MouseEvent } from "react";
-import clsx from "clsx";
-import { Button } from "../button";
+import './Input.scss'
+import { FC, useState, MouseEvent } from 'react'
+import clsx from 'clsx'
+import { Button } from '../button'
 
 interface IInput {
-  children: string;
-  disabled?: boolean;
-  error?: string;
-  className?: string;
-  type?: "text" | "password" | "search" | "independent";
-  value: string;
-  bg?: "light";
-  onChange: (value: string) => void;
-  onSave?: (value: string) => void;
+  children: string
+  disabled?: boolean
+  error?: string
+  className?: string
+  type?: 'text' | 'password' | 'search' | 'independent'
+  value: string
+  bg?: 'light'
+  onChange: (value: string) => void
+  onSave?: (value: string) => void
 }
 
-export const Input: FC<IInput> = (props) => {
+export const Input: FC<IInput> = props => {
   const {
     children,
     className,
-    type = "text",
+    type = 'text',
     error,
     disabled = false,
     onChange,
     onSave,
     value: defaultValue,
     bg,
-  } = props;
+  } = props
 
-  const [fieldType, setFieldType] = useState(type);
-  const [text, setText] = useState<string>(defaultValue);
+  const [fieldType, setFieldType] = useState(type)
+  const [text, setText] = useState<string>(defaultValue)
 
   const togglePassword = (event: MouseEvent) => {
-    event.preventDefault();
+    event.preventDefault()
 
-    if (fieldType === "password") {
-      setFieldType("text");
+    if (fieldType === 'password') {
+      setFieldType('text')
     } else {
-      setFieldType("password");
+      setFieldType('password')
     }
-  };
+  }
 
   const handlerChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setText(event.target.value);
-    onChange(event.target.value);
-  };
+    setText(event.target.value)
+    onChange(event.target.value)
+  }
 
   const handleSave = () => {
-    onSave?.(text);
-  };
+    onSave?.(text)
+  }
 
-  const inputClass = clsx(
-    className,
-    "input",
-    error && "_error",
-    bg && "_" + bg,
-  );
+  const inputClass = clsx(className, 'input', error && '_error', bg && '_' + bg)
 
   return (
-    <div className={inputClass} onClick={(event) => event.stopPropagation()}>
-      <div className="input__wrapper">
+    <div className={inputClass} onClick={event => event.stopPropagation()}>
+      <div className='input__wrapper'>
         <input
-          className="input__field"
+          className='input__field'
           placeholder={children}
           disabled={disabled}
           onChange={handlerChange}
@@ -69,36 +64,36 @@ export const Input: FC<IInput> = (props) => {
           value={defaultValue}
         />
 
-        {type === "password" && (
+        {type === 'password' && (
           <Button
-            color="grey"
-            icon={clsx(fieldType === "password" ? "rr-eye" : "rr-eye-crossed")}
+            color='grey'
+            icon={clsx(fieldType === 'password' ? 'rr-eye' : 'rr-eye-crossed')}
             onClick={togglePassword}
-            className="input__button"
+            className='input__button'
           />
         )}
 
-        {type === "search" && defaultValue && (
+        {type === 'search' && defaultValue && (
           <Button
-            color="grey"
-            icon="rr-cross-small"
-            onClick={() => onChange("")}
-            className="input__button"
+            color='grey'
+            icon='rr-cross-small'
+            onClick={() => onChange('')}
+            className='input__button'
           />
         )}
 
-        {type === "independent" && (
+        {type === 'independent' && (
           <Button
-            color="light"
-            icon="rr-disk"
+            color='light'
+            icon='rr-disk'
             onClick={handleSave}
             disabled={text ? false : true}
-            className="input__button"
+            className='input__button'
           />
         )}
       </div>
 
-      {error && <p className="input__message">* {error}</p>}
+      {error && <p className='input__message'>* {error}</p>}
     </div>
-  );
-};
+  )
+}

@@ -1,15 +1,15 @@
-import { Button } from "@shared/ui/button";
-import { Input } from "@shared/ui/input";
-import { useState } from "react";
-import "./ResetPassword.scss";
+import { Button } from '@shared/ui/button'
+import { Input } from '@shared/ui/input'
+import { useState } from 'react'
+import './ResetPassword.scss'
 
 export const ResetPassword = () => {
-  const [form, setForm] = useState({ email: "" });
-  const [error, setError] = useState<string>("");
-  const idDisabled = error ? true : false;
+  const [form, setForm] = useState({ email: '' })
+  const [error, setError] = useState<string>('')
+  const idDisabled = error ? true : false
 
   const handlerSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+    event.preventDefault()
     // const response = await resetPassword(form)
 
     // if (response.success) {
@@ -17,23 +17,23 @@ export const ResetPassword = () => {
     // } else {
     //   setError(response.error)
     // }
-  };
+  }
 
   const handlerChange = (field: string, value: string) => {
-    setForm({ ...form, [field]: value });
-    setError("");
-  };
+    setForm({ ...form, [field]: value })
+    setError('')
+  }
 
   return (
-    <form onSubmit={handlerSubmit} className="reset-password-form">
+    <form onSubmit={handlerSubmit} className='reset-password-form'>
       <Input
         value={form.email}
-        onChange={(value) => handlerChange("email", value)}
+        onChange={value => handlerChange('email', value)}
       >
         Email
       </Input>
-      {error && <p className="reset-password-form__error">{error}</p>}
+      {error && <p className='reset-password-form__error'>{error}</p>}
       <Button disabled={idDisabled}>Восстановить пароль</Button>
     </form>
-  );
-};
+  )
+}

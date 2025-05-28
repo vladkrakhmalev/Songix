@@ -1,5 +1,5 @@
-import { UILink } from "@shared/ui/link";
-import { LoginForm } from "@entities/auth";
+import { UILink } from '@shared/ui/link'
+import { LoginForm } from '@entities/auth'
 
 export const LoginPage = () => {
   return (
@@ -7,7 +7,7 @@ export const LoginPage = () => {
       <h1>Вход в аккаунт</h1>
       <LoginForm />
       {/* <UILink to='/reset-password'>Востановить пароль</UILink> */}
-      <UILink to="/registration">Зарегестироваться</UILink>
+      <UILink to='/registration'>Зарегестироваться</UILink>
     </>
-  );
-};
+  )
+}

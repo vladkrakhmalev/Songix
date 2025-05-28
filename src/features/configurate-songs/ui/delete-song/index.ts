@@ -1,1 +1,1 @@
-export { DeleteSong } from "./DeleteSong";
+export { DeleteSong } from './DeleteSong'

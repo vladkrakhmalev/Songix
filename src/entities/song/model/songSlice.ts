@@ -1,23 +1,23 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 interface songState {
-  isEdit: boolean;
+  isEdit: boolean
 }
 
 const initialState: songState = {
   isEdit: false,
-};
+}
 
 const songSlice = createSlice({
-  name: "song",
+  name: 'song',
   initialState,
   reducers: {
     toggleEdit: (state, action: PayloadAction<boolean | undefined>) => {
       state.isEdit =
-        action.payload !== undefined ? action.payload : !state.isEdit;
+        action.payload !== undefined ? action.payload : !state.isEdit
     },
   },
-});
+})
 
-export const { toggleEdit } = songSlice.actions;
-export const songReducer = songSlice.reducer;
+export const { toggleEdit } = songSlice.actions
+export const songReducer = songSlice.reducer

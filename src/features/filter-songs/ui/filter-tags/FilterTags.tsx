@@ -1,35 +1,35 @@
-import { FC } from "react";
-import { CategoryCard } from "@entities/category";
-import { ICategory } from "@entities/category";
+import { FC } from 'react'
+import { CategoryCard } from '@entities/category'
+import { ICategory } from '@entities/category'
 import {
   setActiveCategory,
   setDisactiveCategory,
-} from "../../model/filterSongsSlice";
-import { useAppDispatch } from "@shared/hooks";
-import "./FilterTags.scss";
-import clsx from "clsx";
+} from '../../model/filterSongsSlice'
+import { useAppDispatch } from '@shared/hooks'
+import './FilterTags.scss'
+import clsx from 'clsx'
 
 interface FilterTagsProps {
-  categories: ICategory[];
-  className: string;
+  categories: ICategory[]
+  className: string
 }
 
 export const FilterTags: FC<FilterTagsProps> = ({ categories, className }) => {
-  const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch()
 
   const handlerClick = (category: ICategory) => {
     if (category.active) {
-      dispatch(setDisactiveCategory(category.id));
+      dispatch(setDisactiveCategory(category.id))
     } else {
-      dispatch(setActiveCategory(category.id));
+      dispatch(setActiveCategory(category.id))
     }
-  };
+  }
 
-  if (!categories.length) return;
+  if (!categories.length) return
 
   return (
-    <div className={clsx("filter-tags", className)}>
-      {categories.map((category) => (
+    <div className={clsx('filter-tags', className)}>
+      {categories.map(category => (
         <CategoryCard
           key={category.id}
           category={category}
@@ -37,5 +37,5 @@ export const FilterTags: FC<FilterTagsProps> = ({ categories, className }) => {
         />
       ))}
     </div>
-  );
-};
+  )
+}
