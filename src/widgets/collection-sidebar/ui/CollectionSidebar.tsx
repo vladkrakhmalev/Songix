@@ -1,19 +1,25 @@
 import { useNavigate, useParams } from 'react-router-dom'
-import { SongList } from '@entities/song'
-import { Filter, FilterTags, Search } from '@features/filter-songs'
+import { SongList } from './SongList'
+import { FilterSongs } from '@features/filter-songs'
 import './CollectionSidebar.scss'
 import { Button } from '@shared/ui/button'
-import { useGetSongsByCollectionIdQuery } from '@entities/song'
-import { useAppDispatch, useAppSelector } from '@shared/hooks'
+import { songApi } from '@entities/song'
+import { useAppDispatch } from '@shared/hooks'
 import { ISong } from '@entities/song'
 import { CollectionSelect } from '@entities/collection'
 import { LayoutMainTrigger, toggleHidden } from '@features/toggle-layout'
 import { isMobail } from '@shared/utils/is-mobail'
+import {
+  useActiveCategoriesSelector,
+  useSearchSelector,
+} from '@features/filter-songs'
 
 export const CollectionSidebar = () => {
-  const { categories, search } = useAppSelector(state => state.filterSongs)
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
+
+  const activeCategories = useActiveCategoriesSelector()
+  const search = useSearchSelector()
 
   const handleRedirect = () => {
     navigate('/')
@@ -21,18 +27,14 @@ export const CollectionSidebar = () => {
   }
 
   const { collectionId = '' } = useParams()
-  const formatCollectionId = Number(collectionId)
 
-  const { data: response, isFetching } =
-    useGetSongsByCollectionIdQuery(formatCollectionId)
-  const songs = response ? response.posts : []
-
-  const activeCategories = categories.filter(category => category.active)
+  const { data: songs = [], isFetching } =
+    songApi.useGetSongsByCollectionIdQuery(collectionId)
 
   const filterSongs = songs?.filter((song: ISong) => {
     const categoryMatch =
       !activeCategories.length ||
-      categories.some(category => song.tags.includes(category.name))
+      activeCategories.some(category => song.categories.includes(category.name))
     const searchMatch =
       !search || song.title.toLowerCase().includes(search.toLowerCase())
     return categoryMatch && searchMatch
@@ -47,19 +49,10 @@ export const CollectionSidebar = () => {
       </div>
 
       <div className='collection-sidebar__filters'>
-        <Filter />
-        <Search />
-        <FilterTags
-          className='collection-sidebar__tags'
-          categories={activeCategories}
-        />
+        <FilterSongs />
       </div>
 
-      <SongList
-        songs={filterSongs}
-        collectionId={collectionId}
-        isFetching={isFetching}
-      />
+      <SongList songs={filterSongs} isFetching={isFetching} />
       <Button
         color='light'
         to={`/collections/${collectionId}/songs/new`}

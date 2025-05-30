@@ -1,8 +1,37 @@
-import { ISong } from '@entities/song'
+import { ISongEditable } from '@entities/song'
 
-export const EMPTY_SONG_OBJ: ISong = {
-  id: 0,
+export const EMPTY_SONG_OBJ: ISongEditable = {
   title: '',
   body: '',
-  tags: [],
+  isFavorite: false,
+  categories: [],
 }
+
+export type TTonality =
+  | 'C'
+  | 'C+'
+  | 'D'
+  | 'D+'
+  | 'E'
+  | 'F'
+  | 'F+'
+  | 'G'
+  | 'G+'
+  | 'A'
+  | 'A+'
+  | 'B'
+
+export const TONALITIES = [
+  'C',
+  'C+',
+  'D',
+  'D+',
+  'E',
+  'F',
+  'F+',
+  'G',
+  'G+',
+  'A',
+  'A+',
+  'B',
+]

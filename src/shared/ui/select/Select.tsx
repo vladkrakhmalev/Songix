@@ -1,22 +1,22 @@
-import { FC, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import './Select.scss'
 import { useOutsideClick } from '@shared/hooks'
 import clsx from 'clsx'
 
-interface ISelect {
-  items: string[]
-  value?: string
-  values?: string[]
+interface ISelect<T extends string> {
+  items: T[]
+  value?: T
+  values?: T[]
   placeholder?: string
   multiselect?: boolean
   className?: string
-  onChange: (value: string[] | string) => void
+  onChange: (value?: T[] | T) => void
 }
 
-export const Select: FC<ISelect> = props => {
+export const Select = <T extends string>(props: ISelect<T>) => {
   const {
     items = [],
-    value = '',
+    value,
     values = [],
     placeholder = 'Поиск',
     multiselect = false,
@@ -24,8 +24,8 @@ export const Select: FC<ISelect> = props => {
     onChange,
   } = props
 
-  const [activeItem, setActiveItem] = useState<string>(value)
-  const [activeItems, setActiveItems] = useState<string[]>(values)
+  const [activeItem, setActiveItem] = useState<T | undefined>(value)
+  const [activeItems, setActiveItems] = useState<T[]>(values)
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [search, setSearch] = useState<string>('')
   const inputRef = useRef<HTMLInputElement | null>(null)
@@ -34,21 +34,13 @@ export const Select: FC<ISelect> = props => {
     setIsOpen(false)
   })
 
-  useEffect(() => {
-    if (multiselect) {
-      onChange(activeItems)
-    } else {
-      onChange(activeItem)
-    }
-  }, [activeItem, activeItems, multiselect, onChange])
-
   const deleteItem = (currentItem: string) => {
     setActiveItems(prevValue => {
       return prevValue.filter(item => item !== currentItem)
     })
   }
 
-  const addItem = (item: string) => {
+  const addItem = (item: T) => {
     if (multiselect) {
       setActiveItems(prevValue => {
         if (!prevValue.includes(item)) {
@@ -64,7 +56,7 @@ export const Select: FC<ISelect> = props => {
   }
 
   const handleClear = () => {
-    if (multiselect) setActiveItem('')
+    if (multiselect) setActiveItem(undefined)
     setSearch('')
   }
 
@@ -74,6 +66,23 @@ export const Select: FC<ISelect> = props => {
       setIsOpen(true)
     }
   }
+
+  useEffect(() => {
+    setActiveItem(activeItem)
+  }, [activeItem])
+
+  useEffect(() => {
+    setActiveItems(activeItems)
+  }, [activeItems])
+
+  useEffect(() => {
+    if (multiselect) {
+      onChange(activeItems)
+    } else {
+      onChange(activeItem)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeItem, activeItems])
 
   const filtredItems = items.filter(item => item.includes(search))
 

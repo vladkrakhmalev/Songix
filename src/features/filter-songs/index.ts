@@ -1,4 +1,6 @@
-export { Filter } from './ui/filter/Filter'
+export { FilterSongs } from './ui/FilterSongs'
 export { filterSongsReducer } from './model/filterSongsSlice'
-export { Search } from './ui/search/Search'
-export { FilterTags } from './ui/filter-tags/FilterTags'
+export {
+  useActiveCategoriesSelector,
+  useSearchSelector,
+} from './model/filterSongsSelectors'

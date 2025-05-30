@@ -5,7 +5,7 @@ import { Button } from '@shared/ui/button'
 import { Notification } from '@shared/ui/notification'
 import { ConfigurateItem } from '@features/configurate-songs'
 import { useNavigate } from 'react-router-dom'
-import { ISong, useDeleteSongMutation } from '@entities/song'
+import { ISong, songApi } from '@entities/song'
 
 interface IProps extends React.HTMLAttributes<HTMLDivElement> {
   song: ISong
@@ -15,7 +15,7 @@ interface IProps extends React.HTMLAttributes<HTMLDivElement> {
 export const DeleteSong: FC<IProps> = ({ song, collectionId }) => {
   const [openPopup, setOpenPopup] = useState<boolean>(false)
   const [openNotification, setOpenNotification] = useState<boolean>(false)
-  const [deleteSong] = useDeleteSongMutation()
+  const [deleteSong] = songApi.useDeleteSongMutation()
   const navigate = useNavigate()
 
   const handleDelete = async () => {

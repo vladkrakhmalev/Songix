@@ -1,14 +1,6 @@
-export { toggleEdit } from './model/songSlice'
-export {
-  songApi,
-  useGetSongsByCollectionIdQuery,
-  useGetSongByIdQuery,
-  useEditSongMutation,
-  useDeleteSongMutation,
-} from './api/songApi'
-export { SongList } from './ui/song-list'
-export { Song } from './ui/song'
+export { songApi } from './api/songApi'
+export { SongContent } from './ui/song-content/SongContent'
 export { SongForm } from './ui/song-form'
-export type { ISong } from './model/songType'
-export { EMPTY_SONG_OBJ } from './config'
+export type { ISong, ISongEditable } from './model/songType'
+export { EMPTY_SONG_OBJ } from './config/consts'
 export { SongCard } from './ui/song-card'

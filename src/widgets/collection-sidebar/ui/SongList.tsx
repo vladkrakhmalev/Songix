@@ -2,18 +2,14 @@ import { FC } from 'react'
 import './SongList.scss'
 import { ISong, SongCard } from '@entities/song'
 import clsx from 'clsx'
+import { LikeSong } from '@features/like-song'
 
 interface SongListProps {
-  collectionId: string
   songs: ISong[]
   isFetching: boolean
 }
 
-export const SongList: FC<SongListProps> = ({
-  songs = [],
-  collectionId,
-  isFetching,
-}) => {
+export const SongList: FC<SongListProps> = ({ songs = [], isFetching }) => {
   const preloaderArray = [0, 1, 2, 3, 4]
   const isNotFound = !isFetching && !songs?.length
 
@@ -31,7 +27,11 @@ export const SongList: FC<SongListProps> = ({
       {songs && (
         <div className={clsx('song-list__content', !isFetching && '_visible')}>
           {songs.map(song => (
-            <SongCard key={song.id} song={song} collectionId={collectionId} />
+            <SongCard
+              key={song.id}
+              song={song}
+              likeSong={<LikeSong song={song} />}
+            />
           ))}
         </div>
       )}

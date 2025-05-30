@@ -4,7 +4,7 @@ import { filterSongsReducer } from '@features/filter-songs'
 import { configurateSongsReducer } from '@features/configurate-songs'
 import { songApi } from '@entities/song'
 import { toggleLayoutReducer } from '@features/toggle-layout'
-import { songReducer } from '@entities/song/model/songSlice'
+import { editSongReducer } from '@features/edit-song'
 import { authApi } from '@entities/auth'
 
 export const store = configureStore({
@@ -15,7 +15,7 @@ export const store = configureStore({
     filterSongs: filterSongsReducer,
     configurateSongs: configurateSongsReducer,
     toggleLayout: toggleLayoutReducer,
-    song: songReducer,
+    editSong: editSongReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware().concat(

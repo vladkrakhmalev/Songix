@@ -15,17 +15,17 @@ import {
   TEXT_SIZE_ARRAY,
 } from '@features/configurate-songs'
 import { setSpeed, setTonality, setTextSize } from '@features/configurate-songs'
-import { toggleEdit, useGetSongByIdQuery } from '@entities/song'
+import { songApi } from '@entities/song'
 import { useParams } from 'react-router-dom'
+import { toggleEditMode } from '@features/edit-song'
 
 export const ConfigurateList: FC = () => {
   const dispatch = useAppDispatch()
   const { speed, tonality, textSize } = useAppSelector(
     state => state.configurateSongs
   )
-  const { songId, collectionId } = useParams()
-  const formatSongId = Number(songId)
-  const { data: song, isFetching } = useGetSongByIdQuery(formatSongId)
+  const { songId = '', collectionId } = useParams()
+  const { data: song, isFetching } = songApi.useGetSongByIdQuery(songId)
 
   if (isFetching || !song) return
 
@@ -57,7 +57,7 @@ export const ConfigurateList: FC = () => {
         <ConfigurateItem
           icon='rr-pencil'
           title='Редактировать'
-          onClick={() => dispatch(toggleEdit())}
+          onClick={() => dispatch(toggleEditMode())}
         />
         <DeleteSong song={song} collectionId={collectionId} />
       </div>

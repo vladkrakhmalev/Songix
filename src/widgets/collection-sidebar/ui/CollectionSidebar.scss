@@ -12,13 +12,6 @@
     min-height: 35px;
   }
 
-  &__filters {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    align-items: center;
-    gap: 10px;
-  }
-
   &__tags {
     grid-column: 1/-1;
   }

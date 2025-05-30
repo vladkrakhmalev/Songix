@@ -4,17 +4,12 @@ import { ICategory } from '@entities/category'
 import {
   setActiveCategory,
   setDisactiveCategory,
-} from '../../model/filterSongsSlice'
+} from '../model/filterSongsSlice'
 import { useAppDispatch } from '@shared/hooks'
-import './FilterTags.scss'
-import clsx from 'clsx'
+import { useActiveCategoriesSelector } from '../model/filterSongsSelectors'
 
-interface FilterTagsProps {
-  categories: ICategory[]
-  className: string
-}
-
-export const FilterTags: FC<FilterTagsProps> = ({ categories, className }) => {
+export const FilterSongsTags: FC = () => {
+  const activeCategories = useActiveCategoriesSelector()
   const dispatch = useAppDispatch()
 
   const handlerClick = (category: ICategory) => {
@@ -25,11 +20,11 @@ export const FilterTags: FC<FilterTagsProps> = ({ categories, className }) => {
     }
   }
 
-  if (!categories.length) return
+  if (!activeCategories.length) return
 
   return (
-    <div className={clsx('filter-tags', className)}>
-      {categories.map(category => (
+    <div className='filter-songs__tags'>
+      {activeCategories.map(category => (
         <CategoryCard
           key={category.id}
           category={category}

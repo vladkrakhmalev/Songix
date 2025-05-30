@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { CATEGORIES } from '@entities/category'
+import { CATEGORY_ITEM_LIST } from '@entities/category'
 import type { ICategory } from '@entities/category'
 
 interface FilterSongsState {
@@ -9,7 +9,7 @@ interface FilterSongsState {
 
 const initialState: FilterSongsState = {
   search: '',
-  categories: CATEGORIES,
+  categories: CATEGORY_ITEM_LIST,
 }
 
 const filterSongsSlice = createSlice({

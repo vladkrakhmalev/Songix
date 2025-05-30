@@ -1,0 +1,18 @@
+.filter-songs {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 10px;
+
+  &__categories {
+    display: grid;
+    gap: 10px;
+  }
+
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    grid-column: 1/-1;
+  }
+}

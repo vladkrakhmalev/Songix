@@ -1,17 +1,17 @@
 import { Button } from '@shared/ui/button'
-import './Filter.scss'
 import {
   setActiveCategory,
   setDisactiveCategory,
-} from '../../model/filterSongsSlice'
-import { useAppDispatch, useAppSelector } from '@shared/hooks'
+} from '../model/filterSongsSlice'
+import { useAppDispatch } from '@shared/hooks'
 import { CategoryCard } from '@entities/category'
 import { ICategory } from '@entities/category'
 import { Popup } from '@shared/ui/popup'
+import { useCategoriesSelector } from '../model/filterSongsSelectors'
 
-export const Filter = () => {
+export const FilterSongsPopup = () => {
   const dispatch = useAppDispatch()
-  const { categories } = useAppSelector(state => state.filterSongs)
+  const categories = useCategoriesSelector()
 
   const handlerClick = (category: ICategory) => {
     if (category.active) {
@@ -40,7 +40,7 @@ export const Filter = () => {
   )
 
   return (
-    <div className='filter-songs'>
+    <div className='filter-songs__popup'>
       <Popup trigger={triggerButton}>
         <div className='filter-songs__categories'>
           <p className='filter-songs__title'>Категории</p>

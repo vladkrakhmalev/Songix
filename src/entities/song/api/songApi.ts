@@ -1,51 +1,48 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { API_URL } from '@shared/config'
-import { ISong } from '../model/songType'
-
-interface IGetSongsResponse {
-  posts: ISong[]
-  limit: number
-  skip: number
-  total: number
-}
+import { ISong, TSongWithoutId } from '../model/songType'
+import { IUpdateSongRequest } from './songApi.types'
 
 export const songApi = createApi({
   reducerPath: 'songApi',
   baseQuery: fetchBaseQuery({ baseUrl: API_URL }),
-  tagTypes: ['Song'],
+  tagTypes: ['songs'],
   endpoints: builder => ({
-    getSongsByCollectionId: builder.query<IGetSongsResponse, number>({
-      query: userId => ({
-        url: `/users/${userId}/posts?limit=0`,
+    getSongsByCollectionId: builder.query<ISong[], string>({
+      query: collectionId => ({
+        url: `/songs`,
+        params: { collectionId },
       }),
+      providesTags: ['songs'],
     }),
-    getSongById: builder.query<ISong, number>({
-      query: songId => ({
-        url: `/posts/${songId}`,
+    getSongById: builder.query<ISong, string>({
+      query: id => ({
+        url: `/songs/${id}`,
       }),
-      providesTags: (_, __, id) => [{ type: 'Song', id }],
+      providesTags: (_, __, id) => [{ type: 'songs', id }],
     }),
-    editSong: builder.mutation<ISong, Partial<ISong>>({
-      query: ({ id, ...patch }) => ({
-        url: `/posts/${id}`,
+    addSong: builder.mutation<ISong, TSongWithoutId>({
+      query: data => ({
+        url: '/songs',
+        method: 'POST',
+        body: data,
+      }),
+      invalidatesTags: ['songs'],
+    }),
+    updateSong: builder.mutation<ISong, IUpdateSongRequest>({
+      query: ({ id, data }) => ({
+        url: `/songs/${id}`,
         method: 'PATCH',
-        body: patch,
+        body: data,
       }),
-      invalidatesTags: (_, __, { id }) => [{ type: 'Song', id }],
+      invalidatesTags: (_, __, { id }) => [{ type: 'songs', id }],
     }),
-    deleteSong: builder.mutation<ISong, number>({
-      query: songId => ({
-        url: `/posts/${songId}`,
+    deleteSong: builder.mutation<ISong, string>({
+      query: id => ({
+        url: `/songs/${id}`,
         method: 'DELETE',
       }),
-      invalidatesTags: (_, __, id) => [{ type: 'Song', id }],
+      invalidatesTags: ['songs'],
     }),
   }),
 })
-
-export const {
-  useGetSongsByCollectionIdQuery,
-  useGetSongByIdQuery,
-  useEditSongMutation,
-  useDeleteSongMutation,
-} = songApi

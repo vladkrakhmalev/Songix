@@ -1,0 +1,16 @@
+.like-song {
+  color: var(--bg-secondary);
+  cursor: pointer;
+  font-size: 20px;
+  transition: .1s;
+
+  &._active,
+  &:active,
+  &:hover {
+    color: var(--color-error);
+  }
+
+  &:active {
+    transform: scale(1.1);
+  }
+}
