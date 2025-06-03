@@ -9,18 +9,24 @@ export interface IUpdateCollectionRequest {
 
 export const collectionApi = createApi({
   reducerPath: 'collectionApi',
-  baseQuery: fetchBaseQuery({ baseUrl: API_URL }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: API_URL,
+    credentials: 'include',
+  }),
+  tagTypes: ['collections'],
   endpoints: builder => ({
     getCollections: builder.query<ICollection[], number>({
       query: limit => ({
         url: '/collections',
         params: { limit },
       }),
+      providesTags: ['collections'],
     }),
     getCollection: builder.query<ICollection, number>({
       query: id => ({
         url: `/collections/${id}`,
       }),
+      providesTags: (_, __, id) => [{ type: 'collections', id }],
     }),
     addCollection: builder.mutation<ICollection, string>({
       query: title => ({
@@ -28,6 +34,7 @@ export const collectionApi = createApi({
         method: 'POST',
         body: { title },
       }),
+      invalidatesTags: ['collections'],
     }),
     updateCollection: builder.mutation<ICollection, IUpdateCollectionRequest>({
       query: ({ id, data }) => ({
@@ -35,12 +42,14 @@ export const collectionApi = createApi({
         method: 'PATCH',
         body: data,
       }),
+      invalidatesTags: (_, __, { id }) => [{ type: 'collections', id }],
     }),
     deleteCollection: builder.mutation<ICollection, number>({
       query: id => ({
         url: `/collections/${id}`,
         method: 'DELETE',
       }),
+      invalidatesTags: ['collections'],
     }),
   }),
 })
