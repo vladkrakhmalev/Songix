@@ -1,9 +1,9 @@
 import { Button } from '@shared/ui/button'
 import { Input } from '@shared/ui/input'
 import { useState } from 'react'
-import './ResetPassword.scss'
+import './ResetPasswordForm.scss'
 
-export const ResetPassword = () => {
+export const ResetPasswordForm = () => {
   const [form, setForm] = useState({ email: '' })
   const [error, setError] = useState<string>('')
   const idDisabled = error ? true : false

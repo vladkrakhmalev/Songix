@@ -5,11 +5,11 @@ import './RegistrationForm.scss'
 import { useNavigate } from 'react-router-dom'
 import { Popup } from '@shared/ui/popup'
 import { PRIVACY_POLICY_TEXT } from '@shared/config/privacy-policy'
-import { useRegisterMutation } from '@entities/auth/api/authApi'
+import { authApi } from '@entities/auth'
 
 export const RegistrationForm = () => {
   const navigate = useNavigate()
-  const [register, { data, isSuccess }] = useRegisterMutation()
+  const [register, { data }] = authApi.useRegisterMutation()
 
   const [form, setForm] = useState({
     email: '',
@@ -23,10 +23,10 @@ export const RegistrationForm = () => {
     event.preventDefault()
     await register(form)
 
-    if (isSuccess) {
+    if (data) {
       navigate('/collections')
     } else {
-      setError(data)
+      setError(String(data))
     }
   }
 
@@ -36,7 +36,7 @@ export const RegistrationForm = () => {
   }
 
   const privacyPolicyTrigger = (
-    <p className='registration-form__link'>пользовательского соглашения</p>
+    <div className='registration-form__link'>пользовательского соглашения</div>
   )
 
   const helpText = (

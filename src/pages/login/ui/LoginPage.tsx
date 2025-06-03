@@ -1,5 +1,5 @@
 import { UILink } from '@shared/ui/link'
-import { LoginForm } from '@entities/auth'
+import { LoginForm } from '@features/login'
 
 export const LoginPage = () => {
   return (

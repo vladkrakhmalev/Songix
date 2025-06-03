@@ -4,7 +4,7 @@ import clsx from 'clsx'
 import { Button } from '../button'
 
 interface IInput {
-  children: string
+  children?: string
   disabled?: boolean
   error?: string
   className?: string

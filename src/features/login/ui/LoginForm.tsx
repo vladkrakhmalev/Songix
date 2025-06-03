@@ -2,13 +2,12 @@ import { Button } from '@shared/ui/button'
 import { Input } from '@shared/ui/input'
 import { useState } from 'react'
 import './LoginForm.scss'
-import { useGetTokenQuery, useLoginMutation } from '@entities/auth'
+import { authApi } from '@entities/auth'
 import { useNavigate } from 'react-router-dom'
 
 export const LoginForm = () => {
-  useGetTokenQuery('')
   const navigate = useNavigate()
-  const [login, { isLoading }] = useLoginMutation()
+  const [login, { isLoading }] = authApi.useLoginMutation()
 
   const [form, setForm] = useState({
     email: '',

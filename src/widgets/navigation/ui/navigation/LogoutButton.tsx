@@ -1,14 +1,14 @@
 import { FC } from 'react'
 import { Button } from '@shared/ui/button'
-import { useLogoutMutation } from '@entities/auth'
+import { authApi } from '@entities/auth'
 import { useNavigate } from 'react-router-dom'
 
 export const LogoutButton: FC = () => {
-  const [logout] = useLogoutMutation()
+  const [logout] = authApi.useLogoutMutation()
   const navigate = useNavigate()
 
   const handleLogout = async () => {
-    await logout('')
+    await logout()
     navigate('/login')
   }
 

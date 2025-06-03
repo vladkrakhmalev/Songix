@@ -1,5 +1,5 @@
 import { UILink } from '@shared/ui/link'
-import { RegistrationForm } from '@entities/auth'
+import { RegistrationForm } from '@features/register'
 
 export const RegistrationPage = () => {
   return (
