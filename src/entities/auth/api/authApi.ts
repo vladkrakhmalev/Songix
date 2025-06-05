@@ -1,18 +1,15 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { API_URL } from '@shared/config'
+import { createApi } from '@reduxjs/toolkit/query/react'
 import {
   ILoginRequest,
   ILoginResponse,
   IRegisterRequest,
   IRegisterResponse,
 } from './authApi.types'
+import { baseQueryFn } from '@shared/api'
 
 export const authApi = createApi({
   reducerPath: 'authApi',
-  baseQuery: fetchBaseQuery({
-    baseUrl: API_URL,
-    credentials: 'include',
-  }),
+  baseQuery: baseQueryFn,
   endpoints: builder => ({
     login: builder.mutation<ILoginResponse, ILoginRequest>({
       query: credentials => ({
@@ -26,6 +23,12 @@ export const authApi = createApi({
         url: '/auth/register/',
         method: 'POST',
         body: userData,
+      }),
+    }),
+    refresh: builder.mutation<void, void>({
+      query: () => ({
+        url: '/auth/refresh/',
+        method: 'POST',
       }),
     }),
     logout: builder.mutation<void, void>({

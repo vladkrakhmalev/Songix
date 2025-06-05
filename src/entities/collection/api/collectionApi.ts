@@ -1,6 +1,6 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { API_URL } from '@shared/config'
+import { createApi } from '@reduxjs/toolkit/query/react'
 import { ICollection, ICollectionBase } from '../model/collectionType'
+import { baseQuery } from '@shared/api'
 
 export interface IUpdateCollectionRequest {
   id: number
@@ -9,10 +9,7 @@ export interface IUpdateCollectionRequest {
 
 export const collectionApi = createApi({
   reducerPath: 'collectionApi',
-  baseQuery: fetchBaseQuery({
-    baseUrl: API_URL,
-    credentials: 'include',
-  }),
+  baseQuery: baseQuery,
   tagTypes: ['collections'],
   endpoints: builder => ({
     getCollections: builder.query<ICollection[], number>({
@@ -39,7 +36,7 @@ export const collectionApi = createApi({
     updateCollection: builder.mutation<ICollection, IUpdateCollectionRequest>({
       query: ({ id, data }) => ({
         url: `/collections/${id}`,
-        method: 'PATCH',
+        method: 'PUT',
         body: data,
       }),
       invalidatesTags: (_, __, { id }) => [{ type: 'collections', id }],

@@ -1,11 +1,12 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { API_URL } from '@shared/config'
+import { createApi } from '@reduxjs/toolkit/query/react'
 import { ISong, TSongWithoutId } from '../model/songType'
 import { IUpdateSongRequest } from './songApi.types'
+import { convertKeys } from '@shared/utils/convert-case'
+import { baseQuery } from '@shared/api'
 
 export const songApi = createApi({
   reducerPath: 'songApi',
-  baseQuery: fetchBaseQuery({ baseUrl: API_URL }),
+  baseQuery: baseQuery,
   tagTypes: ['songs'],
   endpoints: builder => ({
     getSongsByCollectionId: builder.query<ISong[], string>({
@@ -25,17 +26,17 @@ export const songApi = createApi({
       query: data => ({
         url: '/songs',
         method: 'POST',
-        body: data,
+        body: convertKeys(data, 'snake'),
       }),
       invalidatesTags: ['songs'],
     }),
     updateSong: builder.mutation<ISong, IUpdateSongRequest>({
       query: ({ id, data }) => ({
         url: `/songs/${id}`,
-        method: 'PATCH',
-        body: data,
+        method: 'PUT',
+        body: convertKeys(data, 'snake'),
       }),
-      invalidatesTags: (_, __, { id }) => [{ type: 'songs', id }],
+      invalidatesTags: ['songs'],
     }),
     deleteSong: builder.mutation<ISong, string>({
       query: id => ({
