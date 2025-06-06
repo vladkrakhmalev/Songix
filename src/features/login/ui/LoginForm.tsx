@@ -22,7 +22,7 @@ export const LoginForm = () => {
     const response = await login(form)
 
     if (response.error) {
-      setError(String(response.error))
+      setError('Неверный email или пароль')
     } else {
       navigate('/collections')
     }
