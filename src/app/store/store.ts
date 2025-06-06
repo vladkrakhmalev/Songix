@@ -3,7 +3,6 @@ import { collectionApi } from '@entities/collection'
 import { filterSongsReducer } from '@features/filter-songs'
 import { configurateSongsReducer } from '@features/configurate-songs'
 import { songApi } from '@entities/song'
-import { toggleLayoutReducer } from '@features/toggle-layout'
 import { editSongReducer } from '@features/edit-song'
 import { authApi } from '@entities/auth'
 
@@ -14,7 +13,6 @@ export const store = configureStore({
     [authApi.reducerPath]: authApi.reducer,
     filterSongs: filterSongsReducer,
     configurateSongs: configurateSongsReducer,
-    toggleLayout: toggleLayoutReducer,
     editSong: editSongReducer,
   },
   middleware: getDefaultMiddleware =>

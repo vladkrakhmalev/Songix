@@ -2,9 +2,6 @@ import { FC, ReactNode } from 'react'
 import './CollectionCard.scss'
 import { ICollection } from '../../model/collectionType'
 import { useNavigate } from 'react-router-dom'
-import { useAppDispatch } from '@shared/hooks'
-import { toggleHidden } from '@features/toggle-layout'
-import { isMobail } from '@shared/utils/is-mobail'
 
 interface IProps {
   collection?: ICollection
@@ -17,13 +14,11 @@ export const CollectionCard: FC<IProps> = ({
   deleteCollection,
   editCollection,
 }) => {
-  const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
   const handleRedirect = () => {
     if (collection) {
       navigate(`/collections/${collection.id}/songs`)
-      if (isMobail()) dispatch(toggleHidden())
     }
   }
 

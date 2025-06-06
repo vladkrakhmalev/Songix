@@ -1,9 +1,6 @@
-import { LayoutMainTrigger, toggleHidden } from '@features/toggle-layout'
 import './Navigation.scss'
 import { UILink } from '@shared/ui/link'
 import { MouseEvent } from 'react'
-import { useAppDispatch } from '@shared/hooks'
-import { isMobail } from '@shared/utils/is-mobail'
 import { LogoutButton } from './LogoutButton'
 
 export const Navigation = () => {
@@ -20,13 +17,9 @@ export const Navigation = () => {
     },
   ]
 
-  const dispatch = useAppDispatch()
-
   const handleRedirect = (event: MouseEvent, isSoon?: boolean) => {
     if (isSoon) {
       event.preventDefault()
-    } else if (isMobail()) {
-      dispatch(toggleHidden())
     }
   }
 
@@ -35,7 +28,6 @@ export const Navigation = () => {
       <div className='navigation__header'>
         <div className='navigation__logo'>Songix</div>
         <LogoutButton />
-        <LayoutMainTrigger />
       </div>
       {links.map(item => (
         <UILink

@@ -3,8 +3,8 @@ import { LoginPage } from '@pages/login'
 import { RegistrationPage } from '@pages/registration'
 import { NotFoundPage } from '@pages/not-found'
 import { SongPage } from '@pages/song'
-import { LayoutAuth } from '@shared/ui/layout-auth'
-import { LayoutMain } from '@features/toggle-layout'
+import { AuthLayout } from '@shared/layouts/auth-layout'
+import { MainLayout } from '@shared/layouts/main-layout'
 import { CollectionsPage } from '@pages/collections'
 import { Navigation } from '@widgets/navigation'
 import { CollectionSidebar } from '@widgets/collection-sidebar'
@@ -12,7 +12,7 @@ import { SongNewPage } from '@pages/song-new'
 
 const router = createBrowserRouter([
   {
-    element: <LayoutAuth />,
+    element: <AuthLayout />,
     children: [
       {
         path: '/login',
@@ -32,7 +32,7 @@ const router = createBrowserRouter([
     ],
   },
   {
-    element: <LayoutMain sidebar={<Navigation />} />,
+    element: <MainLayout sidebar={<Navigation />} />,
     children: [
       {
         path: '/',
@@ -56,7 +56,7 @@ const router = createBrowserRouter([
   },
   {
     path: '/collections/:collectionId/songs',
-    element: <LayoutMain size='big' sidebar={<CollectionSidebar />} />,
+    element: <MainLayout size='big' sidebar={<CollectionSidebar />} />,
     children: [
       {
         path: '/collections/:collectionId/songs/:songId',

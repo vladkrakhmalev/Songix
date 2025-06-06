@@ -10,25 +10,16 @@ interface ISongProps {
   configurate: ReactNode
   textSize: ICounterItem
   actionButtons: ReactNode
-  toggleLayout?: ReactNode
 }
 
 export const SongContent: FC<ISongProps> = props => {
-  const {
-    song,
-    isFetching,
-    configurate,
-    textSize,
-    actionButtons,
-    toggleLayout,
-  } = props
+  const { song, isFetching, configurate, textSize, actionButtons } = props
 
   if (!song || isFetching) return <Spinner />
 
   return (
     <div className='song-content'>
       <div className='song-content__header'>
-        {toggleLayout}
         <h1 className='song-content__title'>{song.title}</h1>
         {configurate}
       </div>

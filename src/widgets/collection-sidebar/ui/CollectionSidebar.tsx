@@ -4,11 +4,8 @@ import { FilterSongs } from '@features/filter-songs'
 import './CollectionSidebar.scss'
 import { Button } from '@shared/ui/button'
 import { songApi } from '@entities/song'
-import { useAppDispatch } from '@shared/hooks'
 import { ISong } from '@entities/song'
 import { CollectionSelect } from '@entities/collection'
-import { LayoutMainTrigger, toggleHidden } from '@features/toggle-layout'
-import { isMobail } from '@shared/utils/is-mobail'
 import {
   useActiveCategoriesSelector,
   useSearchSelector,
@@ -16,14 +13,12 @@ import {
 
 export const CollectionSidebar = () => {
   const navigate = useNavigate()
-  const dispatch = useAppDispatch()
 
   const activeCategories = useActiveCategoriesSelector()
   const search = useSearchSelector()
 
   const handleRedirect = () => {
     navigate('/')
-    if (isMobail()) dispatch(toggleHidden())
   }
 
   const { collectionId = '' } = useParams()
@@ -45,7 +40,6 @@ export const CollectionSidebar = () => {
       <div className='collection-sidebar__header'>
         <Button color='grey' icon='rr-home' onClick={handleRedirect} />
         <CollectionSelect />
-        <LayoutMainTrigger />
       </div>
 
       <div className='collection-sidebar__filters'>
