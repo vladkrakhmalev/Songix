@@ -2,14 +2,15 @@ import { TCategoryName } from '@entities/category'
 import { TONALITIES } from '../config/consts'
 export interface ISongEditable {
   title: string
-  body: string
+  text: string
   isFavorite: boolean
   categories: TCategoryName[]
+  tonalities: TTonality[]
 }
 
 export interface ISong extends ISongEditable {
   id: string
-  collectionId: string
+  collectionId: number
 }
 
 export type TSongWithoutId = Omit<ISong, 'id'>

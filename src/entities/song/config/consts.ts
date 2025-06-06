@@ -2,7 +2,8 @@ import { ISongEditable } from '@entities/song'
 
 export const EMPTY_SONG_OBJ: ISongEditable = {
   title: '',
-  body: '',
+  text: '',
+  tonalities: [],
   isFavorite: false,
   categories: [],
 }

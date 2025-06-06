@@ -36,7 +36,7 @@ export const SongContent: FC<ISongProps> = props => {
         className='song-content__text'
         style={{ fontSize: textSize.value + 'px' }}
       >
-        {song.body}
+        {song.text}
       </p>
 
       {actionButtons}

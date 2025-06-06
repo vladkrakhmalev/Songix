@@ -27,7 +27,10 @@ export const SongForm: FC<ISongForm> = ({
 }) => {
   const [form, setForm] = useState<ISongEditable>(initialForm)
 
-  const handleChange = (field: string, value?: string | string[]) => {
+  const handleChange = (
+    field: keyof ISongEditable,
+    value?: string | string[]
+  ) => {
     setForm({ ...form, [field]: value })
   }
 
@@ -51,7 +54,7 @@ export const SongForm: FC<ISongForm> = ({
           placeholder='Категории'
           multiselect={true}
           className='song-form__column'
-          onChange={value => handleChange('tags', value)}
+          onChange={value => handleChange('categories', value)}
         />
 
         <Select
@@ -59,13 +62,13 @@ export const SongForm: FC<ISongForm> = ({
           value='C'
           placeholder='Тональность'
           className='song-form__column'
-          onChange={value => handleChange('tonality', value)}
+          onChange={value => handleChange('tonalities', value)}
         />
 
         <Textarea
-          value={form.body}
+          value={form.text}
           placeholder='Текст'
-          onChange={value => handleChange('body', value)}
+          onChange={value => handleChange('text', value)}
         />
       </div>
 

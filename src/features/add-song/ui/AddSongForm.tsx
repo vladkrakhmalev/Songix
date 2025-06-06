@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 export const AddSongForm = () => {
   const navigate = useNavigate()
   // TODO Придумать более безопасный способ получения id колекции
-  const { collectionId = '' } = useParams()
+  const { collectionId } = useParams()
   const [addSong, { isLoading }] = songApi.useAddSongMutation()
 
   const navigateToSongs = (songId: string = '') => {
@@ -13,7 +13,7 @@ export const AddSongForm = () => {
 
   const handleSubmit = async (form: ISongEditable) => {
     try {
-      const newSong = { ...form, collectionId }
+      const newSong = { ...form, collectionId: Number(collectionId) }
       const response = await addSong(newSong)
       if (response.data) navigateToSongs(response.data.id)
     } catch (error) {
@@ -26,7 +26,7 @@ export const AddSongForm = () => {
       title='Добавить песню'
       isLoading={isLoading}
       onSubmit={handleSubmit}
-      onCancel={navigateToSongs}
+      onCancel={() => navigateToSongs()}
     />
   )
 }
