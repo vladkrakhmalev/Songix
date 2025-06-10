@@ -1,5 +1,5 @@
 .delete-collection {
-
+  
   &__trigger {
     opacity: .2;
     transition: .2s;
@@ -8,5 +8,10 @@
     &:hover {
       opacity: 1;
     }
+  }
+
+  &__content {
+    display: grid;
+    gap: 16px;
   }
 }

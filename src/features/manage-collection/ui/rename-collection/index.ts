@@ -1,1 +1,0 @@
-export { RenameCollection } from './RenameCollection'

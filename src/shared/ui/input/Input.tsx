@@ -1,35 +1,53 @@
 import './Input.scss'
-import { FC, useState, MouseEvent } from 'react'
+import {
+  FC,
+  useState,
+  MouseEvent,
+  useRef,
+  useEffect,
+  ChangeEvent,
+  useCallback,
+} from 'react'
 import clsx from 'clsx'
 import { Button } from '../button'
+import { useKeyboard } from '@shared/hooks'
 
 interface IInput {
-  children?: string
-  disabled?: boolean
-  error?: string
-  className?: string
-  type?: 'text' | 'password' | 'search' | 'independent'
   value: string
+  children?: string
+  type?: 'text' | 'password' | 'search' | 'independent'
+  error?: string
+  disabled?: boolean
+  className?: string
   bg?: 'light'
+  shouldFocus?: boolean
   onChange: (value: string) => void
   onSave?: (value: string) => void
+  onFocus?: () => void
+  onBlur?: () => void
 }
 
 export const Input: FC<IInput> = props => {
   const {
+    value: defaultValue,
     children,
-    className,
     type = 'text',
     error,
     disabled = false,
+    className,
+    bg,
+    shouldFocus,
     onChange,
     onSave,
-    value: defaultValue,
-    bg,
+    onFocus,
+    onBlur,
   } = props
 
   const [fieldType, setFieldType] = useState(type)
   const [text, setText] = useState<string>(defaultValue)
+  const [isFocused, setIsFocused] = useState(false)
+
+  const inputRef = useRef<HTMLInputElement>(null)
 
   const togglePassword = (event: MouseEvent) => {
     event.preventDefault()
@@ -41,7 +59,7 @@ export const Input: FC<IInput> = props => {
     }
   }
 
-  const handlerChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handlerChange = (event: ChangeEvent<HTMLInputElement>) => {
     setText(event.target.value)
     onChange(event.target.value)
   }
@@ -50,18 +68,57 @@ export const Input: FC<IInput> = props => {
     onSave?.(text)
   }
 
-  const inputClass = clsx(className, 'input', error && '_error', bg && '_' + bg)
+  const handleFocus = useCallback(() => {
+    if (disabled) return
+    inputRef.current?.focus()
+    setIsFocused(true)
+    onFocus?.()
+  }, [disabled, onFocus])
+
+  const handleBlur = () => {
+    inputRef.current?.blur()
+    setIsFocused(false)
+    onBlur?.()
+  }
+
+  useEffect(() => {
+    if (shouldFocus) handleFocus()
+  }, [inputRef, shouldFocus, handleFocus])
+
+  useKeyboard(
+    {
+      Enter: handleSave,
+      Escape: handleBlur,
+    },
+    {
+      target: inputRef,
+      focusOnly: true,
+      preventDefault: true,
+    }
+  )
+
+  const inputWrapperClass = clsx(
+    className,
+    'input__wrapper',
+    error && '_error',
+    bg && '_' + bg,
+    isFocused && '_focused',
+    disabled && '_disabled'
+  )
 
   return (
-    <div className={inputClass} onClick={event => event.stopPropagation()}>
-      <div className='input__wrapper'>
+    <div className='input' onClick={event => event.stopPropagation()}>
+      <div className={inputWrapperClass}>
         <input
+          ref={inputRef}
           className='input__field'
           placeholder={children}
           disabled={disabled}
-          onChange={handlerChange}
           type={fieldType}
           value={defaultValue}
+          onChange={handlerChange}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
         />
 
         {type === 'password' && (
@@ -87,7 +144,7 @@ export const Input: FC<IInput> = props => {
             color='light'
             icon='rr-disk'
             onClick={handleSave}
-            disabled={text ? false : true}
+            disabled={!text}
             className='input__button'
           />
         )}

@@ -1,1 +1,0 @@
-export { DeleteCollection } from './DeleteCollection'

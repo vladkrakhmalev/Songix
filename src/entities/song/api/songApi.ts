@@ -12,7 +12,7 @@ export const songApi = createApi({
     getSongsByCollectionId: builder.query<ISong[], string>({
       query: collectionId => ({
         url: `/songs`,
-        params: { collectionId },
+        params: { collection_id: collectionId },
       }),
       providesTags: ['songs'],
     }),

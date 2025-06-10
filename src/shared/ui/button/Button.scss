@@ -13,19 +13,12 @@
   gap: 10px;
   justify-content: center;
 
-  &__icon {
-		margin-top: 3px;
-		color: var(--color-secondary);
-    line-height: 1;
-	}
-
   &._icon {
-    padding: 5px 10px;
+    padding: 10px;
+  }
 
-    .button__icon {
-      margin-top: 3px;
-      font-size: 20px;
-    }
+  &._small._icon {
+    padding: 5px;
   }
 
   &._light {
@@ -63,7 +56,6 @@
   &._small {
     padding: 12px 10px;
     line-height: 1;
-    height: 12px;
     border-radius: 5px;
   }
 
@@ -82,4 +74,15 @@
     // transform: scale(1.03);
     opacity: .7;
   }
+
+  &__icon {
+    display: block;
+		color: var(--color-secondary);
+    line-height: 1;
+    font-size: 20px;
+	}
+
+  &._small &__icon {
+    font-size: 18px;
+	}
 }

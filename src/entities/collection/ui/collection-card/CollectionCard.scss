@@ -34,3 +34,15 @@
     gap: 5px;
   }
 }
+
+.transition-entering .collection-card {
+  opacity: 0;
+}
+
+.transition-entered .collection-card {
+  opacity: 1;
+}
+
+.transition-exiting .collection-card {
+  opacity: 0;
+}

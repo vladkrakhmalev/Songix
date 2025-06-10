@@ -1,51 +1,46 @@
 import { FC } from 'react'
-import clsx from 'clsx'
 import './CollectionList.scss'
-import { collectionApi, CollectionCard } from '@entities/collection'
 import {
-  AddCollection,
-  DeleteCollection,
-  RenameCollection,
-} from '@features/manage-collection'
+  collectionApi,
+  CollectionCard,
+  ICollection,
+} from '@entities/collection'
+import { RenameCollection } from '@features/rename-collection'
+import { TransitionList } from '@shared/lib/transition'
+import { DeleteCollection } from '@features/delete-collection'
 
 export const CollectionList: FC = () => {
   const { data: collections = [], isLoading } =
-    collectionApi.useGetCollectionsQuery(6)
+    collectionApi.useGetCollectionsQuery()
 
-  const preloaderArray = [0, 1, 2, 3, 4]
+  const preloaderArray = isLoading ? [0, 1, 2, 3, 4] : []
+
+  const renderCollectionItem = (collection: ICollection) => (
+    <CollectionCard
+      key={collection.id}
+      collection={collection}
+      deleteCollection={<DeleteCollection collection={collection} />}
+      editCollection={<RenameCollection collection={collection} />}
+    />
+  )
 
   if (!isLoading && collections?.length == 0) {
-    return (
-      <>
-        Cборников нет
-        <AddCollection />
-      </>
-    )
+    return <p className='collection-list__message'>Cборников нет</p>
   }
 
   return (
     <div className='collection-list'>
-      <div
-        className={clsx('collection-list__preloader', isLoading && '_visible')}
-      >
-        {preloaderArray.map(id => (
-          <CollectionCard key={id} />
-        ))}
-      </div>
+      <TransitionList
+        items={preloaderArray}
+        renderItem={() => <CollectionCard />}
+        renderKey={item => item}
+      />
 
-      {collections && (
-        <div className='collection-list__content'>
-          {collections.map(collection => (
-            <CollectionCard
-              key={collection.id}
-              collection={collection}
-              deleteCollection={<DeleteCollection collection={collection} />}
-              editCollection={<RenameCollection collection={collection} />}
-            />
-          ))}
-          <AddCollection />
-        </div>
-      )}
+      <TransitionList
+        items={collections}
+        renderItem={renderCollectionItem}
+        renderKey={collection => collection.id}
+      />
     </div>
   )
 }

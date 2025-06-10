@@ -12,7 +12,7 @@ export const collectionApi = createApi({
   baseQuery: baseQuery,
   tagTypes: ['collections'],
   endpoints: builder => ({
-    getCollections: builder.query<ICollection[], number>({
+    getCollections: builder.query<ICollection[], number | void>({
       query: limit => ({
         url: '/collections',
         params: { limit },
@@ -39,7 +39,7 @@ export const collectionApi = createApi({
         method: 'PUT',
         body: data,
       }),
-      invalidatesTags: (_, __, { id }) => [{ type: 'collections', id }],
+      invalidatesTags: ['collections'],
     }),
     deleteCollection: builder.mutation<ICollection, number>({
       query: id => ({

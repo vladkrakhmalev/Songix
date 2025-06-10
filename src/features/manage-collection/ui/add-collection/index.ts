@@ -1,1 +1,0 @@
-export { AddCollection } from './AddCollection'

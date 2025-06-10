@@ -1,25 +1,13 @@
 .collection-list {
-  position: relative;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  align-items: start;
+  overflow-y: auto;
 
-  &__preloader,
-  &__content {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-    align-items: start;
-    overflow-y: auto;
-  }
-
-  &__preloader {
-    position: absolute;
-    width: 100%;
-    opacity: 0;
-    transition: .3s;
-    visibility: hidden;
-
-    &._visible {
-      opacity: 1;
-      visibility: visible;
-    }
+  &__message {
+    margin: 50px 0;
+    color: var(--text-secondary);
+    text-align: center;
   }
 }
