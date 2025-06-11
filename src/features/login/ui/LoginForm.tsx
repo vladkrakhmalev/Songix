@@ -4,6 +4,7 @@ import { useState } from 'react'
 import './LoginForm.scss'
 import { authApi } from '@entities/auth'
 import { useNavigate } from 'react-router-dom'
+import { GoogleLoginButton } from './GoogleLoginButton'
 
 export const LoginForm = () => {
   const navigate = useNavigate()
@@ -16,9 +17,7 @@ export const LoginForm = () => {
   const [error, setError] = useState<string>('')
   const idDisabled = !!error || isLoading
 
-  const handlerSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-
+  const handlerSubmit = async () => {
     const response = await login(form)
 
     if (response.error) {
@@ -34,7 +33,7 @@ export const LoginForm = () => {
   }
 
   return (
-    <form onSubmit={handlerSubmit} className='login-form'>
+    <form onSubmit={event => event.preventDefault()} className='login-form'>
       <Input
         value={form.email}
         onChange={value => handlerChange('email', value)}
@@ -42,6 +41,7 @@ export const LoginForm = () => {
       >
         Email
       </Input>
+
       <Input
         type='password'
         value={form.password}
@@ -50,8 +50,14 @@ export const LoginForm = () => {
       >
         Пароль
       </Input>
+
       {error && <p className='login-form__error'>{error}</p>}
-      <Button disabled={idDisabled}>Войти</Button>
+
+      <Button disabled={idDisabled} onClick={handlerSubmit}>
+        Войти
+      </Button>
+
+      <GoogleLoginButton />
     </form>
   )
 }
