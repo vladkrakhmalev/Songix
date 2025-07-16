@@ -1,40 +1,51 @@
 import { FC } from 'react'
 import './SongList.scss'
-import { ISong, SongCard } from '@entities/song'
-import clsx from 'clsx'
+import { ISong, songApi, SongCard, SongCardSkeleton } from '@entities/song'
 import { LikeSong } from '@features/like-song'
+import { useParams } from 'react-router-dom'
+import {
+  useActiveCategoriesSelector,
+  useSearchSelector,
+} from '@features/filter-songs'
+import { TransitionList } from '@shared/lib/transition'
 
-interface SongListProps {
-  songs: ISong[]
-  isFetching: boolean
-}
+export const SongList: FC = () => {
+  const { collectionId = '' } = useParams()
 
-export const SongList: FC<SongListProps> = ({ songs = [], isFetching }) => {
-  const preloaderArray = [0, 1, 2, 3, 4]
-  const isNotFound = !isFetching && !songs?.length
+  const activeCategories = useActiveCategoriesSelector()
+  const search = useSearchSelector()
+  const { data: songs = [], isLoading } =
+    songApi.useGetSongsByCollectionIdQuery(collectionId)
 
-  if (isNotFound)
+  const filterSongs = songs?.filter((song: ISong) => {
+    const categoryMatch =
+      !activeCategories.length ||
+      activeCategories.some(category =>
+        song.categories?.includes(category.name)
+      )
+
+    const searchMatch =
+      !search || song.title.toLowerCase().includes(search.toLowerCase())
+
+    return categoryMatch && searchMatch
+  })
+
+  if (!isLoading && filterSongs.length === 0) {
     return <p className='song-list__not-found'>Ничего не найдено</p>
+  }
 
   return (
     <div className='song-list'>
-      <div className={clsx('song-list__preloader', isFetching && '_visible')}>
-        {preloaderArray.map(id => (
-          <SongCard key={id} />
-        ))}
-      </div>
-
-      {songs && (
-        <div className={clsx('song-list__content', !isFetching && '_visible')}>
-          {songs.map(song => (
-            <SongCard
-              key={song.id}
-              song={song}
-              likeSong={<LikeSong song={song} />}
-            />
-          ))}
-        </div>
-      )}
+      <TransitionList
+        items={filterSongs}
+        isLoading={isLoading}
+        className='song-list__items'
+        preloadItem={<SongCardSkeleton />}
+        renderItem={song => (
+          <SongCard song={song} likeSong={<LikeSong song={song} />} />
+        )}
+        renderKey={song => song.id}
+      />
     </div>
   )
 }

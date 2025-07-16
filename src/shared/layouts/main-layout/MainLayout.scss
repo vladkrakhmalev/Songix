@@ -34,7 +34,7 @@
       max-width: none;
       width: 100%;
       transform: translate(0);
-      transition: .3s;
+      transition: .2s;
       position: absolute;
 
       &._hidden {
@@ -49,7 +49,7 @@
     border-radius: 20px;
     width: 100%;
     position: relative;
-    transition: .3s;
+    transition: .2s;
 
     @media (max-width: 768px) {
       border-radius: 0;

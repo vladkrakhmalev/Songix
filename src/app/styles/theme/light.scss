@@ -17,19 +17,3 @@
   --shadow-secondary: 0 0 0 4px #dbeeff;
   --shadow-error: 0 0 0 4px #ffdcdc;
 }
-
-._load {
-  animation: shimmer 2s infinite ease-in-out;
-}
-
-@keyframes shimmer {
-  0% {
-    background-color: #eee;
-  }
-  50% {
-    background-color: #f5f5f5;
-  }
-  100% {
-    background-color: #eee;
-  }
-}

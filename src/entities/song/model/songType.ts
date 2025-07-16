@@ -4,7 +4,7 @@ export interface ISongEditable {
   title: string
   text: string
   isFavorite: boolean
-  categories: TCategoryName[]
+  categories?: TCategoryName[]
   tonalities: TTonality[]
 }
 

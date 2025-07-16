@@ -1,33 +1,32 @@
 import { FC, ReactNode } from 'react'
 import './SongContent.scss'
 import { ISong } from '@entities/song'
-import { Spinner } from '@shared/ui/spinner'
 import { ICounterItem } from '@shared/ui/counter'
 
 interface ISongProps {
-  song: ISong | undefined
-  isFetching: boolean
-  configurate: ReactNode
+  song: ISong
   textSize: ICounterItem
+  configurate: ReactNode
   actionButtons: ReactNode
 }
 
 export const SongContent: FC<ISongProps> = props => {
-  const { song, isFetching, configurate, textSize, actionButtons } = props
-
-  if (!song || isFetching) return <Spinner />
+  const { song, configurate, textSize, actionButtons } = props
 
   return (
     <div className='song-content'>
       <div className='song-content__header'>
-        <h1 className='song-content__title'>{song.title}</h1>
+        <div>
+          <h1 className='song-content__title'>{song?.title}</h1>
+        </div>
+
         {configurate}
       </div>
       <p
         className='song-content__text'
         style={{ fontSize: textSize.value + 'px' }}
       >
-        {song.text}
+        {song?.text}
       </p>
 
       {actionButtons}

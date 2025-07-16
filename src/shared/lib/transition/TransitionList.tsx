@@ -4,16 +4,22 @@ import { useTransitionList } from './useTransitionList'
 
 interface IProps<T> {
   items: T[]
-  className?: string
+  isLoading?: boolean
   delay?: number
+  className?: string
+  preloadCount?: number
+  preloadItem?: ReactNode
   renderItem: (item: T) => ReactNode
   renderKey: (item: T) => Key
 }
 
 export function TransitionList<T>({
   items,
-  className,
+  isLoading = false,
   delay,
+  className,
+  preloadCount = 5,
+  preloadItem,
   renderItem,
   renderKey,
 }: IProps<T>) {
@@ -22,6 +28,10 @@ export function TransitionList<T>({
     delay,
     renderKey,
   })
+
+  const preloadElements = Array.from({ length: preloadCount }, (_, index) => (
+    <div key={`preload-${index}`}>{preloadItem}</div>
+  ))
 
   const transitions = allItems.map(item => {
     const key = renderKey(item)
@@ -32,9 +42,13 @@ export function TransitionList<T>({
     )
   })
 
-  if (className) {
-    return <div className={className}>{transitions}</div>
-  }
+  return (
+    <>
+      <Transition in={isLoading} delay={delay} className={className}>
+        {preloadElements}
+      </Transition>
 
-  return transitions
+      {!isLoading && <div className={className}>{transitions}</div>}
+    </>
+  )
 }

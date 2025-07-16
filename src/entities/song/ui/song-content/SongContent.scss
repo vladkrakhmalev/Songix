@@ -3,6 +3,7 @@
   grid-template-rows: auto 1fr;
   height: 100%;
   gap: 20px;
+  transition: .2s;
 
   @media (max-width: 768px) {
     gap: 10px;
@@ -10,7 +11,7 @@
 
   &__header {
     display: grid;
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 1fr 40px;
     align-items: start;
     gap: 10px;
 
@@ -31,4 +32,20 @@
     font-family: sans-serif;
     overflow-y: auto;
   }
+
+  &__message {
+    color: var(--text-secondary);
+  }
+}
+
+.transition-entering .song-content {
+  opacity: 0;
+}
+
+.transition-entered .song-content {
+  opacity: 1;
+}
+
+.transition-exiting .song-content {
+  opacity: 0;
 }

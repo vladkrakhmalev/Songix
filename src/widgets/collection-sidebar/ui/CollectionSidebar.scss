@@ -5,14 +5,9 @@
   height: 100%;
 
   &__header {
-    display: flex;
+    display: grid;
+    grid-template-columns: auto 1fr;
     align-items: center;
-    justify-content: space-between;
     gap: 10px;
-    min-height: 35px;
-  }
-
-  &__tags {
-    grid-column: 1/-1;
   }
 }

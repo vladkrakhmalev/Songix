@@ -3,37 +3,15 @@ import { SongList } from './SongList'
 import { FilterSongs } from '@features/filter-songs'
 import './CollectionSidebar.scss'
 import { Button } from '@shared/ui/button'
-import { songApi } from '@entities/song'
-import { ISong } from '@entities/song'
 import { CollectionSelect } from '@entities/collection'
-import {
-  useActiveCategoriesSelector,
-  useSearchSelector,
-} from '@features/filter-songs'
 
 export const CollectionSidebar = () => {
+  const { collectionId = '' } = useParams()
   const navigate = useNavigate()
-
-  const activeCategories = useActiveCategoriesSelector()
-  const search = useSearchSelector()
 
   const handleRedirect = () => {
     navigate('/')
   }
-
-  const { collectionId = '' } = useParams()
-
-  const { data: songs = [], isFetching } =
-    songApi.useGetSongsByCollectionIdQuery(collectionId)
-
-  const filterSongs = songs?.filter((song: ISong) => {
-    const categoryMatch =
-      !activeCategories.length ||
-      activeCategories.some(category => song.categories.includes(category.name))
-    const searchMatch =
-      !search || song.title.toLowerCase().includes(search.toLowerCase())
-    return categoryMatch && searchMatch
-  })
 
   return (
     <div className='collection-sidebar'>
@@ -42,11 +20,10 @@ export const CollectionSidebar = () => {
         <CollectionSelect />
       </div>
 
-      <div className='collection-sidebar__filters'>
-        <FilterSongs />
-      </div>
+      <FilterSongs />
 
-      <SongList songs={filterSongs} isFetching={isFetching} />
+      <SongList />
+
       <Button
         color='light'
         to={`/collections/${collectionId}/songs/new`}

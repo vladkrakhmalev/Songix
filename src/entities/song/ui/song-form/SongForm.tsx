@@ -4,9 +4,6 @@ import { EMPTY_SONG_OBJ, ISongEditable } from '@entities/song'
 import { Button } from '@shared/ui/button'
 import { Input } from '@shared/ui/input'
 import { Textarea } from '@shared/ui/textarea'
-import { Select } from '@shared/ui/select'
-import { TONALITIES } from '@entities/song/config/consts'
-import { CATEGORIES } from '@entities/category'
 
 interface ISongForm {
   initialForm?: ISongEditable
@@ -48,22 +45,22 @@ export const SongForm: FC<ISongForm> = ({
           Название
         </Input>
 
-        <Select
-          items={CATEGORIES}
-          values={form.categories}
+        {/* <Select
+          options={CATEGORIES}
+          value={form.categories}
           placeholder='Категории'
-          multiselect={true}
+          isMultiselect
           className='song-form__column'
           onChange={value => handleChange('categories', value)}
-        />
+        /> */}
 
-        <Select
-          items={TONALITIES}
+        {/* <Select
+          options={TONALITIES}
           value='C'
           placeholder='Тональность'
           className='song-form__column'
           onChange={value => handleChange('tonalities', value)}
-        />
+        /> */}
 
         <Textarea
           value={form.text}

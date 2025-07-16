@@ -1,8 +1,9 @@
 .song-card {
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: 1fr 30px;
   gap: 5px;
   align-items: center;
+  transition: .2s;
 
   &._load {
     border-radius: 10px;
@@ -18,4 +19,16 @@
       opacity: .6;
     }
   }
+}
+
+.transition-entering .song-card {
+  opacity: 0;
+}
+
+.transition-entered .song-card {
+  opacity: 1;
+}
+
+.transition-exiting .song-card {
+  opacity: 0;
 }

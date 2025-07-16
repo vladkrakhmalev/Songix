@@ -1,0 +1,24 @@
+.skeleton {
+  animation: shimmer 1s infinite ease-in-out;
+  width: 100%;
+
+  &._primary {
+    background-color: var(--bg-primary);
+  }
+
+  &._secondary {
+    background-color: var(--bg-secondary);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.5;
+  }
+}

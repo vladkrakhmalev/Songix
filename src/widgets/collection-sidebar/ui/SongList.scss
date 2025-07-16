@@ -1,27 +1,10 @@
 .song-list {
-  position: relative;
-  
-  &__preloader,
-  &__content {
-    overflow-y: auto;
-    overflow-x: hidden;
+  &__items {
     display: grid;
-    align-content: start;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 10px;
-    margin-bottom: 5px;
-    opacity: 0;
-    transition: .3s;
-    visibility: hidden;
-
-    &._visible {
-      opacity: 1;
-      visibility: visible;
-    }
-  }
-
-  &__preloader {
-    position: absolute;
-    width: 100%;
+    align-items: start;
+    overflow-y: auto;
   }
 
   &__not-found {
