@@ -1,4 +1,6 @@
 export { collectionApi } from './api/collectionApi'
-export { CollectionCard, CollectionSelect } from './ui'
+export { CollectionCard } from './ui/collection-card/CollectionCard'
+export { CollectionCardSkeleton } from './ui/collection-card/CollectionCardSkeleton'
+export { CollectionSelect } from './ui/collection-select/CollectionSelect'
 export type { ICollection } from './model/collectionType'
 export { validateCollection } from './model/validateCollection'

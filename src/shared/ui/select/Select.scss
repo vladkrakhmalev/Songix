@@ -2,18 +2,29 @@
   position: relative;
 
   &__field {
+    display: flex;
+    align-items: center;
+    gap: 5px;
     border: 1px solid transparent;
     border-radius: 10px;
     background-color: var(--bg-secondary);
     transition: .2s;
     width: 100%;  
     padding: 10px 15px;
-    cursor: text;
+    cursor: pointer;
 
-    &-wrapper {
-      display: flex;
-      align-items: center;
-      gap: 5px;
+    &:not(._disabled):hover,
+    &._open {
+      border: 1px solid var(--color-primary);
+    }
+
+    &._open {
+      box-shadow: var(--shadow-secondary);
+    }
+
+    &._disabled {
+      opacity: 0.8;
+      cursor: not-allowed;
     }
   }
 
@@ -24,6 +35,10 @@
     background-color: var(--bg-secondary);
     outline: none;
     font-size: var(--text-size-small);
+
+    &:read-only {
+      cursor: pointer;
+    }
 
     &::placeholder {
       color: var(--text-light);
@@ -74,37 +89,72 @@
     }
   }
 
-  &__container {
+  &__options {
     display: grid;
     gap: 5px;
-    width: calc(100% - 20px);
-    left: 50%;
-    transform: translate(-50%, -5px) scale(.95);
+    width: 100%;
+    left: 0;
     position: absolute;
     z-index: 10;
     background: var(--bg-primary);
     padding: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1333333333);
+    box-shadow: var(--shadow-primary);
     border-radius: 10px;
-    visibility: hidden;
     transition: .2s;
-    opacity: 0;
 
-    &._open {
-      visibility: visible;
-      opacity: 1;
-      transform: translate(-50%, 5px);
+    &-title {
+      font-size: var(--text-size-small);
+    }
+
+    &-item {
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: var(--text-size-small);
+      background-color: var(--bg-secondary);
+      transition: .2s;
+      width: max-content;
+  
+      &._selected {
+        background-color: var(--color-primary);
+        color: var(--text-white);
+        cursor: default;
+      }
+  
+      &:not(._selected):hover {
+        opacity: .6;
+        cursor: pointer;
+      }
+    }
+
+    &-message {
+      margin: 50px 0;
+      font-size: var(--text-size-small);
+      color: var(--text-light);
+      text-align: center;
     }
   }
+}
 
-  &__item {
-    font-size: var(--text-size-small);
-    transition: .2s;
-    width: max-content;
+.transition-entering {
+  .select__options {
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-5px) scale(.95);
+  }
+}
 
-    &:hover {
-      opacity: .6;
-      cursor: pointer;
-    }
+.transition-entered {
+  .select__options {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(5px);
+  }
+}
+
+.transition-exiting {
+  .select__options {
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-5px) scale(.95);
   }
 }

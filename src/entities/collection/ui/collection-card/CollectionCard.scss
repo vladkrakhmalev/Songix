@@ -8,30 +8,18 @@
   align-content: start;
   transition: .2s;
   text-decoration: none;
-
-  &:not(._load):hover {
-    cursor: pointer;
-    // opacity: .7;
-  }
-
-  &._load &__title {
-    width: 70%;
-    height: 25px;
-    border-radius: 5px;
-    background-color: var(--bg-primary);
-  }
-
-  &._load &__count {
-    width: 50%;
-    height: 20px;
-    border-radius: 5px;
-    background-color: var(--bg-primary);
-  }
+  cursor: pointer;
 
   &__header {
     display: flex;
     align-items: center;
     gap: 5px;
+  }
+
+  &__count {
+    display: flex;
+    gap: 5px;
+    align-items: center;
   }
 }
 

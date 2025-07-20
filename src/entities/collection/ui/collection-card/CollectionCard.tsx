@@ -4,9 +4,9 @@ import { ICollection } from '../../model/collectionType'
 import { useNavigate } from 'react-router-dom'
 
 interface IProps {
-  collection?: ICollection
-  deleteCollection?: ReactNode
-  editCollection?: ReactNode
+  collection: ICollection
+  deleteCollection: ReactNode
+  editCollection: ReactNode
 }
 
 export const CollectionCard: FC<IProps> = ({
@@ -21,14 +21,6 @@ export const CollectionCard: FC<IProps> = ({
       navigate(`/collections/${collection.id}/songs`)
     }
   }
-
-  if (!collection)
-    return (
-      <div className='collection-card _load'>
-        <h3 className='collection-card__title'></h3>
-        <p className='collection-card__count'></p>
-      </div>
-    )
 
   return (
     <div onClick={handleRedirect} className='collection-card'>

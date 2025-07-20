@@ -1,38 +1,38 @@
 .collection-select {
+  width: 100%;
+  position: relative;
 
-  &._load {
-    width: 150px;
-    height: 20px;
-    border-radius: 5px;
-  }
-
-  &__field {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    cursor: pointer;
+  &__transition {
     transition: .2s;
+  }
+}
 
-    &:hover {
-      opacity: .7;
-    }
-
-    &-icon {
-      line-height: 1;
-    }
+.transition-exited {
+  &.collection-select__transition {
+    opacity: 0;
   }
 
-  &__list {
-    display: grid;
-    gap: 10px;
+  .collection-select__skeleton {
+    opacity: 0;
+  }
+}
+
+.transition-entered {
+  &.collection-select__transition {
+    opacity: 1;
   }
 
-  &__link {
-    cursor: pointer;
-    transition: .2s;
+  .collection-select__skeleton {
+    opacity: 1;
+  }
+}
 
-    &:hover {
-      opacity: .7;
-    }
+.transition-exiting {
+  &.collection-select__transition {
+    opacity: 0;
+  }
+
+  .collection-select__skeleton {
+    opacity: 0;
   }
 }

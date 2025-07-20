@@ -1,138 +1,121 @@
-import { useEffect, useRef, useState } from 'react'
+import { useState, useMemo, useEffect, ChangeEvent } from 'react'
 import './Select.scss'
-import { useOutsideClick } from '@shared/hooks'
+import { Transition } from '@shared/lib/transition'
 import clsx from 'clsx'
+import { useOutsideClick } from '@shared/hooks'
 
-interface ISelect<T extends string> {
-  items: T[]
-  value?: T
-  values?: T[]
-  placeholder?: string
-  multiselect?: boolean
-  className?: string
-  onChange: (value?: T[] | T) => void
+export interface ISelectOption<T extends string> {
+  label: string
+  value: T
 }
 
-export const Select = <T extends string>(props: ISelect<T>) => {
-  const {
-    items = [],
-    value,
-    values = [],
-    placeholder = 'Поиск',
-    multiselect = false,
-    className,
-    onChange,
-  } = props
+interface IProps<T extends string> {
+  options: ISelectOption<T>[]
+  value: T
+  disabled?: boolean
+  isSearchable?: boolean
+  placeholder?: string
+  optionsTitle?: string
+  onChange: (value: T) => void
+}
 
-  const [activeItem, setActiveItem] = useState<T | undefined>(value)
-  const [activeItems, setActiveItems] = useState<T[]>(values)
-  const [isOpen, setIsOpen] = useState<boolean>(false)
-  const [search, setSearch] = useState<string>('')
-  const inputRef = useRef<HTMLInputElement | null>(null)
+export const Select = <T extends string>({
+  options,
+  value,
+  disabled,
+  isSearchable,
+  placeholder,
+  optionsTitle,
+  onChange,
+}: IProps<T>) => {
+  const initialValue = value
+    ? options.find(opt => opt.value === value)?.label
+    : ''
 
-  const selectRef = useOutsideClick(() => {
+  const [isOpen, setIsOpen] = useState(false)
+  const [search, setSearch] = useState(initialValue)
+
+  const selectRef = useOutsideClick(() => setIsOpen(false))
+
+  const handleOpen = () => {
+    if (disabled) return
+    setIsOpen(!isOpen)
+  }
+
+  const handleSelect = (newValue: T) => {
+    onChange(newValue)
     setIsOpen(false)
-  })
-
-  const deleteItem = (currentItem: string) => {
-    setActiveItems(prevValue => {
-      return prevValue.filter(item => item !== currentItem)
-    })
   }
 
-  const addItem = (item: T) => {
-    if (multiselect) {
-      setActiveItems(prevValue => {
-        if (!prevValue.includes(item)) {
-          return [...prevValue, item]
-        }
-        return prevValue
-      })
-    } else {
-      setActiveItem(item)
-      setSearch(item)
-      setIsOpen(false)
-    }
+  const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
+    const newSearch = e.target.value.trim()
+    setSearch(newSearch)
+    if (!isOpen) setIsOpen(true)
   }
 
-  const handleClear = () => {
-    if (multiselect) setActiveItem(undefined)
-    setSearch('')
-  }
+  const filteredOptions = useMemo(() => {
+    if (!isSearchable || !search) return options
 
-  const focusInput = () => {
-    if (inputRef.current) {
-      inputRef.current.focus()
-      setIsOpen(true)
-    }
-  }
+    return options.filter(opt =>
+      opt.label.toLowerCase().includes(search.toLowerCase())
+    )
+  }, [search, options, isSearchable])
 
-  useEffect(() => {
-    setActiveItem(activeItem)
-  }, [activeItem])
-
-  useEffect(() => {
-    setActiveItems(activeItems)
-  }, [activeItems])
-
-  useEffect(() => {
-    if (multiselect) {
-      onChange(activeItems)
-    } else {
-      onChange(activeItem)
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeItem, activeItems])
-
-  const filtredItems = items.filter(item => item.includes(search))
-
-  const iconClass = clsx(
-    'select__icon fi',
-    !search && !isOpen && 'fi-rr-angle-small-down',
-    !search && isOpen && 'fi-rr-angle-small-up',
-    search && 'fi-rr-cross-small'
+  const selectFieldClass = clsx(
+    'select__field',
+    isOpen && '_open',
+    disabled && '_disabled'
   )
 
+  const selectIconClass = clsx(
+    'select__icon fi',
+    isOpen ? 'fi-rr-angle-small-up' : 'fi fi-rr-angle-small-down'
+  )
+
+  useEffect(() => {
+    setSearch(initialValue)
+  }, [initialValue])
+
   return (
-    <div className={clsx('select', className)} ref={selectRef}>
-      <div className='select__field' onClick={focusInput}>
-        {activeItems.length > 0 && multiselect && (
-          <div className='select__tags'>
-            {activeItems.map(item => (
-              <div
-                key={item}
-                className='select__tag'
-                onClick={() => deleteItem(item)}
-              >
-                {item}
-                <i className='select__tag-icon fi fi-rr-cross-small'></i>
-              </div>
-            ))}
-          </div>
-        )}
-        <div className='select__field-wrapper'>
-          <input
-            type='text'
-            className='select__input'
-            value={search}
-            onChange={event => setSearch(event.target.value)}
-            ref={inputRef}
-            placeholder={placeholder}
-          />
-          <i className={iconClass} onClick={handleClear}></i>
+    <div className='select' ref={selectRef}>
+      <div className={selectFieldClass} onClick={handleOpen}>
+        <input
+          value={search}
+          readOnly={!isSearchable}
+          disabled={disabled}
+          placeholder={placeholder}
+          type='text'
+          className='select__input'
+          onChange={handleSearch}
+        />
+
+        <i className={selectIconClass}></i>
+      </div>
+
+      <Transition in={isOpen}>
+        <div className='select__options'>
+          {optionsTitle && (
+            <div className='select__options-title'>{optionsTitle}</div>
+          )}
+
+          {filteredOptions.map(option => (
+            <div
+              key={option.value}
+              className={clsx(
+                'select__options-item',
+                option.value === value && '_selected'
+              )}
+              onClick={() => handleSelect(option.value)}
+            >
+              {option.label}
+            </div>
+          ))}
+
+          {filteredOptions.length === 0 && (
+            <div className='select__options-message'>Список пуст</div>
+          )}
         </div>
-      </div>
-      <div className={clsx('select__container', isOpen && '_open')}>
-        {filtredItems.map(item => (
-          <div
-            key={item}
-            className='select__item'
-            onClick={() => addItem(item)}
-          >
-            {item}
-          </div>
-        ))}
-      </div>
+      </Transition>
     </div>
   )
 }
