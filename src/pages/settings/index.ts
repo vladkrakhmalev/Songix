@@ -1,1 +1,1 @@
-export { SettingsPage } from './ui/SettingsPage'
+export { SettingsPageLazy as SettingsPage } from './ui/SettingsPage.lazy'

@@ -1,0 +1,11 @@
+.settings-page {
+  display: grid;
+  gap: 1rem;
+  align-content: start;
+  justify-items: start;
+
+  &__item {
+    display: grid;
+    gap: 0.25rem;
+  }
+}
