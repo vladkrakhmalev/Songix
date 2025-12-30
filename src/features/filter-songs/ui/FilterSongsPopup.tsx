@@ -3,15 +3,15 @@ import {
   setActiveCategory,
   setDisactiveCategory,
 } from '../model/filterSongsSlice'
-import { useAppDispatch } from '@shared/hooks'
+import { useAppDispatch, useAppSelector } from '@shared/hooks'
 import { CategoryCard } from '@entities/category'
 import { ICategory } from '@entities/category'
 import { Popup } from '@shared/ui/popup'
-import { useCategoriesSelector } from '../model/filterSongsSelectors'
+import { selectCategories } from '../model/filterSongs.selectors'
 
 export function FilterSongsPopup() {
   const dispatch = useAppDispatch()
-  const categories = useCategoriesSelector()
+  const categories = useAppSelector(selectCategories)
 
   function handlerClick(category: ICategory) {
     if (category.active) {

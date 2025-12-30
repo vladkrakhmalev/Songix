@@ -1,4 +1,4 @@
 export { toggleEditMode } from './model/editSongSlice'
 export { editSongReducer } from './model/editSongSlice'
-export { useIsEditModeSelector } from './model/editSongSelectors'
+export { selectIsEditMode } from './model/editSong.selectors'
 export { EditSongForm } from './ui/EditSongForm'

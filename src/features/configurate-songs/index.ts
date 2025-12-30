@@ -2,6 +2,11 @@ export { ConfigurateItem } from './ui/configurate-item'
 export { DeleteSong } from './ui/delete-song'
 export { CopySongLink } from './ui/copy-song-link'
 export {
+  selectSpeed,
+  selectTextSize,
+  selectTonality,
+} from './model/configurateSongs.selectors'
+export {
   configurateSongsReducer,
   setSpeed,
   setTonality,

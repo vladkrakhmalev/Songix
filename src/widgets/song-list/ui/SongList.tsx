@@ -2,17 +2,15 @@ import './SongList.scss'
 import { ISong, songApi, SongCard, SongCardSkeleton } from '@entities/song'
 import { LikeSong } from '@features/like-song'
 import { useParams } from 'react-router-dom'
-import {
-  useActiveCategoriesSelector,
-  useSearchSelector,
-} from '@features/filter-songs'
+import { selectActiveCategories, selectSearch } from '@features/filter-songs'
 import { SKELETON_ARRAY } from '@shared/ui/skeleton'
+import { useAppSelector } from '@shared/hooks'
 
 export function SongList() {
   const { collectionId = '' } = useParams()
 
-  const activeCategories = useActiveCategoriesSelector()
-  const search = useSearchSelector()
+  const activeCategories = useAppSelector(selectActiveCategories)
+  const search = useAppSelector(selectSearch)
   const { data: songs = [], isLoading } =
     songApi.useGetSongsByCollectionIdQuery(collectionId)
 

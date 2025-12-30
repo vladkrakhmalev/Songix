@@ -7,6 +7,9 @@ import {
   ConfigurateItem,
   CopySongLink,
   DeleteSong,
+  selectSpeed,
+  selectTextSize,
+  selectTonality,
 } from '@features/configurate-songs'
 import {
   SPEED_ARRAY,
@@ -25,9 +28,9 @@ interface IProps {
 export function ConfigurateList({ songId, collectionId }: IProps) {
   const dispatch = useAppDispatch()
 
-  const { speed, tonality, textSize } = useAppSelector(
-    state => state.configurateSongs
-  )
+  const speed = useAppSelector(selectSpeed)
+  const textSize = useAppSelector(selectTextSize)
+  const tonality = useAppSelector(selectTonality)
 
   const { data: song, isFetching } = songApi.useGetSongByIdQuery(songId)
 

@@ -8,7 +8,7 @@ import {
 } from '@entities/song'
 import { useParams } from 'react-router-dom'
 import { ConfigurateList } from '@widgets/configurate-list'
-import { EditSongForm, useIsEditModeSelector } from '@features/edit-song'
+import { EditSongForm, selectIsEditMode } from '@features/edit-song'
 
 function SongPage() {
   const { songId = '', collectionId = '' } = useParams()
@@ -16,7 +16,7 @@ function SongPage() {
   const { speed, textSize } = useAppSelector(state => state.configurateSongs)
 
   const { data: song, isLoading } = songApi.useGetSongByIdQuery(songId)
-  const isEditMode = useIsEditModeSelector()
+  const isEditMode = useAppSelector(selectIsEditMode)
 
   return (
     <div className='song-page'>

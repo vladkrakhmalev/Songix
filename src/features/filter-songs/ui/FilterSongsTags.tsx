@@ -4,11 +4,11 @@ import {
   setActiveCategory,
   setDisactiveCategory,
 } from '../model/filterSongsSlice'
-import { useAppDispatch } from '@shared/hooks'
-import { useActiveCategoriesSelector } from '../model/filterSongsSelectors'
+import { useAppDispatch, useAppSelector } from '@shared/hooks'
+import { selectActiveCategories } from '../model/filterSongs.selectors'
 
 export function FilterSongsTags() {
-  const activeCategories = useActiveCategoriesSelector()
+  const activeCategories = useAppSelector(selectActiveCategories)
   const dispatch = useAppDispatch()
 
   function handlerClick(category: ICategory) {
