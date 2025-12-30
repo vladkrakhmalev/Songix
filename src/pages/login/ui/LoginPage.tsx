@@ -1,7 +1,7 @@
 import { UILink } from '@shared/ui/link'
 import { LoginForm } from '@features/auth'
 
-export const LoginPage = () => {
+const LoginPage = () => {
   return (
     <>
       <h1>Вход в аккаунт</h1>
@@ -10,3 +10,4 @@ export const LoginPage = () => {
     </>
   )
 }
+export default LoginPage

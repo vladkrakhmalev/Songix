@@ -1,12 +1,9 @@
-// src/app/api/baseQueryWithReauth.ts
-
 import { fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import type {
   BaseQueryFn,
   FetchArgs,
   FetchBaseQueryError,
 } from '@reduxjs/toolkit/query'
-import { authApi } from '@entities/auth'
 import { API_URL } from '@shared/config'
 import { convertKeys } from '@shared/utils/convert-case'
 
@@ -31,6 +28,7 @@ export const baseQuery: BaseQueryFn<
   if (result.error && result.error.status === 401 && !isRefreshRequest) {
     console.warn('Access token expired, trying to refresh...')
 
+    const { authApi } = await import('@entities/auth')
     const refreshResult = await api.dispatch(
       authApi.endpoints.refresh.initiate()
     )

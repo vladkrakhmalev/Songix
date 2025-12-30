@@ -8,8 +8,7 @@ import { MainLayout } from '@app/layouts/main-layout'
 import { CollectionsPage } from '@pages/collections'
 import { CollectionPage } from '@pages/collection'
 import { SongNewPage } from '@pages/song-new'
-
-// TODO: Добавить lazy загрузку страниц
+import { SettingsPage } from '@pages/settings'
 
 const router = createBrowserRouter([
   {
@@ -25,11 +24,6 @@ const router = createBrowserRouter([
         element: <RegistrationPage />,
         errorElement: <NotFoundPage />,
       },
-      // {
-      //   path: "/reset-password",
-      //   element: <ResetPasswordPage/>,
-      //   errorElement: <NotFoundPage/>,
-      // },
     ],
   },
   {
@@ -54,6 +48,10 @@ const router = createBrowserRouter([
       {
         path: '/collections/:collectionId/songs/new',
         element: <SongNewPage />,
+      },
+      {
+        path: '/settings',
+        element: <SettingsPage />,
       },
     ],
     errorElement: <NotFoundPage />,

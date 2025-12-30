@@ -1,7 +1,7 @@
 import { UILink } from '@shared/ui/link'
 import { ResetPasswordForm } from '@features/reset-password'
 
-export const ResetPasswordPage = () => {
+const ResetPasswordPage = () => {
   return (
     <>
       <h1>Восстановить пароль</h1>
@@ -10,3 +10,5 @@ export const ResetPasswordPage = () => {
     </>
   )
 }
+
+export default ResetPasswordPage

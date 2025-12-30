@@ -1,1 +1,1 @@
-export { CollectionPage } from './ui/CollectionPage'
+export { CollectionPageLazy as CollectionPage } from './ui/CollectionPage.lazy'

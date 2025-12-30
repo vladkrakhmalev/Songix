@@ -11,7 +11,7 @@ import { useParams } from 'react-router-dom'
 import { ConfigurateList } from '@widgets/configurate-list'
 import { EditSongForm, useIsEditModeSelector } from '@features/edit-song'
 
-export const SongPage: FC = () => {
+const SongPage: FC = () => {
   const { songId = '', collectionId = '' } = useParams()
 
   const { speed, textSize } = useAppSelector(state => state.configurateSongs)
@@ -40,3 +40,5 @@ export const SongPage: FC = () => {
     </div>
   )
 }
+
+export default SongPage

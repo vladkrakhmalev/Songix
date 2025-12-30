@@ -1,1 +1,1 @@
-export { SongPage } from './ui/SongPage'
+export { SongPageLazy as SongPage } from './ui/SongPage.lazy'

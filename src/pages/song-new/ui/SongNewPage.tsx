@@ -1,6 +1,8 @@
 import { AddSongForm } from '@features/add-song'
 import './SongNewPage.scss'
 
-export const SongNewPage = () => {
+const SongNewPage = () => {
   return <AddSongForm />
 }
+
+export default SongNewPage

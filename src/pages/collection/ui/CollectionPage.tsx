@@ -6,7 +6,7 @@ import { Button } from '@shared/ui/button'
 import { collectionApi } from '@entities/collection'
 import { BackButton } from '@infra/history'
 
-export const CollectionPage = () => {
+const CollectionPage = () => {
   const { collectionId = '' } = useParams()
 
   const formatCollectionId = Number(collectionId)
@@ -35,3 +35,5 @@ export const CollectionPage = () => {
     </div>
   )
 }
+
+export default CollectionPage

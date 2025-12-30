@@ -1,1 +1,1 @@
-export { RegistrationPage } from './ui/RegistrationPage'
+export { RegistrationPageLazy as RegistrationPage } from './ui/RegistrationPage.lazy'
