@@ -8,7 +8,7 @@ export const MainLayout: FC = () => {
 
   return (
     <div className='main-layout'>
-      <div className='main-layout-content'>{outlet && <Outlet />}</div>
+      <div className='main-layout__content'>{outlet && <Outlet />}</div>
 
       <Navigation />
     </div>

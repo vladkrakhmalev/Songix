@@ -16,6 +16,8 @@ const sanitizeOptions = {
 export const Textarea: FC<ITextarea> = ({ value, placeholder, onChange }) => {
   const showPlaceholder = placeholder && !value
 
+  console.log(value)
+
   const handleChange = (value: string) => {
     const cleanText = sanitizeHtml(value, sanitizeOptions)
     onChange(cleanText)

@@ -34,8 +34,11 @@ export const AddCollection: FC = () => {
       <Button
         icon='plus-small'
         variant='accent'
+        size='small'
         onClick={() => setIsOpen(true)}
-      />
+      >
+        Добавить сборник
+      </Button>
 
       {isOpen && (
         <Modal title='Создать новый сборник' onClose={() => setIsOpen(false)}>

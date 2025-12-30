@@ -1,8 +1,5 @@
 .collection-page {
   height: 100%;
-  background-color: var(--bg-primary);
-  padding: 1rem;
-  border-radius: 1rem;
   display: grid;
   gap: 1rem;
   grid-template-rows: auto auto 1fr auto;
@@ -12,5 +9,9 @@
     gap: 1rem;
     align-items: center;
     flex-wrap: wrap;
+  }
+
+  &__column {
+    margin-right: auto;
   }
 }

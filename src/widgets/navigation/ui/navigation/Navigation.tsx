@@ -19,9 +19,10 @@ export const Navigation = () => {
       {NAVIGATION_ITEMS.map(item => (
         <Button
           key={item.link}
-          variant='transparent'
           icon={item.icon}
           to={item.link}
+          size='small'
+          variant='transparent'
         >
           {item.title}
         </Button>

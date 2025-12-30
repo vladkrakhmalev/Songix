@@ -4,10 +4,6 @@
   align-items: center;
   justify-content: space-evenly;
   background-color: var(--bg-primary);
-  padding: 1rem;
   border-radius: 1rem;
-
-  &__link {
-    font-size: var(--text-size);
-  }
+  padding: 0.5rem;
 }

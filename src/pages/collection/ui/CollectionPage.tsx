@@ -4,7 +4,6 @@ import { FilterSongs } from '@features/filter-songs'
 import { SongList } from '@widgets/song-list'
 import { Button } from '@shared/ui/button'
 import { collectionApi } from '@entities/collection'
-import { BackButton } from '@infra/history'
 import { routerConfig } from '@shared/config'
 
 const CollectionPage = () => {
@@ -17,22 +16,25 @@ const CollectionPage = () => {
   return (
     <div className='collection-page'>
       <div className='collection-page__header'>
-        <BackButton />
+        <div className='collection-page__column'>
+          <h1 className='collection-page__title'>
+            Песни из {collection?.title}
+          </h1>
+        </div>
 
-        <h1>{collection?.title}</h1>
+        <Button
+          icon='plus-small'
+          variant='accent'
+          size='small'
+          to={routerConfig.songNew.replace(':collectionId', collectionId)}
+        >
+          Добавить песню
+        </Button>
       </div>
 
       <FilterSongs />
 
       <SongList />
-
-      <Button
-        icon='plus-small'
-        variant='accent'
-        to={routerConfig.songNew.replace(':collectionId', collectionId)}
-      >
-        Добавить
-      </Button>
     </div>
   )
 }

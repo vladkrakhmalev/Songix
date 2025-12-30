@@ -8,7 +8,7 @@ import { Textarea } from '@shared/ui/textarea'
 interface ISongForm {
   initialForm?: ISongEditable
   isLoading?: boolean
-  title?: string
+  title: string
   onSubmit: (form: ISongEditable) => void
   onCancel: () => void
 }
@@ -32,8 +32,30 @@ export const SongForm: FC<ISongForm> = ({
   return (
     <div className='song-form'>
       <div className='song-form__header'>
-        {title && <h1 className='song-form__title'>{title}</h1>}
+        <h1 className='song-form__title'>{title}</h1>
+
+        <Button
+          icon='disk'
+          variant='accent'
+          size='small'
+          disabled={isLoading}
+          className='song-form__button'
+          onClick={() => onSubmit(form)}
+        >
+          Сохарнить
+        </Button>
+
+        <Button
+          icon='cross-small'
+          size='small'
+          disabled={isLoading}
+          className='song-form__button'
+          onClick={onCancel}
+        >
+          Отменить
+        </Button>
       </div>
+
       <div className='song-form__container'>
         <Input
           value={form.title}
@@ -65,25 +87,6 @@ export const SongForm: FC<ISongForm> = ({
           onChange={value => handleChange('text', value)}
         />
       </div>
-
-      <Button
-        icon='disk'
-        variant='accent'
-        disabled={isLoading}
-        className='song-form__button'
-        onClick={() => onSubmit(form)}
-      >
-        Сохарнить
-      </Button>
-
-      <Button
-        icon='cross-small'
-        disabled={isLoading}
-        className='song-form__button'
-        onClick={onCancel}
-      >
-        Отменить
-      </Button>
     </div>
   )
 }

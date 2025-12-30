@@ -2,6 +2,7 @@ import { FC } from 'react'
 import { ICategory } from '../../model/categoryType'
 import clsx from 'clsx'
 import './CategoryCard.scss'
+import { Icon } from '@shared/ui/icon'
 
 interface CategoryCardProps {
   category: ICategory
@@ -15,9 +16,7 @@ export const CategoryCard: FC<CategoryCardProps> = ({ category, onClick }) => {
       onClick={() => onClick(category)}
     >
       {category.name}
-      {category.active && (
-        <i className='category-card__icon fi fi-br-cross-small'></i>
-      )}
+      {category.active && <Icon name='cross-small' />}
     </button>
   )
 }

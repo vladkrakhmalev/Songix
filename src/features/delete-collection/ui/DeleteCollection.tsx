@@ -25,7 +25,7 @@ export const DeleteCollection: FC<IProps> = ({ collection }) => {
 
   return (
     <>
-      <Button icon='trash' variant='secondary' onClick={handleOpen}></Button>
+      <Button icon='trash' onClick={handleOpen}></Button>
 
       {isOpen && (
         <Modal title='Удалить сборник' onClose={() => setIsOpen(false)}>

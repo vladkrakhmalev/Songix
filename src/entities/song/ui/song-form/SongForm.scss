@@ -5,9 +5,6 @@
   grid-template-rows: auto 1fr auto;
   height: 100%;
   transition: .2s;
-  background-color: var(--bg-primary);
-  padding: 1rem;
-  border-radius: 1rem;
 
   &__header {
     grid-column: 1/-1;
@@ -15,10 +12,15 @@
     align-items: center;
     gap: 10px;
   }
+
+  &__title {
+    margin-right: auto;
+  }
   
   &__container {
     grid-column: 1/-1;
     display: grid;
+    grid-template-rows: auto 1fr;
     gap: 10px;
     align-content: start;
   }

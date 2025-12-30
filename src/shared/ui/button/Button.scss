@@ -7,8 +7,6 @@
   justify-content: center;
   gap: 0.35rem;
   font-weight: 500;
-  color: var(--text-white);
-  background: var(--color-primary);
   transition: color 0.2s ease, background 0.2s ease, border 0.2s ease, opacity 0.2s ease;
 }
 
@@ -22,13 +20,18 @@
   opacity: .7;
 }
 
+.button._accent {
+  color: var(--text-white);
+  background: var(--color-primary);
+}
+
 .button._primary {
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-primary);
   color: var(--color-primary);
 }
 
 .button._secondary {
-  background-color: var(--bg-primary);
+  background-color: var(--bg-secondary);
   color: var(--color-primary);
 }
 
@@ -43,6 +46,7 @@
 
 .button._danger {
   background-color: var(--bg-negative);
+  color: var(--text-white);
 }
 
 .button._big {
@@ -50,8 +54,8 @@
 }
 
 .button._small {
-  padding: 0.25rem 0.5rem;
-  font-size: 0.75rem;
+  padding: 0.325rem 0.75rem;
+  font-size: 0.875rem;
 }
 
 .button._only-icon {

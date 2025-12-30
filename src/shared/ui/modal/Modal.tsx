@@ -32,7 +32,11 @@ export const Modal: FC<IProps> = ({ children, title, onClose }) => {
           <div className='modal__header'>
             <h3 className='modal__title'>{title}</h3>
 
-            <Button icon='cross-small' onClick={handleClose} />
+            <Button
+              icon='cross-small'
+              variant='secondary'
+              onClick={handleClose}
+            />
           </div>
         )}
 

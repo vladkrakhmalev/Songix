@@ -7,7 +7,7 @@
     border-radius: 10px;
     border: 1px solid transparent;
     align-items: center;
-    background-color: var(--bg-secondary);
+    background-color: var(--bg-primary);
     transition: .2s;
     overflow: hidden;
 
@@ -46,7 +46,6 @@
     background-color: transparent;
     outline: none;
     font-size: var(--text-size-small);
-    box-shadow: inset 0 0 0 30px var(--bg-secondary);
 
     &:disabled {
       cursor: not-allowed;

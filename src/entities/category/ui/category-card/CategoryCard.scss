@@ -8,12 +8,11 @@
   border-radius: 5px;
   cursor: pointer;
   padding: 5px 10px;
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-primary);
   transition: .2s;
 
   &:hover {
-    background-color: var(--bg-blue-light);
-    transform: scale(1.02);
+    opacity: .6;
   }
 
   &._active{
@@ -22,13 +21,6 @@
 
     &:hover {
       opacity: .8;
-      transform: scale(.98);
     }
-  }
-
-  &__icon {
-    color: var(--text-white);
-    line-height: 1;
-    font-size: 15px;
   }
 }

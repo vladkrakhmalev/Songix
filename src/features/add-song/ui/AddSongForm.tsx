@@ -1,11 +1,15 @@
 import { ISongEditable, songApi, SongForm } from '@entities/song'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { routerConfig } from '@shared/config'
+import { FC } from 'react'
 
-export const AddSongForm = () => {
+interface IProps {
+  collectionId: string
+}
+
+export const AddSongForm: FC<IProps> = ({ collectionId }) => {
   const navigate = useNavigate()
-  // TODO Придумать более безопасный способ получения id колекции
-  const { collectionId } = useParams()
+
   const [addSong, { isLoading }] = songApi.useAddSongMutation()
 
   const navigateToSongs = (songId: string = '') => {

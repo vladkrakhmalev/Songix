@@ -56,6 +56,7 @@ export const RenameCollection: FC<IProps> = ({ collection }) => {
         type='independent'
         className='edit-collection__input'
         shouldFocus
+        variant='secondary'
         onChange={handleInputChange}
         onSave={handleSave}
         onBlur={handleCancel}
@@ -67,7 +68,7 @@ export const RenameCollection: FC<IProps> = ({ collection }) => {
   return (
     <>
       <h3 className='edit-collection__title'>{title}</h3>
-      <Button icon='pencil' variant='secondary' onClick={handleOpen}></Button>
+      <Button icon='pencil' onClick={handleOpen}></Button>
     </>
   )
 }
