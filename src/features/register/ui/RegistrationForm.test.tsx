@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event'
 import { screen, waitFor } from '@testing-library/react'
 import { RegistrationForm } from './RegistrationForm'
 import { renderWithProviders } from '@shared/tests/test-utils'
-import { routerConfig } from '@shared/config'
+import { routes } from '@infra/router'
 
 const registerMock = vi.fn()
 const navigateMock = vi.fn()
@@ -60,7 +60,7 @@ describe('RegistrationForm', () => {
       screen.getByRole('button', { name: 'Зарегистироваться' })
     )
 
-    expect(navigateMock).toHaveBeenCalledWith(routerConfig.collections)
+    expect(navigateMock).toHaveBeenCalledWith(routes.collections())
   })
 
   it('shows error when registration fails', async () => {

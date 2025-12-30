@@ -5,7 +5,7 @@ import { ConfigurateItem } from '@features/configurate-songs'
 import { useNavigate } from 'react-router-dom'
 import { ISong, songApi } from '@entities/song'
 import { Modal } from '@shared/ui/modal'
-import { routerConfig } from '@shared/config'
+import { routes } from '@infra/router'
 
 interface IProps extends React.HTMLAttributes<HTMLDivElement> {
   song: ISong
@@ -20,7 +20,7 @@ export const DeleteSong: FC<IProps> = ({ song, collectionId }) => {
   const handleDelete = async () => {
     await deleteSong(song.id)
     setIsOpenModal(false)
-    navigate(routerConfig.collection.replace(':collectionId', collectionId))
+    navigate(routes.collection(collectionId))
   }
 
   return (

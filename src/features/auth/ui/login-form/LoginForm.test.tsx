@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event'
 import { renderWithProviders } from '@shared/tests/test-utils'
 import { screen } from '@testing-library/react'
 import { LoginForm } from './LoginForm'
-import { routerConfig } from '@shared/config'
+import { routes } from '@infra/router'
 
 const loginMock = vi.fn()
 const navigateMock = vi.fn()
@@ -58,6 +58,6 @@ describe('LoginForm', () => {
     await userEvent.type(screen.getByPlaceholderText('Пароль'), 'correct')
     await userEvent.click(screen.getByRole('button', { name: 'Войти' }))
 
-    expect(navigateMock).toHaveBeenCalledWith(routerConfig.collections)
+    expect(navigateMock).toHaveBeenCalledWith(routes.collections())
   })
 })

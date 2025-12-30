@@ -4,7 +4,8 @@ import type {
   FetchArgs,
   FetchBaseQueryError,
 } from '@reduxjs/toolkit/query'
-import { API_URL, routerConfig } from '@shared/config'
+import { API_URL } from '@shared/config'
+import { routes } from '@infra/router'
 import { convertKeys } from '@shared/utils/convert-case'
 
 export const baseQueryFn = fetchBaseQuery({
@@ -38,7 +39,7 @@ export const baseQuery: BaseQueryFn<
     } else {
       console.warn('Failed to refresh token, logging out')
       api.dispatch(authApi.endpoints.logout.initiate())
-      window.location.href = routerConfig.login
+      window.location.href = routes.login()
     }
   }
 

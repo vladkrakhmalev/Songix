@@ -9,19 +9,19 @@ import { CollectionsPage } from '@pages/collections'
 import { CollectionPage } from '@pages/collection'
 import { SongNewPage } from '@pages/song-new'
 import { SettingsPage } from '@pages/settings'
-import { routerConfig } from '@shared/config'
+import { routes } from '@infra/router'
 
 const router = createBrowserRouter([
   {
     element: <AuthLayout />,
     children: [
       {
-        path: routerConfig.login,
+        path: routes.login(),
         element: <LoginPage />,
         errorElement: <NotFoundPage />,
       },
       {
-        path: routerConfig.registration,
+        path: routes.registration(),
         element: <RegistrationPage />,
         errorElement: <NotFoundPage />,
       },
@@ -31,27 +31,27 @@ const router = createBrowserRouter([
     element: <MainLayout />,
     children: [
       {
-        path: routerConfig.home,
+        path: routes.home(),
         element: <CollectionsPage />,
       },
       {
-        path: routerConfig.collections,
+        path: routes.collections(),
         element: <CollectionsPage />,
       },
       {
-        path: routerConfig.collection,
+        path: routes.collection(),
         element: <CollectionPage />,
       },
       {
-        path: routerConfig.song,
+        path: routes.song(),
         element: <SongPage />,
       },
       {
-        path: routerConfig.songNew,
+        path: routes.songNew(),
         element: <SongNewPage />,
       },
       {
-        path: routerConfig.settings,
+        path: routes.settings(),
         element: <SettingsPage />,
       },
     ],

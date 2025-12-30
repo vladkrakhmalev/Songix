@@ -5,7 +5,7 @@ import './LoginForm.scss'
 import { authApi } from '@entities/auth'
 import { useNavigate } from 'react-router-dom'
 import { GoogleLoginButton } from './GoogleLoginButton'
-import { routerConfig } from '@shared/config'
+import { routes } from '@infra/router'
 
 export const LoginForm = () => {
   const navigate = useNavigate()
@@ -24,7 +24,7 @@ export const LoginForm = () => {
     if (response.error) {
       setError('Неверный email или пароль')
     } else {
-      navigate(routerConfig.collections)
+      navigate(routes.collections())
     }
   }
 

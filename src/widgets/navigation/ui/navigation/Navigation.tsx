@@ -1,6 +1,6 @@
 import './Navigation.scss'
 import { Button } from '@shared/ui/button'
-import { routerConfig } from '@shared/config'
+import { routes } from '@infra/router'
 
 type TNavigationItem = {
   link: string
@@ -9,8 +9,8 @@ type TNavigationItem = {
 }
 
 const NAVIGATION_ITEMS: TNavigationItem[] = [
-  { link: routerConfig.collections, icon: 'music-alt', title: 'Сборники' },
-  { link: routerConfig.settings, icon: 'settings', title: 'Настройки' },
+  { link: routes.collections(), icon: 'music-alt', title: 'Сборники' },
+  { link: routes.settings(), icon: 'settings', title: 'Настройки' },
 ] as const
 
 export const Navigation = () => {

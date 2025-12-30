@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event'
 import { screen } from '@testing-library/react'
 import { AddSongForm } from './AddSongForm'
 import { renderWithProviders } from '@shared/tests/test-utils'
-import { routerConfig } from '@shared/config'
+import { routes } from '@infra/router'
 
 const addSongMock = vi.fn()
 const navigateMock = vi.fn()
@@ -50,8 +50,6 @@ describe('AddSongForm', () => {
     expect(payload.title).toBe('Новая песня')
     expect(String(payload.collectionId)).toBe('10')
     expect(payload.text).toContain('Текст песни')
-    expect(navigateMock).toHaveBeenCalledWith(
-      routerConfig.song.replace(':collectionId', '10').replace(':songId', '99')
-    )
+    expect(navigateMock).toHaveBeenCalledWith(routes.song('10', '99'))
   })
 })

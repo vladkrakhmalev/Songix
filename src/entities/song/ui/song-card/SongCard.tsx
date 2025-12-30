@@ -2,7 +2,7 @@ import { FC, ReactNode } from 'react'
 import './SongCard.scss'
 import { useNavigate } from 'react-router-dom'
 import type { ISong } from '@entities/song'
-import { routerConfig } from '@shared/config'
+import { routes } from '@infra/router'
 
 interface ISongCard {
   song: ISong
@@ -13,10 +13,7 @@ export const SongCard: FC<ISongCard> = ({ song, likeSong }) => {
   const navigate = useNavigate()
 
   const handleRedirect = () => {
-    const link = routerConfig.song
-      .replace(':collectionId', String(song.collectionId))
-      .replace(':songId', String(song.id))
-    navigate(link)
+    navigate(routes.song(song.collectionId, song.id))
   }
 
   return (

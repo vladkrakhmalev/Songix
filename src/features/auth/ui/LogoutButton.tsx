@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { Button } from '@shared/ui/button'
 import { authApi } from '@entities/auth'
-import { routerConfig } from '@shared/config'
+import { routes } from '@infra/router'
 import { useNavigate } from 'react-router-dom'
 
 export const LogoutButton: FC = () => {
@@ -10,7 +10,7 @@ export const LogoutButton: FC = () => {
 
   const handleLogout = async () => {
     await logout()
-    navigate(routerConfig.login)
+    navigate(routes.login())
   }
 
   return (

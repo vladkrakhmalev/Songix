@@ -17,9 +17,9 @@ describe('ThemeSwitcher', () => {
     await userEvent.click(screen.getByRole('button', { name: 'Тёмная' }))
 
     await waitFor(() => {
-      expect(
-        document.documentElement.classList.contains('dark-theme')
-      ).toBe(true)
+      expect(document.documentElement.classList.contains('dark-theme')).toBe(
+        true
+      )
       expect(localStorage.getItem(THEME_STORAGE_KEY)).toBe('dark')
     })
   })

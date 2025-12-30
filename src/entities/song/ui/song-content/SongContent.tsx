@@ -2,9 +2,10 @@ import { FC, ReactNode, useRef, useState } from 'react'
 import './SongContent.scss'
 import { ISong } from '@entities/song'
 import { ICounterItem } from '@shared/ui/counter'
-import { BackButton } from '@infra/history'
+import { BackButton } from '@infra/router'
 import { OpenFullElement, ScrollElement } from '@infra/dom'
 import clsx from 'clsx'
+import { routes } from '@infra/router'
 
 interface ISongProps {
   song: ISong
@@ -26,7 +27,7 @@ export const SongContent: FC<ISongProps> = ({
   return (
     <div className='song-content'>
       <div className='song-content__header'>
-        <BackButton />
+        <BackButton to={routes.collection(String(song.collectionId))} />
 
         <h1 className='song-content__title'>{song?.title}</h1>
 

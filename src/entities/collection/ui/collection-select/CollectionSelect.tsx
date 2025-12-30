@@ -3,7 +3,7 @@ import { collectionApi } from '../../api/collectionApi'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Select } from '@shared/ui/select'
 import { Skeleton } from '@shared/ui/skeleton'
-import { routerConfig } from '@shared/config'
+import { routes } from '@infra/router'
 
 export const CollectionSelect: FC = () => {
   const navigate = useNavigate()
@@ -22,7 +22,7 @@ export const CollectionSelect: FC = () => {
 
   const handlerChange = (id: string) => {
     setAciveCollectionId(id)
-    navigate(routerConfig.collection.replace(':collectionId', id))
+    navigate(routes.collection(id))
   }
 
   if (isLoading) {
