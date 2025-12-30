@@ -10,7 +10,7 @@ import { routerConfig } from '@shared/config'
 
 export const RegistrationForm = () => {
   const navigate = useNavigate()
-  const [register, { data }] = authApi.useRegisterMutation()
+  const [register] = authApi.useRegisterMutation()
 
   const [form, setForm] = useState({
     email: '',
@@ -22,12 +22,12 @@ export const RegistrationForm = () => {
 
   const handlerSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    await register(form)
+    const response = await register(form)
 
-    if (data) {
-      navigate(routerConfig.collections)
+    if (response.error) {
+      setError(String(response.error))
     } else {
-      setError(String(data))
+      navigate(routerConfig.collections)
     }
   }
 
@@ -81,7 +81,9 @@ export const RegistrationForm = () => {
 
       {helpText}
 
-      <Button disabled={idDisabled}>Зарегистироваться</Button>
+      <Button disabled={idDisabled} type='submit'>
+        Зарегистироваться
+      </Button>
     </form>
   )
 }

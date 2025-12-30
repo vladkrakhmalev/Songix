@@ -1,6 +1,6 @@
-import { defineConfig } from 'vite'
+import { defineConfig } from 'vitest/config'
 import react from '@vitejs/plugin-react'
-import * as path from 'path'
+import path from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -15,6 +15,12 @@ export default defineConfig({
       '@infra': path.resolve(__dirname, 'src/infra'),
       '@shared': path.resolve(__dirname, 'src/shared'),
     },
+  },
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    setupFiles: 'src/shared/tests/setupTests.ts',
+    css: true,
   },
   server: {
     proxy: {

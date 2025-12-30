@@ -1,0 +1,76 @@
+import { PropsWithChildren, ReactElement } from 'react'
+import { render, RenderOptions } from '@testing-library/react'
+import { Provider } from 'react-redux'
+import { configureStore } from '@reduxjs/toolkit'
+import { MemoryRouter, MemoryRouterProps } from 'react-router-dom'
+import { ThemeProvider } from '@infra/theme'
+import { collectionApi } from '@entities/collection'
+import { songApi } from '@entities/song'
+import { authApi } from '@entities/auth'
+import { filterSongsReducer } from '@features/filter-songs'
+import { configurateSongsReducer } from '@features/configurate-songs'
+import { editSongReducer } from '@features/edit-song'
+import type { RootState } from '@app/store/store'
+
+export const setupStore = (preloadedState?: Partial<RootState>) => {
+  return configureStore({
+    reducer: {
+      [collectionApi.reducerPath]: collectionApi.reducer,
+      [songApi.reducerPath]: songApi.reducer,
+      [authApi.reducerPath]: authApi.reducer,
+      filterSongs: filterSongsReducer,
+      configurateSongs: configurateSongsReducer,
+      editSong: editSongReducer,
+    },
+    preloadedState: preloadedState as RootState,
+    middleware: getDefaultMiddleware =>
+      getDefaultMiddleware().concat(
+        collectionApi.middleware,
+        songApi.middleware,
+        authApi.middleware
+      ),
+  })
+}
+
+export type AppStore = ReturnType<typeof setupStore>
+
+interface RenderOptionsProps extends Omit<RenderOptions, 'queries'> {
+  store?: AppStore
+  route?: MemoryRouterProps['initialEntries']
+}
+
+const Wrapper = ({
+  children,
+  store,
+  route,
+}: PropsWithChildren<{
+  store: AppStore
+  route?: RenderOptionsProps['route']
+}>) => {
+  return (
+    <Provider store={store}>
+      <MemoryRouter initialEntries={route}>
+        <ThemeProvider>{children}</ThemeProvider>
+      </MemoryRouter>
+    </Provider>
+  )
+}
+
+export function renderWithProviders(
+  ui: ReactElement,
+  options?: RenderOptionsProps
+) {
+  const store = options?.store ?? setupStore()
+  const route = options?.route
+
+  const WrapperComponent = ({ children }: PropsWithChildren) => (
+    <Wrapper store={store} route={route}>
+      {children}
+    </Wrapper>
+  )
+
+  return {
+    store,
+    ...render(ui, { wrapper: WrapperComponent, ...options }),
+  }
+}
