@@ -12,5 +12,9 @@ export const LogoutButton: FC = () => {
     navigate('/login')
   }
 
-  return <Button color='grey' icon='rr-sign-out-alt' onClick={handleLogout} />
+  return (
+    <Button variant='danger' icon='sign-out-alt' onClick={handleLogout}>
+      Выйти
+    </Button>
+  )
 }
