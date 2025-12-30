@@ -3,12 +3,12 @@ import { Input } from '@shared/ui/input'
 import { useState } from 'react'
 import './ResetPasswordForm.scss'
 
-export const ResetPasswordForm = () => {
+export function ResetPasswordForm() {
   const [form, setForm] = useState({ email: '' })
   const [error, setError] = useState<string>('')
   const idDisabled = error ? true : false
 
-  const handlerSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  async function handlerSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
     // const response = await resetPassword(form)
 
@@ -19,7 +19,7 @@ export const ResetPasswordForm = () => {
     // }
   }
 
-  const handlerChange = (field: string, value: string) => {
+  function handlerChange(field: string, value: string) {
     setForm({ ...form, [field]: value })
     setError('')
   }

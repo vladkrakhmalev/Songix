@@ -2,7 +2,7 @@ import { UILink } from '@shared/ui/link'
 import { RegistrationForm } from '@features/register'
 import { routes } from '@infra/router'
 
-const RegistrationPage = () => {
+function RegistrationPage() {
   return (
     <>
       <h1>Зарегистироваться</h1>

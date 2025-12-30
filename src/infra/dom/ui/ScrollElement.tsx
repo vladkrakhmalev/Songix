@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { useState } from 'react'
 import { Button } from '@shared/ui/button'
 import type { ICounterItem } from '@shared/ui/counter'
 
@@ -7,11 +7,11 @@ interface IProps {
   speed: ICounterItem
 }
 
-export const ScrollElement: FC<IProps> = ({ speed, element }) => {
+export function ScrollElement({ speed, element }: IProps) {
   const [isScrolling, setIsScrolling] = useState<boolean>(false)
   const [scroll, setScroll] = useState<NodeJS.Timeout>()
 
-  const toggleScroll = () => {
+  function toggleScroll() {
     if (!isScrolling && element) {
       setScroll(
         setInterval(() => {

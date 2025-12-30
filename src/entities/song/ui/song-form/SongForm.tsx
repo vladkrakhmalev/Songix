@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { useState } from 'react'
 import './SongForm.scss'
 import { EMPTY_SONG_OBJ, ISongEditable } from '@entities/song'
 import { Button } from '@shared/ui/button'
@@ -13,19 +13,16 @@ interface ISongForm {
   onCancel: () => void
 }
 
-export const SongForm: FC<ISongForm> = ({
+export function SongForm({
   initialForm = EMPTY_SONG_OBJ,
   isLoading,
   title,
   onSubmit,
   onCancel,
-}) => {
+}: ISongForm) {
   const [form, setForm] = useState<ISongEditable>(initialForm)
 
-  const handleChange = (
-    field: keyof ISongEditable,
-    value?: string | string[]
-  ) => {
+  function handleChange(field: keyof ISongEditable, value?: string | string[]) {
     setForm({ ...form, [field]: value })
   }
 

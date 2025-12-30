@@ -1,4 +1,4 @@
-import { FC, MouseEvent, ReactNode, useEffect, useState } from 'react'
+import { MouseEvent, ReactNode, useEffect, useState } from 'react'
 import { useOutsideClick } from '@shared/hooks'
 import './Popup.scss'
 import clsx from 'clsx'
@@ -14,7 +14,7 @@ interface IPopup {
   onToggle?: (value: boolean) => void
 }
 
-export const Popup: FC<IPopup> = props => {
+export function Popup(props: IPopup) {
   const {
     trigger,
     children,
@@ -31,12 +31,14 @@ export const Popup: FC<IPopup> = props => {
     setOpen(isOpen ? true : false)
   }, [isOpen])
 
-  const ref = useOutsideClick(() => {
+  const ref = useOutsideClick(handleOutsideClick)
+
+  function handleOutsideClick() {
     setOpen(false)
     if (onToggle) onToggle(false)
-  })
+  }
 
-  const handleOpen = (event: MouseEvent) => {
+  function handleOpen(event: MouseEvent) {
     event.stopPropagation()
     setOpen(true)
     if (onToggle) onToggle(true)

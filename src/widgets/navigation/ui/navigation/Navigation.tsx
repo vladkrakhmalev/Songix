@@ -13,7 +13,7 @@ const NAVIGATION_ITEMS: TNavigationItem[] = [
   { link: routes.settings(), icon: 'settings', title: 'Настройки' },
 ] as const
 
-export const Navigation = () => {
+export function Navigation() {
   return (
     <nav className='navigation'>
       {NAVIGATION_ITEMS.map(item => (

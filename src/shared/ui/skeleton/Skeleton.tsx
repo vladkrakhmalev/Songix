@@ -1,4 +1,3 @@
-import { FC } from 'react'
 import './Skeleton.scss'
 
 interface IProps {
@@ -9,12 +8,12 @@ interface IProps {
   className?: string
 }
 
-export const Skeleton: FC<IProps> = ({
+export function Skeleton({
   variant = 'primary',
   width = '100%',
   height = '30px',
   radius = '10px',
-}) => {
+}: IProps) {
   const styles = { maxWidth: width, height, borderRadius: radius }
 
   return <div className={`skeleton _${variant}`} style={styles} />

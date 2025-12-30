@@ -1,4 +1,4 @@
-import { FC, ReactNode } from 'react'
+import { ReactNode } from 'react'
 import './SongCard.scss'
 import { useNavigate } from 'react-router-dom'
 import type { ISong } from '@entities/song'
@@ -9,10 +9,10 @@ interface ISongCard {
   likeSong: ReactNode
 }
 
-export const SongCard: FC<ISongCard> = ({ song, likeSong }) => {
+export function SongCard({ song, likeSong }: ISongCard) {
   const navigate = useNavigate()
 
-  const handleRedirect = () => {
+  function handleRedirect() {
     navigate(routes.song(song.collectionId, song.id))
   }
 

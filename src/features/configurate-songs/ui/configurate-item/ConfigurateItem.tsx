@@ -1,4 +1,4 @@
-import { FC, ReactNode } from 'react'
+import { ReactNode } from 'react'
 import './ConfigurateItem.scss'
 import clsx from 'clsx'
 
@@ -10,13 +10,13 @@ interface IConfigurateItem {
   onClick?: () => void
 }
 
-export const ConfigurateItem: FC<IConfigurateItem> = ({
+export function ConfigurateItem({
   icon,
   title,
   children,
   clickable,
   onClick,
-}) => {
+}: IConfigurateItem) {
   return (
     <div
       className={clsx(

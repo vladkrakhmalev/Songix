@@ -9,11 +9,11 @@ import { ICategory } from '@entities/category'
 import { Popup } from '@shared/ui/popup'
 import { useCategoriesSelector } from '../model/filterSongsSelectors'
 
-export const FilterSongsPopup = () => {
+export function FilterSongsPopup() {
   const dispatch = useAppDispatch()
   const categories = useCategoriesSelector()
 
-  const handlerClick = (category: ICategory) => {
+  function handlerClick(category: ICategory) {
     if (category.active) {
       dispatch(setDisactiveCategory(category.id))
     } else {

@@ -1,6 +1,4 @@
-import { FC } from 'react'
-
-export const SongContentEmtpy: FC = () => {
+export function SongContentEmtpy() {
   return (
     <div className='song-content'>
       <h1>При получении песни произошла ошибка</h1>

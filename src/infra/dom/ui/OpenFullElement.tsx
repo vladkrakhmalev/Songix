@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { useState } from 'react'
 import { Button } from '@shared/ui/button'
 
 interface IProps {
@@ -6,10 +6,10 @@ interface IProps {
   onChange: (isFullSize: boolean) => void
 }
 
-export const OpenFullElement: FC<IProps> = ({ element, onChange }) => {
+export function OpenFullElement({ element, onChange }: IProps) {
   const [isFullSize, setIsFullSize] = useState<boolean>(false)
 
-  const toggleFullScreen = () => {
+  function toggleFullScreen() {
     if (!isFullSize && element?.requestFullscreen) {
       element.requestFullscreen()
     } else if (element && document.fullscreenElement) {

@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { useState } from 'react'
 import { Button } from '../button'
 import './Counter.scss'
 import { ICounterItem } from './Counter.type'
@@ -9,14 +9,14 @@ interface ICounter {
   onChange: (selectedValue: ICounterItem) => void
 }
 
-export const Counter: FC<ICounter> = ({
+export function Counter({
   values,
   default: defaultValue = values[0],
   onChange,
-}) => {
+}: ICounter) {
   const [active, setActive] = useState<ICounterItem>(defaultValue)
 
-  const selectPrev = () => {
+  function selectPrev() {
     const idx = values.findIndex(item => item.value === active.value)
 
     if (idx != -1) {
@@ -26,7 +26,7 @@ export const Counter: FC<ICounter> = ({
     }
   }
 
-  const selectNext = () => {
+  function selectNext() {
     const idx = values.findIndex(item => item.value === active.value)
 
     if (idx != -1) {

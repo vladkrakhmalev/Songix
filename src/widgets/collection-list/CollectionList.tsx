@@ -1,4 +1,3 @@
-import { FC } from 'react'
 import './CollectionList.scss'
 import {
   collectionApi,
@@ -9,7 +8,7 @@ import { RenameCollection } from '@features/rename-collection'
 import { DeleteCollection } from '@features/delete-collection'
 import { SKELETON_ARRAY } from '@shared/ui/skeleton'
 
-export const CollectionList: FC = () => {
+export function CollectionList() {
   const { data: collections = [], isLoading } =
     collectionApi.useGetCollectionsQuery()
 

@@ -2,7 +2,7 @@ import './SettingsPage.scss'
 import { LogoutButton } from '@features/auth'
 import { ThemeSwitcher } from '@infra/theme'
 
-const SettingsPage = () => {
+function SettingsPage() {
   return (
     <div className='settings-page'>
       <h1>Настройки</h1>

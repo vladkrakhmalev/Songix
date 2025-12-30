@@ -1,6 +1,5 @@
 import './Input.scss'
 import {
-  FC,
   useState,
   MouseEvent,
   useRef,
@@ -27,7 +26,7 @@ interface IInput {
   onBlur?: () => void
 }
 
-export const Input: FC<IInput> = props => {
+export function Input(props: IInput) {
   const {
     value: defaultValue,
     children,
@@ -49,7 +48,7 @@ export const Input: FC<IInput> = props => {
 
   const inputRef = useRef<HTMLInputElement>(null)
 
-  const togglePassword = (event: MouseEvent) => {
+  function togglePassword(event: MouseEvent) {
     event.preventDefault()
 
     if (fieldType === 'password') {
@@ -59,12 +58,12 @@ export const Input: FC<IInput> = props => {
     }
   }
 
-  const handlerChange = (event: ChangeEvent<HTMLInputElement>) => {
+  function handlerChange(event: ChangeEvent<HTMLInputElement>) {
     setText(event.target.value)
     onChange(event.target.value)
   }
 
-  const handleSave = () => {
+  function handleSave() {
     onSave?.(text)
   }
 
@@ -75,7 +74,7 @@ export const Input: FC<IInput> = props => {
     onFocus?.()
   }, [disabled, onFocus])
 
-  const handleBlur = () => {
+  function handleBlur() {
     inputRef.current?.blur()
     setIsFocused(false)
     onBlur?.()

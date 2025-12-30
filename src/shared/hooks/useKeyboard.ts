@@ -41,10 +41,10 @@ export interface KeyboardHandlers {
  *   enabled: isOpen
  * })
  */
-export const useKeyboard = (
+export function useKeyboard(
   handlers: KeyboardHandlers,
   config: KeyboardConfig = {}
-) => {
+) {
   const {
     target,
     focusOnly = false,

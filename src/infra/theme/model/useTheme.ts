@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { THEME_STORAGE_KEY, Theme, themeClassName, isTheme } from './theme'
 
-const getSystemTheme = (): Exclude<Theme, 'system'> => {
+function getSystemTheme(): Exclude<Theme, 'system'> {
   if (window.matchMedia?.('(prefers-color-scheme: dark)').matches) {
     return 'dark'
   }
@@ -9,18 +9,18 @@ const getSystemTheme = (): Exclude<Theme, 'system'> => {
   return 'light'
 }
 
-const applyThemeClass = (resolvedTheme: Exclude<Theme, 'system'>) => {
+function applyThemeClass(resolvedTheme: Exclude<Theme, 'system'>) {
   const root = document.documentElement
   root.classList.remove(themeClassName.light, themeClassName.dark)
   root.classList.add(themeClassName[resolvedTheme])
 }
 
-const getStoredTheme = (): Theme => {
+function getStoredTheme(): Theme {
   const stored = localStorage.getItem(THEME_STORAGE_KEY)
   return stored && isTheme(stored) ? stored : 'system'
 }
 
-export const useThemeState = () => {
+export function useThemeState() {
   const [theme, setTheme] = useState<Theme>(() => getStoredTheme())
 
   const applyTheme = useCallback((nextTheme: Theme) => {
@@ -39,7 +39,9 @@ export const useThemeState = () => {
     const mediaQuery = window.matchMedia?.('(prefers-color-scheme: dark)')
     if (!mediaQuery) return
 
-    const handleChange = () => applyTheme('system')
+    function handleChange() {
+      applyTheme('system')
+    }
 
     if (mediaQuery.addEventListener) {
       mediaQuery.addEventListener('change', handleChange)

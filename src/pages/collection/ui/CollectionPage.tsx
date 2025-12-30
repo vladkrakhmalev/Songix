@@ -7,7 +7,7 @@ import { collectionApi } from '@entities/collection'
 import { routes } from '@infra/router'
 import { BackButton } from '@infra/router'
 
-const CollectionPage = () => {
+function CollectionPage() {
   const { collectionId = '' } = useParams()
 
   const formatCollectionId = Number(collectionId)

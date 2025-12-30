@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { PropsWithChildren, ReactElement } from 'react'
 import { render, RenderOptions } from '@testing-library/react'
 import { Provider } from 'react-redux'
@@ -12,7 +13,7 @@ import { configurateSongsReducer } from '@features/configurate-songs'
 import { editSongReducer } from '@features/edit-song'
 import type { RootState } from '@app/store/store'
 
-export const setupStore = (preloadedState?: Partial<RootState>) => {
+export function setupStore(preloadedState?: Partial<RootState>) {
   return configureStore({
     reducer: {
       [collectionApi.reducerPath]: collectionApi.reducer,
@@ -39,14 +40,14 @@ interface RenderOptionsProps extends Omit<RenderOptions, 'queries'> {
   route?: MemoryRouterProps['initialEntries']
 }
 
-const Wrapper = ({
+function Wrapper({
   children,
   store,
   route,
 }: PropsWithChildren<{
   store: AppStore
   route?: RenderOptionsProps['route']
-}>) => {
+}>) {
   return (
     <Provider store={store}>
       <MemoryRouter initialEntries={route}>
@@ -63,11 +64,13 @@ export function renderWithProviders(
   const store = options?.store ?? setupStore()
   const route = options?.route
 
-  const WrapperComponent = ({ children }: PropsWithChildren) => (
-    <Wrapper store={store} route={route}>
-      {children}
-    </Wrapper>
-  )
+  function WrapperComponent({ children }: PropsWithChildren) {
+    return (
+      <Wrapper store={store} route={route}>
+        {children}
+      </Wrapper>
+    )
+  }
 
   return {
     store,

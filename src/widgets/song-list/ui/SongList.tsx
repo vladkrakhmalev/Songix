@@ -1,4 +1,3 @@
-import { FC } from 'react'
 import './SongList.scss'
 import { ISong, songApi, SongCard, SongCardSkeleton } from '@entities/song'
 import { LikeSong } from '@features/like-song'
@@ -9,7 +8,7 @@ import {
 } from '@features/filter-songs'
 import { SKELETON_ARRAY } from '@shared/ui/skeleton'
 
-export const SongList: FC = () => {
+export function SongList() {
   const { collectionId = '' } = useParams()
 
   const activeCategories = useActiveCategoriesSelector()

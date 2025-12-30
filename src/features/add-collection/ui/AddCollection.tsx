@@ -1,23 +1,23 @@
-import { FC, useState } from 'react'
+import { useState } from 'react'
 import './AddCollection.scss'
 import { Button } from '@shared/ui/button'
 import { collectionApi, validateCollection } from '@entities/collection'
 import { Modal } from '@shared/ui/modal'
 import { Input } from '@shared/ui/input'
 
-export const AddCollection: FC = () => {
+export function AddCollection() {
   const [addCollection] = collectionApi.useAddCollectionMutation()
 
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [title, setTitle] = useState<string>('')
   const [inputError, setInputError] = useState<string | undefined>()
 
-  const handleInputChange = (value: string) => {
+  function handleInputChange(value: string) {
     setInputError(undefined)
     setTitle(value)
   }
 
-  const handleSubmit = () => {
+  function handleSubmit() {
     const error = validateCollection(title)
 
     if (error) {

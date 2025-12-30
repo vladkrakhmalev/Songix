@@ -1,4 +1,4 @@
-import { FC, ReactNode, useRef, useState } from 'react'
+import { ReactNode, useRef, useState } from 'react'
 import './SongContent.scss'
 import { ISong } from '@entities/song'
 import { ICounterItem } from '@shared/ui/counter'
@@ -14,12 +14,12 @@ interface ISongProps {
   configurate: ReactNode
 }
 
-export const SongContent: FC<ISongProps> = ({
+export function SongContent({
   song,
   configurate,
   speed,
   textSize,
-}) => {
+}: ISongProps) {
   const ref = useRef<HTMLDivElement>(null)
 
   const [isFullSize, setIsFullSize] = useState<boolean>(false)

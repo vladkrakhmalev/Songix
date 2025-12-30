@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { useState } from 'react'
 import './DeleteSong.scss'
 import { Button } from '@shared/ui/button'
 import { ConfigurateItem } from '@features/configurate-songs'
@@ -12,12 +12,12 @@ interface IProps extends React.HTMLAttributes<HTMLDivElement> {
   collectionId: string
 }
 
-export const DeleteSong: FC<IProps> = ({ song, collectionId }) => {
+export function DeleteSong({ song, collectionId }: IProps) {
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false)
   const [deleteSong] = songApi.useDeleteSongMutation()
   const navigate = useNavigate()
 
-  const handleDelete = async () => {
+  async function handleDelete() {
     await deleteSong(song.id)
     setIsOpenModal(false)
     navigate(routes.collection(collectionId))

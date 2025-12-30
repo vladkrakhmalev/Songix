@@ -1,18 +1,17 @@
 import { ISong, ISongEditable, songApi, SongForm } from '@entities/song'
 import { useAppDispatch } from '@shared/hooks'
 import { toggleEditMode } from '../model/editSongSlice'
-import { FC } from 'react'
 
 interface IProps {
   song: ISong
 }
 
-export const EditSongForm: FC<IProps> = ({ song }) => {
+export function EditSongForm({ song }: IProps) {
   const dispatch = useAppDispatch()
 
   const [editSong, { isLoading }] = songApi.useUpdateSongMutation()
 
-  const handleSubmit = async (form: ISongEditable) => {
+  async function handleSubmit(form: ISongEditable) {
     try {
       const data = { ...song, ...form }
       const response = await editSong({ id: song.id, data })
@@ -22,13 +21,17 @@ export const EditSongForm: FC<IProps> = ({ song }) => {
     }
   }
 
+  function handleCancel() {
+    dispatch(toggleEditMode())
+  }
+
   return (
     <SongForm
       initialForm={song}
       title='Редактировать песню'
       isLoading={isLoading}
       onSubmit={handleSubmit}
-      onCancel={() => dispatch(toggleEditMode())}
+      onCancel={handleCancel}
     />
   )
 }

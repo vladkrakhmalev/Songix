@@ -1,4 +1,3 @@
-import { FC } from 'react'
 import './Textarea.scss'
 import ContentEditable from 'react-contenteditable'
 import sanitizeHtml from 'sanitize-html'
@@ -13,10 +12,10 @@ const sanitizeOptions = {
   allowedTags: ['br', 'div'],
 }
 
-export const Textarea: FC<ITextarea> = ({ value, placeholder, onChange }) => {
+export function Textarea({ value, placeholder, onChange }: ITextarea) {
   const showPlaceholder = placeholder && !value
 
-  const handleChange = (value: string) => {
+  function handleChange(value: string) {
     const cleanText = sanitizeHtml(value, sanitizeOptions)
     onChange(cleanText)
   }

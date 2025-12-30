@@ -1,8 +1,7 @@
-import { FC } from 'react'
 import './CollectionCard.scss'
 import { Skeleton } from '@shared/ui/skeleton'
 
-export const CollectionCardSkeleton: FC = () => {
+export function CollectionCardSkeleton() {
   return (
     <div className='collection-card'>
       <div className='collection-card__header'>

@@ -17,13 +17,13 @@ interface SwitcherProps<T extends string> {
   onSwitch: (value: T) => void
 }
 
-export const Switcher = <T extends string>({
+export function Switcher<T extends string>({
   options,
   value,
   variant = 'primary',
   className,
   onSwitch,
-}: SwitcherProps<T>) => {
+}: SwitcherProps<T>) {
   const activeIndex = Math.max(
     0,
     options.findIndex(option => option.value === value)
@@ -35,7 +35,7 @@ export const Switcher = <T extends string>({
     '--switcher-count': safeCount,
   } as CSSProperties
 
-  const handleSwitch = (nextValue: T) => {
+  function handleSwitch(nextValue: T) {
     if (nextValue === value) return
     onSwitch(nextValue)
   }

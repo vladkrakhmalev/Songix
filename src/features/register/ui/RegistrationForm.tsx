@@ -8,7 +8,7 @@ import { PRIVACY_POLICY_TEXT } from '@shared/config/privacy-policy'
 import { authApi } from '@entities/auth'
 import { routes } from '@infra/router'
 
-export const RegistrationForm = () => {
+export function RegistrationForm() {
   const navigate = useNavigate()
   const [register] = authApi.useRegisterMutation()
 
@@ -20,7 +20,7 @@ export const RegistrationForm = () => {
   const [error, setError] = useState<string>('')
   const idDisabled = error ? true : false
 
-  const handlerSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  async function handlerSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
     const response = await register(form)
 
@@ -31,7 +31,7 @@ export const RegistrationForm = () => {
     }
   }
 
-  const handlerChange = (field: string, value: string) => {
+  function handlerChange(field: string, value: string) {
     setForm({ ...form, [field]: value })
     setError('')
   }

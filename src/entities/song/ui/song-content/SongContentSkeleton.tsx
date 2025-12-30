@@ -1,7 +1,6 @@
 import { Skeleton } from '@shared/ui/skeleton'
-import { FC } from 'react'
 
-export const SongContentSkeleton: FC = () => {
+export function SongContentSkeleton() {
   return (
     <div className='song-content'>
       <div className='song-content__header'>

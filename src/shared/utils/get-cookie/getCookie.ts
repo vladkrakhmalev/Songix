@@ -1,4 +1,4 @@
-export const getCookie = (cookieName: string) => {
+export function getCookie(cookieName: string) {
   const cookie = document.cookie
     .split('; ')
     .map(e => e.split('='))

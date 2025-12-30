@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { useState } from 'react'
 import './LikeSong.scss'
 import { ISong, songApi } from '@entities/song'
 import clsx from 'clsx'
@@ -8,12 +8,12 @@ interface IProps {
   song: ISong
 }
 
-export const LikeSong: FC<IProps> = ({ song }) => {
+export function LikeSong({ song }: IProps) {
   const [updateSong] = songApi.useUpdateSongMutation()
 
   const [isFavorite, setIsFavorite] = useState<boolean>(song.isFavorite)
 
-  const handleClick = () => {
+  function handleClick() {
     setIsFavorite(!isFavorite)
     updateSong({ id: song.id, data: { isFavorite: !isFavorite } })
   }

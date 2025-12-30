@@ -1,4 +1,4 @@
-import { FC, MouseEvent, useState } from 'react'
+import { MouseEvent, useState } from 'react'
 import './DeleteCollection.scss'
 import { Button } from '@shared/ui/button'
 import { collectionApi, ICollection } from '@entities/collection'
@@ -8,17 +8,17 @@ interface IProps {
   collection: ICollection
 }
 
-export const DeleteCollection: FC<IProps> = ({ collection }) => {
+export function DeleteCollection({ collection }: IProps) {
   const [deletteCollection] = collectionApi.useDeleteCollectionMutation()
 
   const [isOpen, setIsOpen] = useState<boolean>(false)
 
-  const handleOpen = (event: MouseEvent<HTMLElement>) => {
+  function handleOpen(event: MouseEvent<HTMLElement>) {
     event.stopPropagation()
     setIsOpen(true)
   }
 
-  const handleDelete = () => {
+  function handleDelete() {
     deletteCollection(collection.id)
     setIsOpen(false)
   }

@@ -1,4 +1,3 @@
-import { FC } from 'react'
 import { ICategory } from '../../model/categoryType'
 import clsx from 'clsx'
 import './CategoryCard.scss'
@@ -9,7 +8,7 @@ interface CategoryCardProps {
   onClick: (category: ICategory) => void
 }
 
-export const CategoryCard: FC<CategoryCardProps> = ({ category, onClick }) => {
+export function CategoryCard({ category, onClick }: CategoryCardProps) {
   return (
     <button
       className={clsx('category-card', category.active && '_active')}

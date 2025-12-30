@@ -1,4 +1,3 @@
-import { FC } from 'react'
 import './ConfigurateList.scss'
 import { Counter } from '@shared/ui/counter'
 import { Button } from '@shared/ui/button'
@@ -23,7 +22,7 @@ interface IProps {
   collectionId: string
 }
 
-export const ConfigurateList: FC<IProps> = ({ songId, collectionId }) => {
+export function ConfigurateList({ songId, collectionId }: IProps) {
   const dispatch = useAppDispatch()
 
   const { speed, tonality, textSize } = useAppSelector(

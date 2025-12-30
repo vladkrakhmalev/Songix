@@ -1,14 +1,14 @@
-import { FC, useState } from 'react'
+import { useState } from 'react'
 import './CopySongLink.scss'
 import { ConfigurateItem } from '../configurate-item'
 import { useLocation } from 'react-router-dom'
 import { Notification } from '@shared/ui/notification'
 
-export const CopySongLink: FC = () => {
+export function CopySongLink() {
   const [openNotification, setOpenNotification] = useState<boolean>(false)
   const location = useLocation()
 
-  const handleCopy = () => {
+  function handleCopy() {
     const currentUrl = window.location.origin + location.pathname
     navigator.clipboard.writeText(currentUrl)
     setOpenNotification(true)

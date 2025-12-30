@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom'
 import { GoogleLoginButton } from './GoogleLoginButton'
 import { routes } from '@infra/router'
 
-export const LoginForm = () => {
+export function LoginForm() {
   const navigate = useNavigate()
   const [login, { isLoading }] = authApi.useLoginMutation()
 
@@ -18,7 +18,7 @@ export const LoginForm = () => {
   const [error, setError] = useState<string>('')
   const idDisabled = !!error || isLoading
 
-  const handlerSubmit = async () => {
+  async function handlerSubmit() {
     const response = await login(form)
 
     if (response.error) {
@@ -28,7 +28,7 @@ export const LoginForm = () => {
     }
   }
 
-  const handlerChange = (field: string, value: string) => {
+  function handlerChange(field: string, value: string) {
     setForm({ ...form, [field]: value })
     setError('')
   }

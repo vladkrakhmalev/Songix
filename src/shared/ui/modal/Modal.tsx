@@ -1,4 +1,4 @@
-import { FC, MouseEvent, ReactNode, useCallback } from 'react'
+import { MouseEvent, ReactNode, useCallback } from 'react'
 import './Modal.scss'
 import { createPortal } from 'react-dom'
 import { Button } from '@shared/ui/button'
@@ -10,7 +10,7 @@ interface IProps {
   onClose?: () => void
 }
 
-export const Modal: FC<IProps> = ({ children, title, onClose }) => {
+export function Modal({ children, title, onClose }: IProps) {
   const RootElem = document.getElementById('main')
 
   const handleClose = useCallback(

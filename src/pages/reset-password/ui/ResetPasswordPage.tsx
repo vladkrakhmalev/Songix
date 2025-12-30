@@ -2,7 +2,7 @@ import { UILink } from '@shared/ui/link'
 import { ResetPasswordForm } from '@features/reset-password'
 import { routes } from '@infra/router'
 
-const ResetPasswordPage = () => {
+function ResetPasswordPage() {
   return (
     <>
       <h1>Восстановить пароль</h1>

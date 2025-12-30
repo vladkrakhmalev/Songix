@@ -1,11 +1,11 @@
-import { FC, useState } from 'react'
+import { useState } from 'react'
 import { collectionApi } from '../../api/collectionApi'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Select } from '@shared/ui/select'
 import { Skeleton } from '@shared/ui/skeleton'
 import { routes } from '@infra/router'
 
-export const CollectionSelect: FC = () => {
+export function CollectionSelect() {
   const navigate = useNavigate()
   const { collectionId = '' } = useParams()
 
@@ -20,7 +20,7 @@ export const CollectionSelect: FC = () => {
   const [aciveCollectionId, setAciveCollectionId] =
     useState<string>(collectionId)
 
-  const handlerChange = (id: string) => {
+  function handlerChange(id: string) {
     setAciveCollectionId(id)
     navigate(routes.collection(id))
   }

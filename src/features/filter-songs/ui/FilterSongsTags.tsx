@@ -1,4 +1,3 @@
-import { FC } from 'react'
 import { CategoryCard } from '@entities/category'
 import { ICategory } from '@entities/category'
 import {
@@ -8,11 +7,11 @@ import {
 import { useAppDispatch } from '@shared/hooks'
 import { useActiveCategoriesSelector } from '../model/filterSongsSelectors'
 
-export const FilterSongsTags: FC = () => {
+export function FilterSongsTags() {
   const activeCategories = useActiveCategoriesSelector()
   const dispatch = useAppDispatch()
 
-  const handlerClick = (category: ICategory) => {
+  function handlerClick(category: ICategory) {
     if (category.active) {
       dispatch(setDisactiveCategory(category.id))
     } else {

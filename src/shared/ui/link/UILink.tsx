@@ -1,4 +1,3 @@
-import { FC } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import './UILink.scss'
 import clsx from 'clsx'
@@ -12,7 +11,7 @@ interface IUILink extends React.HTMLAttributes<HTMLAnchorElement> {
   className?: string
 }
 
-export const UILink: FC<IUILink> = props => {
+export function UILink(props: IUILink) {
   const { to, children, icon, nav, soon, className, ...rest } = props
 
   if (nav)

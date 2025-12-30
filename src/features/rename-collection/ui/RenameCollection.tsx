@@ -1,4 +1,4 @@
-import { FC, MouseEvent, useState } from 'react'
+import { MouseEvent, useState } from 'react'
 import './RenameCollection.scss'
 import {
   collectionApi,
@@ -12,24 +12,24 @@ interface IProps extends React.HTMLAttributes<HTMLDivElement> {
   collection: ICollection
 }
 
-export const RenameCollection: FC<IProps> = ({ collection }) => {
+export function RenameCollection({ collection }: IProps) {
   const [renameCollection] = collectionApi.useUpdateCollectionMutation()
 
   const [isEdit, setIsEdit] = useState<boolean>(false)
   const [title, setTitle] = useState<string>(collection.title)
   const [inputError, setInputError] = useState<string | undefined>()
 
-  const handleOpen = (event: MouseEvent) => {
+  function handleOpen(event: MouseEvent) {
     event.stopPropagation()
     setIsEdit(true)
   }
 
-  const handleInputChange = (value: string) => {
+  function handleInputChange(value: string) {
     setInputError(undefined)
     setTitle(value)
   }
 
-  const handleSave = (value: string) => {
+  function handleSave(value: string) {
     const error = validateCollection(value)
 
     if (error) {
@@ -43,7 +43,7 @@ export const RenameCollection: FC<IProps> = ({ collection }) => {
     setIsEdit(false)
   }
 
-  const handleCancel = () => {
+  function handleCancel() {
     setTitle(collection.title)
     setIsEdit(false)
   }

@@ -1,4 +1,4 @@
-import { FC, ReactNode } from 'react'
+import { ReactNode } from 'react'
 import './CollectionCard.scss'
 import { ICollection } from '../../model/collectionType'
 import { useNavigate } from 'react-router-dom'
@@ -10,14 +10,14 @@ interface IProps {
   editCollection: ReactNode
 }
 
-export const CollectionCard: FC<IProps> = ({
+export function CollectionCard({
   collection,
   deleteCollection,
   editCollection,
-}) => {
+}: IProps) {
   const navigate = useNavigate()
 
-  const handleRedirect = () => {
+  function handleRedirect() {
     if (collection) {
       navigate(routes.collection(collection.id))
     }

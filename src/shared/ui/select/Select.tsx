@@ -18,7 +18,7 @@ interface IProps<T extends string> {
   onChange: (value: T) => void
 }
 
-export const Select = <T extends string>({
+export function Select<T extends string>({
   options,
   value,
   disabled,
@@ -26,7 +26,7 @@ export const Select = <T extends string>({
   placeholder,
   optionsTitle,
   onChange,
-}: IProps<T>) => {
+}: IProps<T>) {
   const initialValue = value
     ? options.find(opt => opt.value === value)?.label
     : ''
@@ -36,17 +36,17 @@ export const Select = <T extends string>({
 
   const selectRef = useOutsideClick(() => setIsOpen(false))
 
-  const handleOpen = () => {
+  function handleOpen() {
     if (disabled) return
     setIsOpen(!isOpen)
   }
 
-  const handleSelect = (newValue: T) => {
+  function handleSelect(newValue: T) {
     onChange(newValue)
     setIsOpen(false)
   }
 
-  const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
+  function handleSearch(e: ChangeEvent<HTMLInputElement>) {
     const newSearch = e.target.value.trim()
     setSearch(newSearch)
     if (!isOpen) setIsOpen(true)

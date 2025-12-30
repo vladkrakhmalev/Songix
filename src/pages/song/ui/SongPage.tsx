@@ -1,5 +1,4 @@
 import './SongPage.scss'
-import { FC } from 'react'
 import { useAppSelector } from '@shared/hooks'
 import {
   SongContent,
@@ -11,7 +10,7 @@ import { useParams } from 'react-router-dom'
 import { ConfigurateList } from '@widgets/configurate-list'
 import { EditSongForm, useIsEditModeSelector } from '@features/edit-song'
 
-const SongPage: FC = () => {
+function SongPage() {
   const { songId = '', collectionId = '' } = useParams()
 
   const { speed, textSize } = useAppSelector(state => state.configurateSongs)

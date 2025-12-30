@@ -1,4 +1,5 @@
 import { useAppSelector } from '@shared/hooks'
 
-export const useIsEditModeSelector = () =>
-  useAppSelector(state => state.editSong.isEditMode)
+export function useIsEditModeSelector() {
+  return useAppSelector(state => state.editSong.isEditMode)
+}

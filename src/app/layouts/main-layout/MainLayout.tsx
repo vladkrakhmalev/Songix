@@ -1,9 +1,8 @@
-import { FC } from 'react'
 import './MainLayout.scss'
 import { Outlet, useOutlet } from 'react-router-dom'
 import { Navigation } from '@widgets/navigation'
 
-export const MainLayout: FC = () => {
+export function MainLayout() {
   const outlet = useOutlet()
 
   return (

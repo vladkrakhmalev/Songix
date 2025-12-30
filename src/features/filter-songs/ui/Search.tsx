@@ -1,13 +1,12 @@
-import { FC } from 'react'
 import { Input } from '@shared/ui/input'
 import { useAppDispatch, useAppSelector } from '@shared/hooks'
 import { setSearch } from '../model/filterSongsSlice'
 
-export const Search: FC = () => {
+export function Search() {
   const dispatch = useAppDispatch()
   const { search } = useAppSelector(state => state.filterSongs)
 
-  const handlerChange = (value: string) => {
+  function handlerChange(value: string) {
     dispatch(setSearch(value))
   }
 

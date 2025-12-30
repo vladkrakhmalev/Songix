@@ -14,6 +14,6 @@ export const ThemeContext = createContext<{
   setTheme: (theme: Theme) => void
 } | null>(null)
 
-export const isTheme = (value: string | null): value is Theme => {
+export function isTheme(value: string | null): value is Theme {
   return value === 'light' || value === 'dark' || value === 'system'
 }

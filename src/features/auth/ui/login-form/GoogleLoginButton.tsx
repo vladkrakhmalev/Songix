@@ -1,8 +1,8 @@
 import { API_URL } from '@shared/config'
 import { Button } from '@shared/ui/button'
 
-export const GoogleLoginButton = () => {
-  const handleGoogleLogin = () => {
+export function GoogleLoginButton() {
+  function handleGoogleLogin() {
     const googleAuthUrl = `${API_URL}/auth/google/`
     window.location.href = googleAuthUrl
   }

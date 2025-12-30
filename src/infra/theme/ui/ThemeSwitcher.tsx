@@ -8,7 +8,7 @@ const options: { title: string; value: Theme }[] = [
   { title: 'Системная', value: 'system' },
 ]
 
-export const ThemeSwitcher = () => {
+export function ThemeSwitcher() {
   const { theme, setTheme } = useThemeContext()
 
   return (

@@ -2,7 +2,7 @@ import { UILink } from '@shared/ui/link'
 import { LoginForm } from '@features/auth'
 import { routes } from '@infra/router'
 
-const LoginPage = () => {
+function LoginPage() {
   return (
     <>
       <h1>Вход в аккаунт</h1>
