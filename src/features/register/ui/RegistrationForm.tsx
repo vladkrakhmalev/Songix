@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import { Popup } from '@shared/ui/popup'
 import { PRIVACY_POLICY_TEXT } from '@shared/config/privacy-policy'
 import { authApi } from '@entities/auth'
+import { routerConfig } from '@shared/config'
 
 export const RegistrationForm = () => {
   const navigate = useNavigate()
@@ -24,7 +25,7 @@ export const RegistrationForm = () => {
     await register(form)
 
     if (data) {
-      navigate('/collections')
+      navigate(routerConfig.collections)
     } else {
       setError(String(data))
     }

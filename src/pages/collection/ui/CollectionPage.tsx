@@ -5,6 +5,7 @@ import { SongList } from '@widgets/song-list'
 import { Button } from '@shared/ui/button'
 import { collectionApi } from '@entities/collection'
 import { BackButton } from '@infra/history'
+import { routerConfig } from '@shared/config'
 
 const CollectionPage = () => {
   const { collectionId = '' } = useParams()
@@ -28,7 +29,7 @@ const CollectionPage = () => {
       <Button
         icon='plus-small'
         variant='accent'
-        to={`/collections/${collectionId}/songs/new`}
+        to={routerConfig.songNew.replace(':collectionId', collectionId)}
       >
         Добавить
       </Button>

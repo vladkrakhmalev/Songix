@@ -2,6 +2,7 @@ import { FC, ReactNode } from 'react'
 import './CollectionCard.scss'
 import { ICollection } from '../../model/collectionType'
 import { useNavigate } from 'react-router-dom'
+import { routerConfig } from '@shared/config'
 
 interface IProps {
   collection: ICollection
@@ -18,7 +19,9 @@ export const CollectionCard: FC<IProps> = ({
 
   const handleRedirect = () => {
     if (collection) {
-      navigate(`/collections/${collection.id}/songs`)
+      navigate(
+        routerConfig.collection.replace(':collectionId', String(collection.id))
+      )
     }
   }
 
