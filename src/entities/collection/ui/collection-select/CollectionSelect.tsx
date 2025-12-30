@@ -4,6 +4,7 @@ import { collectionApi } from '../../api/collectionApi'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Select } from '@shared/ui/select'
 import { Transition } from '@shared/lib/transition'
+import { routerConfig } from '@shared/config/routerConfig'
 
 export const CollectionSelect: FC = () => {
   const navigate = useNavigate()
@@ -22,7 +23,7 @@ export const CollectionSelect: FC = () => {
 
   const handlerChange = (id: string) => {
     setAciveCollectionId(id)
-    navigate(`/collections/${id}/songs`)
+    navigate(routerConfig.collectionSongs.replace(':collectionId', id))
   }
 
   return (

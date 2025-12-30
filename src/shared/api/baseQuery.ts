@@ -9,6 +9,7 @@ import type {
 import { authApi } from '@entities/auth'
 import { API_URL } from '@shared/config'
 import { convertKeys } from '@shared/utils/convert-case'
+import { routerConfig } from '@shared/config/routerConfig'
 
 export const baseQueryFn = fetchBaseQuery({
   baseUrl: API_URL,
@@ -40,7 +41,7 @@ export const baseQuery: BaseQueryFn<
     } else {
       console.warn('Failed to refresh token, logging out')
       api.dispatch(authApi.endpoints.logout.initiate())
-      window.location.href = '/login'
+      window.location.href = routerConfig.login
     }
   }
 

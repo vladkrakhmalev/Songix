@@ -9,23 +9,24 @@ import { CollectionsPage } from '@pages/collections'
 import { Navigation } from '@widgets/navigation'
 import { CollectionSidebar } from '@widgets/collection-sidebar'
 import { SongNewPage } from '@pages/song-new'
+import { routerConfig } from '@shared/config/routerConfig'
 
 const router = createBrowserRouter([
   {
     element: <AuthLayout />,
     children: [
       {
-        path: '/login',
+        path: routerConfig.login,
         element: <LoginPage />,
         errorElement: <NotFoundPage />,
       },
       {
-        path: '/registration',
+        path: routerConfig.registration,
         element: <RegistrationPage />,
         errorElement: <NotFoundPage />,
       },
       // {
-      //   path: "/reset-password",
+      //   path: routerConfig.resetPassword,
       //   element: <ResetPasswordPage/>,
       //   errorElement: <NotFoundPage/>,
       // },
@@ -35,36 +36,36 @@ const router = createBrowserRouter([
     element: <MainLayout sidebar={<Navigation />} />,
     children: [
       {
-        path: '/',
+        path: routerConfig.root,
         element: <CollectionsPage />,
         errorElement: <NotFoundPage />,
       },
       {
-        path: '/collections',
+        path: routerConfig.collections,
         element: <CollectionsPage />,
         errorElement: <NotFoundPage />,
       },
       // {
-      //   path: "/profile",
+      //   path: routerConfig.profile,
       //   errorElement: <NotFoundPage/>,
       // },
       // {
-      //   path: "/settings",
+      //   path: routerConfig.settings,
       //   errorElement: <NotFoundPage/>,
       // },
     ],
   },
   {
-    path: '/collections/:collectionId/songs',
+    path: routerConfig.collectionSongs,
     element: <MainLayout size='big' sidebar={<CollectionSidebar />} />,
     children: [
       {
-        path: '/collections/:collectionId/songs/:songId',
+        path: routerConfig.collectionSong,
         element: <SongPage />,
         errorElement: <NotFoundPage />,
       },
       {
-        path: '/collections/:collectionId/songs/new',
+        path: routerConfig.collectionSongNew,
         element: <SongNewPage />,
         errorElement: <NotFoundPage />,
       },

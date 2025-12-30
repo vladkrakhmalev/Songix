@@ -4,13 +4,14 @@ import { FilterSongs } from '@features/filter-songs'
 import './CollectionSidebar.scss'
 import { Button } from '@shared/ui/button'
 import { CollectionSelect } from '@entities/collection'
+import { routerConfig } from '@shared/config/routerConfig'
 
 export const CollectionSidebar = () => {
   const { collectionId = '' } = useParams()
   const navigate = useNavigate()
 
   const handleRedirect = () => {
-    navigate('/')
+    navigate(routerConfig.root)
   }
 
   return (
@@ -26,7 +27,10 @@ export const CollectionSidebar = () => {
 
       <Button
         color='light'
-        to={`/collections/${collectionId}/songs/new`}
+        to={routerConfig.collectionSongNew.replace(
+          ':collectionId',
+          collectionId
+        )}
         icon=''
       >
         Добавить

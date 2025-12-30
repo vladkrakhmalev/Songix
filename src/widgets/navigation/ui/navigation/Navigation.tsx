@@ -2,15 +2,27 @@ import './Navigation.scss'
 import { UILink } from '@shared/ui/link'
 import { MouseEvent } from 'react'
 import { LogoutButton } from './LogoutButton'
+import { routerConfig } from '@shared/config/routerConfig'
 
 export const Navigation = () => {
   const links = [
     // { id: 0, link: '/', icon: 'rr-apps', title: 'Главная' },
-    { id: 1, link: '/collections', icon: 'rr-music-alt', title: 'Сборники' },
-    { id: 2, link: '/profile', icon: 'rr-user', title: 'Профиль', soon: true },
+    {
+      id: 1,
+      link: routerConfig.collections,
+      icon: 'rr-music-alt',
+      title: 'Сборники',
+    },
+    {
+      id: 2,
+      link: routerConfig.profile,
+      icon: 'rr-user',
+      title: 'Профиль',
+      soon: true,
+    },
     {
       id: 3,
-      link: '/settings',
+      link: routerConfig.settings,
       icon: 'rr-settings',
       title: 'Настройки',
       soon: true,

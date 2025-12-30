@@ -1,13 +1,14 @@
 import { UILink } from '@shared/ui/link'
 import { LoginForm } from '@features/login'
+import { routerConfig } from '@shared/config/routerConfig'
 
 export const LoginPage = () => {
   return (
     <>
       <h1>Вход в аккаунт</h1>
       <LoginForm />
-      {/* <UILink to='/reset-password'>Востановить пароль</UILink> */}
-      <UILink to='/registration'>Зарегестироваться</UILink>
+      {/* <UILink to={routerConfig.resetPassword}>Востановить пароль</UILink> */}
+      <UILink to={routerConfig.registration}>Зарегестироваться</UILink>
     </>
   )
 }

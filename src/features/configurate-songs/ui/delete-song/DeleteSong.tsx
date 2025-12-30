@@ -6,6 +6,7 @@ import { Notification } from '@shared/ui/notification'
 import { ConfigurateItem } from '@features/configurate-songs'
 import { useNavigate } from 'react-router-dom'
 import { ISong, songApi } from '@entities/song'
+import { routerConfig } from '@shared/config/routerConfig'
 
 interface IProps extends React.HTMLAttributes<HTMLDivElement> {
   song: ISong
@@ -27,9 +28,9 @@ export const DeleteSong: FC<IProps> = ({ song, collectionId }) => {
     // TODO Настроить вывод попапа после удаления
 
     if (collectionId) {
-      navigate(`/collections/${collectionId}/songs/`)
+      navigate(routerConfig.collectionSongs.replace(':collectionId', collectionId))
     } else {
-      navigate(`/collections/`)
+      navigate(routerConfig.collections)
     }
   }
 

@@ -1,5 +1,6 @@
 import { ISongEditable, songApi, SongForm } from '@entities/song'
 import { useNavigate, useParams } from 'react-router-dom'
+import { routerConfig } from '@shared/config/routerConfig'
 
 export const AddSongForm = () => {
   const navigate = useNavigate()
@@ -8,7 +9,16 @@ export const AddSongForm = () => {
   const [addSong, { isLoading }] = songApi.useAddSongMutation()
 
   const navigateToSongs = (songId: string = '') => {
-    navigate(`/collections/${collectionId}/songs/${songId}`)
+    if (!collectionId) return
+    if (!songId) {
+      navigate(routerConfig.collectionSongs.replace(':collectionId', collectionId))
+      return
+    }
+    navigate(
+      routerConfig.collectionSong
+        .replace(':collectionId', collectionId)
+        .replace(':songId', songId)
+    )
   }
 
   const handleSubmit = async (form: ISongEditable) => {
