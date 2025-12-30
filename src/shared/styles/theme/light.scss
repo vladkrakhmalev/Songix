@@ -1,6 +1,6 @@
-:root {
+.light-theme {
   --color-primary: #5db1ff;
-  --color-negative: #f00
+  --color-negative: #f00;
 
   --text-primary: #333333;
   --text-secondary: #999999;
@@ -13,5 +13,4 @@
 
   --shadow-primary: 0 0 20px #00000015;
   --shadow-secondary: 0 0 0 4px #dbeeff;
-  --shadow-secondary-small: 0 0 0 2px #dbeeff;
 }

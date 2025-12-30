@@ -1,13 +1,16 @@
-:root {
+.dark-theme {
   --color-primary: #5db1ff;
-  --color-secondary: #f0f8ff;
-  --color-error: #ff8c8c;
+  --color-negative: #ff8c8c;
 
   --text-primary: #ffffff;
   --text-secondary: #999999;
-  --text-light: #cccccc;
+  --text-white: #ffffff;
 
   --bg-primary: #24272b;
   --bg-secondary: #333333;
-  --bg-blue-light: #37424a;
+  --bg-positive: #d8ffe7;
+  --bg-negative: #ff4e4e;
+
+  --shadow-primary: 0 0 20px #00000015;
+  --shadow-secondary: 0 0 0 4px #28333d;
 }

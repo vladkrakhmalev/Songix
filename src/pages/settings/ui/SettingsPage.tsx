@@ -1,5 +1,6 @@
 import './SettingsPage.scss'
 import { LogoutButton } from '@features/auth'
+import { ThemeSwitcher } from '@infra/theme'
 
 const SettingsPage = () => {
   return (
@@ -8,7 +9,7 @@ const SettingsPage = () => {
 
       <div className='settings-page__item'>
         Тема
-        {/* TODO Вставить смены темы */}
+        <ThemeSwitcher />
       </div>
 
       <LogoutButton />
