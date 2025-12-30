@@ -25,32 +25,22 @@ export const DeleteCollection: FC<IProps> = ({ collection }) => {
 
   return (
     <>
-      <i
-        className='delete-collection__trigger fi fi-rr-trash'
-        onClick={handleOpen}
-      ></i>
+      <Button icon='trash' variant='secondary' onClick={handleOpen}></Button>
 
-      <Modal
-        isOpen={isOpen}
-        title='Удалить сборник'
-        onClose={() => setIsOpen(false)}
-      >
-        <div className='delete-collection__content'>
-          <p>
-            Вы точно хотите удалить сборник &quot;{collection.title}&quot;? Это
-            действие нельзя будет отменить
-          </p>
+      {isOpen && (
+        <Modal title='Удалить сборник' onClose={() => setIsOpen(false)}>
+          <div className='delete-collection__content'>
+            <p>
+              Вы точно хотите удалить сборник &quot;{collection.title}&quot;?
+              Это действие нельзя будет отменить
+            </p>
 
-          <Button
-            size='medium'
-            icon='rr-trash'
-            color='red'
-            onClick={handleDelete}
-          >
-            Удалить
-          </Button>
-        </div>
-      </Modal>
+            <Button icon='trash' variant='danger' onClick={handleDelete}>
+              Удалить
+            </Button>
+          </div>
+        </Modal>
+      )}
     </>
   )
 }

@@ -1,9 +1,8 @@
 import { FC, useState } from 'react'
-import './CollectionSelect.scss'
 import { collectionApi } from '../../api/collectionApi'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Select } from '@shared/ui/select'
-import { Transition } from '@shared/lib/transition'
+import { Skeleton } from '@shared/ui/skeleton'
 
 export const CollectionSelect: FC = () => {
   const navigate = useNavigate()
@@ -25,23 +24,16 @@ export const CollectionSelect: FC = () => {
     navigate(`/collections/${id}/songs`)
   }
 
-  return (
-    <div className='collection-select'>
-      {/* <Skeleton
-        in={isLoading}
-        variant='secondary'
-        height='40px'
-        className='collection-select__skeleton'
-      /> */}
+  if (isLoading) {
+    return <Skeleton />
+  }
 
-      <Transition in={!isLoading} className='collection-select__transition'>
-        <Select
-          options={collectionItems}
-          value={aciveCollectionId}
-          optionsTitle='Ваши сборники:'
-          onChange={handlerChange}
-        />
-      </Transition>
-    </div>
+  return (
+    <Select
+      options={collectionItems}
+      value={aciveCollectionId}
+      optionsTitle='Ваши сборники:'
+      onChange={handlerChange}
+    />
   )
 }

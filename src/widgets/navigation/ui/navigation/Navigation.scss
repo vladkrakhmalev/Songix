@@ -1,19 +1,11 @@
 .navigation {
-  display: grid;
-  gap: 15px;
-  padding: 10px;
-
-  &__header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  &__logo {
-    font-weight: bold;
-    font-size: 20px;
-    margin-right: auto;
-  }
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-evenly;
+  background-color: var(--bg-primary);
+  padding: 1rem;
+  border-radius: 1rem;
 
   &__link {
     font-size: var(--text-size);

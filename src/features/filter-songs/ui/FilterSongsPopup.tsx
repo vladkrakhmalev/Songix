@@ -31,13 +31,7 @@ export const FilterSongsPopup = () => {
       />
     ))
 
-  const triggerButton = (
-    <Button
-      className='filter-songs__button'
-      color='grey'
-      icon='rr-bars-filter'
-    />
-  )
+  const triggerButton = <Button icon='bars-filter' />
 
   return (
     <div className='filter-songs__popup'>

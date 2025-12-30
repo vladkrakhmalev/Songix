@@ -1,8 +1,8 @@
+// TODO: Добавить ховер
 .collection-card {
-  background-color: var(--bg-blue-light);
+  background-color: var(--bg-primary);
   padding: 20px;
   border-radius: 20px;
-  min-height: 200px;
   display: grid;
   gap: 10px;
   align-content: start;
@@ -20,17 +20,7 @@
     display: flex;
     gap: 5px;
     align-items: center;
+    color: var(--text-secondary);
+    font-size: 0.875rem;
   }
-}
-
-.transition-entering .collection-card {
-  opacity: 0;
-}
-
-.transition-entered .collection-card {
-  opacity: 1;
-}
-
-.transition-exiting .collection-card {
-  opacity: 0;
 }

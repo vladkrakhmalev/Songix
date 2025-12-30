@@ -32,31 +32,29 @@ export const AddCollection: FC = () => {
   return (
     <>
       <Button
-        icon='br-plus-small'
-        size='small'
+        icon='plus-small'
+        variant='accent'
         onClick={() => setIsOpen(true)}
       />
 
-      <Modal
-        isOpen={isOpen}
-        title='Создать новый сборник'
-        onClose={() => setIsOpen(false)}
-      >
-        <div className='add-collection__form'>
-          <Input
-            value={title}
-            error={inputError}
-            shouldFocus
-            onChange={handleInputChange}
-            onSave={handleSubmit}
-          >
-            Название
-          </Input>
-          <Button size='medium' icon='br-plus-small' onClick={handleSubmit}>
-            Создать
-          </Button>
-        </div>
-      </Modal>
+      {isOpen && (
+        <Modal title='Создать новый сборник' onClose={() => setIsOpen(false)}>
+          <div className='add-collection__form'>
+            <Input
+              value={title}
+              error={inputError}
+              shouldFocus
+              onChange={handleInputChange}
+              onSave={handleSubmit}
+            >
+              Название
+            </Input>
+            <Button icon='plus-small' variant='accent' onClick={handleSubmit}>
+              Создать
+            </Button>
+          </div>
+        </Modal>
+      )}
     </>
   )
 }

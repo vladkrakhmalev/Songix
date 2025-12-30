@@ -1,0 +1,31 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Unbounded', sans-serif;
+  line-height: 1.5;
+	font-size: 1rem;
+  color: var(--text-primary);
+}
+
+html {
+  background-color: var(--bg-secondary);
+}
+
+._hide {
+  display: none;
+}
+
+h1 {
+  font-size: var(--text-size-big);
+
+  @media (max-width: 768px) {
+    font-size: var(--text-size);
+  }
+}
+
+.message {
+  padding: 10px;
+  text-align: center;
+  color: var(--text-secondary);
+}

@@ -16,21 +16,26 @@ import {
 } from '@features/configurate-songs'
 import { setSpeed, setTonality, setTextSize } from '@features/configurate-songs'
 import { songApi } from '@entities/song'
-import { useParams } from 'react-router-dom'
 import { toggleEditMode } from '@features/edit-song'
 
-export const ConfigurateList: FC = () => {
+interface IProps {
+  songId: string
+  collectionId: string
+}
+
+export const ConfigurateList: FC<IProps> = ({ songId, collectionId }) => {
   const dispatch = useAppDispatch()
+
   const { speed, tonality, textSize } = useAppSelector(
     state => state.configurateSongs
   )
-  const { songId = '', collectionId } = useParams()
+
   const { data: song, isFetching } = songApi.useGetSongByIdQuery(songId)
 
   if (isFetching || !song) return
 
   return (
-    <Popup trigger={<Button color='grey' icon='rr-settings' />} align='right'>
+    <Popup trigger={<Button icon='settings' />} align='right'>
       <div className='configurate-list'>
         <ConfigurateItem icon='rr-tachometer-fastest' title='Скорость'>
           <Counter

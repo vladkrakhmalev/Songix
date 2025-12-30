@@ -19,7 +19,7 @@ interface IInput {
   error?: string
   disabled?: boolean
   className?: string
-  bg?: 'light'
+  variant?: 'primary' | 'secondary'
   shouldFocus?: boolean
   onChange: (value: string) => void
   onSave?: (value: string) => void
@@ -35,7 +35,7 @@ export const Input: FC<IInput> = props => {
     error,
     disabled = false,
     className,
-    bg,
+    variant = 'primary',
     shouldFocus,
     onChange,
     onSave,
@@ -101,7 +101,7 @@ export const Input: FC<IInput> = props => {
     className,
     'input__wrapper',
     error && '_error',
-    bg && '_' + bg,
+    variant && '_' + variant,
     isFocused && '_focused',
     disabled && '_disabled'
   )
@@ -123,29 +123,29 @@ export const Input: FC<IInput> = props => {
 
         {type === 'password' && (
           <Button
-            color='grey'
-            icon={clsx(fieldType === 'password' ? 'rr-eye' : 'rr-eye-crossed')}
-            onClick={togglePassword}
+            icon={clsx(fieldType === 'password' ? 'eye' : 'eye-crossed')}
+            variant='transparent'
             className='input__button'
+            onClick={togglePassword}
           />
         )}
 
         {type === 'search' && defaultValue && (
           <Button
-            color='grey'
-            icon='rr-cross-small'
-            onClick={() => onChange('')}
+            icon='cross-small'
+            variant='transparent'
             className='input__button'
+            onClick={() => onChange('')}
           />
         )}
 
         {type === 'independent' && (
           <Button
-            color='light'
-            icon='rr-disk'
-            onClick={handleSave}
+            icon='disk'
+            variant='transparent'
             disabled={!text}
             className='input__button'
+            onClick={handleSave}
           />
         )}
       </div>

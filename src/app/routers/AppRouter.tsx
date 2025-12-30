@@ -3,12 +3,13 @@ import { LoginPage } from '@pages/login'
 import { RegistrationPage } from '@pages/registration'
 import { NotFoundPage } from '@pages/not-found'
 import { SongPage } from '@pages/song'
-import { AuthLayout } from '@shared/layouts/auth-layout'
-import { MainLayout } from '@shared/layouts/main-layout'
+import { AuthLayout } from '@app/layouts/auth-layout'
+import { MainLayout } from '@app/layouts/main-layout'
 import { CollectionsPage } from '@pages/collections'
-import { Navigation } from '@widgets/navigation'
-import { CollectionSidebar } from '@widgets/collection-sidebar'
+import { CollectionPage } from '@pages/collection'
 import { SongNewPage } from '@pages/song-new'
+
+// TODO: Добавить lazy загрузку страниц
 
 const router = createBrowserRouter([
   {
@@ -32,43 +33,30 @@ const router = createBrowserRouter([
     ],
   },
   {
-    element: <MainLayout sidebar={<Navigation />} />,
+    element: <MainLayout />,
     children: [
       {
         path: '/',
         element: <CollectionsPage />,
-        errorElement: <NotFoundPage />,
       },
       {
         path: '/collections',
         element: <CollectionsPage />,
-        errorElement: <NotFoundPage />,
       },
-      // {
-      //   path: "/profile",
-      //   errorElement: <NotFoundPage/>,
-      // },
-      // {
-      //   path: "/settings",
-      //   errorElement: <NotFoundPage/>,
-      // },
-    ],
-  },
-  {
-    path: '/collections/:collectionId/songs',
-    element: <MainLayout size='big' sidebar={<CollectionSidebar />} />,
-    children: [
+      {
+        path: '/collections/:collectionId/songs',
+        element: <CollectionPage />,
+      },
       {
         path: '/collections/:collectionId/songs/:songId',
         element: <SongPage />,
-        errorElement: <NotFoundPage />,
       },
       {
         path: '/collections/:collectionId/songs/new',
         element: <SongNewPage />,
-        errorElement: <NotFoundPage />,
       },
     ],
+    errorElement: <NotFoundPage />,
   },
 ])
 

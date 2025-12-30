@@ -1,0 +1,10 @@
+export type TIconStyle =
+  | 'rr'
+  | 'rs'
+  | 'sr'
+  | 'bs'
+  | 'ss'
+  | 'br'
+  | 'brands'
+  | 'tr'
+  | 'ts'

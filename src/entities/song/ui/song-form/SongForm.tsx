@@ -1,4 +1,4 @@
-import { FC, ReactNode, useState } from 'react'
+import { FC, useState } from 'react'
 import './SongForm.scss'
 import { EMPTY_SONG_OBJ, ISongEditable } from '@entities/song'
 import { Button } from '@shared/ui/button'
@@ -9,7 +9,6 @@ interface ISongForm {
   initialForm?: ISongEditable
   isLoading?: boolean
   title?: string
-  toggleLayout?: ReactNode
   onSubmit: (form: ISongEditable) => void
   onCancel: () => void
 }
@@ -18,7 +17,6 @@ export const SongForm: FC<ISongForm> = ({
   initialForm = EMPTY_SONG_OBJ,
   isLoading,
   title,
-  toggleLayout,
   onSubmit,
   onCancel,
 }) => {
@@ -34,7 +32,6 @@ export const SongForm: FC<ISongForm> = ({
   return (
     <div className='song-form'>
       <div className='song-form__header'>
-        {toggleLayout}
         {title && <h1 className='song-form__title'>{title}</h1>}
       </div>
       <div className='song-form__container'>
@@ -70,21 +67,19 @@ export const SongForm: FC<ISongForm> = ({
       </div>
 
       <Button
-        size='medium'
-        className='song-form__button'
-        icon='rr-disk'
+        icon='disk'
+        variant='accent'
         disabled={isLoading}
+        className='song-form__button'
         onClick={() => onSubmit(form)}
       >
         Сохарнить
       </Button>
 
       <Button
-        size='medium'
-        className='song-form__button'
-        icon='rr-cross-small'
-        color='light'
+        icon='cross-small'
         disabled={isLoading}
+        className='song-form__button'
         onClick={onCancel}
       >
         Отменить

@@ -2,6 +2,7 @@ import { FC, useState } from 'react'
 import './LikeSong.scss'
 import { ISong, songApi } from '@entities/song'
 import clsx from 'clsx'
+import { Icon } from '@shared/ui/icon'
 
 interface IProps {
   song: ISong
@@ -18,11 +19,13 @@ export const LikeSong: FC<IProps> = ({ song }) => {
   }
 
   return (
-    <i
-      className={clsx('like-song fi fi-sr-heart', {
+    <Icon
+      name='heart'
+      style='sr'
+      className={clsx('like-song', {
         _active: isFavorite,
       })}
       onClick={handleClick}
-    ></i>
+    />
   )
 }

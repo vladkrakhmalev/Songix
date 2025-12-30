@@ -1,46 +1,29 @@
 import './Navigation.scss'
-import { UILink } from '@shared/ui/link'
-import { MouseEvent } from 'react'
-import { LogoutButton } from './LogoutButton'
+import { Button } from '@shared/ui/button'
+
+type TNavigationItem = {
+  link: string
+  icon: string
+  title: string
+}
+
+const NAVIGATION_ITEMS: TNavigationItem[] = [
+  { link: '/collections', icon: 'music-alt', title: 'Сборники' },
+  { link: '/settings', icon: 'settings', title: 'Настройки' },
+] as const
 
 export const Navigation = () => {
-  const links = [
-    // { id: 0, link: '/', icon: 'rr-apps', title: 'Главная' },
-    { id: 1, link: '/collections', icon: 'rr-music-alt', title: 'Сборники' },
-    { id: 2, link: '/profile', icon: 'rr-user', title: 'Профиль', soon: true },
-    {
-      id: 3,
-      link: '/settings',
-      icon: 'rr-settings',
-      title: 'Настройки',
-      soon: true,
-    },
-  ]
-
-  const handleRedirect = (event: MouseEvent, isSoon?: boolean) => {
-    if (isSoon) {
-      event.preventDefault()
-    }
-  }
-
   return (
     <nav className='navigation'>
-      <div className='navigation__header'>
-        <div className='navigation__logo'>Songix</div>
-        <LogoutButton />
-      </div>
-      {links.map(item => (
-        <UILink
-          key={item.id}
-          className='navigation__link'
-          nav={true}
-          to={item.link}
+      {NAVIGATION_ITEMS.map(item => (
+        <Button
+          key={item.link}
+          variant='transparent'
           icon={item.icon}
-          soon={item.soon}
-          onClick={event => handleRedirect(event, item.soon)}
+          to={item.link}
         >
           {item.title}
-        </UILink>
+        </Button>
       ))}
     </nav>
   )

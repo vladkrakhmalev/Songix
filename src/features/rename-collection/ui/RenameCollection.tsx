@@ -6,6 +6,7 @@ import {
   validateCollection,
 } from '@entities/collection'
 import { Input } from '@shared/ui/input'
+import { Button } from '@shared/ui/button'
 
 interface IProps extends React.HTMLAttributes<HTMLDivElement> {
   collection: ICollection
@@ -53,7 +54,6 @@ export const RenameCollection: FC<IProps> = ({ collection }) => {
         value={title}
         error={inputError}
         type='independent'
-        bg='light'
         className='edit-collection__input'
         shouldFocus
         onChange={handleInputChange}
@@ -67,10 +67,7 @@ export const RenameCollection: FC<IProps> = ({ collection }) => {
   return (
     <>
       <h3 className='edit-collection__title'>{title}</h3>
-      <i
-        onClick={handleOpen}
-        className='edit-collection__trigger fi fi-rr-pencil'
-      ></i>
+      <Button icon='pencil' variant='secondary' onClick={handleOpen}></Button>
     </>
   )
 }

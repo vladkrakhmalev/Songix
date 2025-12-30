@@ -1,0 +1,29 @@
+.auth-layout {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  padding: 20px;
+  background-color: var(--bg-secondary);
+  
+  &__container {
+    display: grid;
+    gap: 20px;
+    background-color: var(--bg-primary);
+    padding: 20px;
+    border-radius: 20px;
+    width: 500px;
+    box-shadow: var(--shadow-primary);
+
+    @media (max-width: 768px) {
+      width: 100%;
+    }
+  }
+
+  &__logo {
+    font-size: var(--text-size-big);
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--text-primary);
+  }
+}

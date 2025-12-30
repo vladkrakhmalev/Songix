@@ -1,1 +1,0 @@
-export { CollectionSidebar } from './ui/CollectionSidebar'

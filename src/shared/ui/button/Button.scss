@@ -1,88 +1,63 @@
 .button {
   border: none;
-  padding: 15px 30px;
-  border-radius: 10px;
-  font-weight: 400;
-  transition: .2s;
-  outline: none;
-  background-color: var( --color-primary);
-  font-size: var(--text-size);
-  color: var(--color-secondary);
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
   display: flex;
   align-items: center;
-  gap: 10px;
   justify-content: center;
+  gap: 0.35rem;
+  font-weight: 500;
+  color: var(--text-white);
+  background: var(--color-primary);
+  transition: color 0.2s ease, background 0.2s ease, border 0.2s ease, opacity 0.2s ease;
+}
 
-  &._icon {
-    padding: 10px;
-  }
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
 
-  &._small._icon {
-    padding: 5px;
-  }
+.button:not(:disabled):hover {
+  cursor: pointer;
+  opacity: .7;
+}
 
-  &._light {
-    background-color: var(--bg-blue-light);
-    color: var(--text-primary);
+.button._primary {
+  background-color: var(--bg-secondary);
+  color: var(--color-primary);
+}
 
-    .button__icon {
-      color: var(--text-primary);
-    }
-  }
+.button._secondary {
+  background-color: var(--bg-primary);
+  color: var(--color-primary);
+}
 
-  &._grey {
-    background-color: var(--bg-secondary);
-    color: var(--text-primary);
+.button._transparent {
+  background-color: transparent;
+  color: var(--text-primary);
+}
 
-    .button__icon {
-      color: var(--text-primary);
-    }
-  }
+.button._transparent:not(:disabled):hover {
+  opacity: 0.5;
+}
 
-  &._red {
-    background-color: var(--color-error);
-    color: var(--color-secondary);
+.button._danger {
+  background-color: var(--bg-negative);
+}
 
-    .button__icon {
-      color: var(--color-secondary);
-    }
-  }
-  
-  &._white {
-    background-color: var(--bg-primary);
-    color: var(--text-primary);
-  }
+.button._big {
+  padding: 0.75rem 1.5rem;
+}
 
-  &._small {
-    padding: 12px 10px;
-    line-height: 1;
-    border-radius: 5px;
-  }
+.button._small {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+}
 
-  &._medium {
-    padding: 12px 10px;
-    line-height: 1;
-  }
+.button._only-icon {
+  padding: 0.5rem;
+}
 
-  &:disabled {
-    background-color: var(--color-secondary);
-    color: var(--text-light);
-  }
-
-  &:not(:disabled):hover {
-    cursor: pointer;
-    // transform: scale(1.03);
-    opacity: .7;
-  }
-
-  &__icon {
-    display: block;
-		color: var(--color-secondary);
-    line-height: 1;
-    font-size: 20px;
-	}
-
-  &._small &__icon {
-    font-size: 18px;
-	}
+.button._big._only-icon {
+  padding: 0.75rem;
 }

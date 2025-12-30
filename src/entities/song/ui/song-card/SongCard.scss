@@ -20,15 +20,3 @@
     }
   }
 }
-
-.transition-entering .song-card {
-  opacity: 0;
-}
-
-.transition-entered .song-card {
-  opacity: 1;
-}
-
-.transition-exiting .song-card {
-  opacity: 0;
-}

@@ -1,53 +1,63 @@
-import './Button.scss'
-import { FC, MouseEvent } from 'react'
 import clsx from 'clsx'
+import './Button.scss'
+import { Icon, TIconStyle } from '@shared/ui/icon'
 import { useNavigate } from 'react-router-dom'
+import { MouseEvent } from 'react'
 
-interface IButton {
-  color?: 'light' | 'grey' | 'red' | 'white' | null
-  size?: 'small' | 'medium'
-  children?: string
-  disabled?: boolean
-  className?: string
+type TProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
+  variant?: 'accent' | 'primary' | 'secondary' | 'transparent' | 'danger'
+  size?: 'small' | 'big'
   icon?: string
+  iconStyle?: TIconStyle
   to?: string
-  onClick?: (event: MouseEvent) => void
+  shouldIconBehindText?: boolean
 }
 
-export const Button: FC<IButton> = props => {
-  const {
-    children,
-    className,
-    disabled = false,
-    onClick,
-    icon,
-    color,
-    size,
-    to,
-  } = props
-
+export function Button({
+  disabled,
+  variant = 'primary',
+  type = 'button',
+  size,
+  children,
+  className,
+  icon,
+  iconStyle,
+  to,
+  shouldIconBehindText,
+  onClick,
+  ...props
+}: TProps) {
   const navigate = useNavigate()
 
-  const handlerClick = () => {
-    if (to) navigate(to)
-  }
-
-  const buttonClass = clsx(
+  const classes = clsx(
     'button',
-    className,
-    color && '_' + color,
+    variant && '_' + variant,
     size && '_' + size,
-    icon && !children && '_icon'
+    { '_only-icon': !children && icon },
+    className
   )
+
+  function handleClick(event: MouseEvent<HTMLButtonElement>) {
+    if (to) {
+      navigate(to)
+    } else {
+      onClick?.(event)
+    }
+  }
 
   return (
     <button
-      className={buttonClass}
+      type={type}
       disabled={disabled}
-      onClick={to ? handlerClick : onClick}
+      className={classes}
+      {...props}
+      onClick={handleClick}
     >
-      {icon && <i className={'button__icon fi fi-' + icon}></i>}
+      {icon && !shouldIconBehindText && <Icon name={icon} style={iconStyle} />}
+
       {children}
+
+      {icon && shouldIconBehindText && <Icon name={icon} style={iconStyle} />}
     </button>
   )
 }
