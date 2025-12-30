@@ -29,16 +29,3 @@
     grid-column: span 1;
   }
 }
-
-
-.transition-entering .song-form {
-  opacity: 0;
-}
-
-.transition-entered .song-form {
-  opacity: 1;
-}
-
-.transition-exiting .song-form {
-  opacity: 0;
-}

@@ -1,6 +1,5 @@
 import { useState, useMemo, useEffect, ChangeEvent } from 'react'
 import './Select.scss'
-import { Transition } from '@shared/lib/transition'
 import clsx from 'clsx'
 import { useOutsideClick } from '@shared/hooks'
 
@@ -92,7 +91,7 @@ export const Select = <T extends string>({
         <i className={selectIconClass}></i>
       </div>
 
-      <Transition in={isOpen}>
+      {isOpen && (
         <div className='select__options'>
           {optionsTitle && (
             <div className='select__options-title'>{optionsTitle}</div>
@@ -115,7 +114,7 @@ export const Select = <T extends string>({
             <div className='select__options-message'>Список пуст</div>
           )}
         </div>
-      </Transition>
+      )}
     </div>
   )
 }

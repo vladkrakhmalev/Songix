@@ -3,7 +3,6 @@ import './CollectionSelect.scss'
 import { collectionApi } from '../../api/collectionApi'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Select } from '@shared/ui/select'
-import { Transition } from '@shared/lib/transition'
 
 export const CollectionSelect: FC = () => {
   const navigate = useNavigate()
@@ -34,14 +33,16 @@ export const CollectionSelect: FC = () => {
         className='collection-select__skeleton'
       /> */}
 
-      <Transition in={!isLoading} className='collection-select__transition'>
-        <Select
-          options={collectionItems}
-          value={aciveCollectionId}
-          optionsTitle='Ваши сборники:'
-          onChange={handlerChange}
-        />
-      </Transition>
+      {!isLoading && (
+        <div className='collection-select__transition'>
+          <Select
+            options={collectionItems}
+            value={aciveCollectionId}
+            optionsTitle='Ваши сборники:'
+            onChange={handlerChange}
+          />
+        </div>
+      )}
     </div>
   )
 }

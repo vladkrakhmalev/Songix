@@ -7,7 +7,6 @@ import {
   ICollection,
 } from '@entities/collection'
 import { RenameCollection } from '@features/rename-collection'
-import { TransitionList } from '@shared/lib/transition'
 import { DeleteCollection } from '@features/delete-collection'
 
 export const CollectionList: FC = () => {
@@ -28,14 +27,23 @@ export const CollectionList: FC = () => {
 
   return (
     <div className='collection-list'>
-      <TransitionList
-        items={collections}
-        isLoading={isLoading}
-        className='collection-list__items'
-        preloadItem={<CollectionCardSkeleton />}
-        renderItem={renderCollectionItem}
-        renderKey={collection => collection.id}
-      />
+      {isLoading && (
+        <div className='collection-list__items'>
+          {Array.from({ length: 5 }, (_, index) => (
+            <div key={`preload-${index}`}>
+              <CollectionCardSkeleton />
+            </div>
+          ))}
+        </div>
+      )}
+
+      {!isLoading && (
+        <div className='collection-list__items'>
+          {collections.map(collection => (
+            <div key={collection.id}>{renderCollectionItem(collection)}</div>
+          ))}
+        </div>
+      )}
     </div>
   )
 }

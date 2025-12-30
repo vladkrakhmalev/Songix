@@ -37,15 +37,3 @@
     color: var(--text-secondary);
   }
 }
-
-.transition-entering .song-content {
-  opacity: 0;
-}
-
-.transition-entered .song-content {
-  opacity: 1;
-}
-
-.transition-exiting .song-content {
-  opacity: 0;
-}

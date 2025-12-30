@@ -39,33 +39,3 @@
     font-size: 20px;
   }
 }
-
-.transition-entering {
-  .modal__overlay {
-    opacity: 0;
-  }
-
-  .modal__content {
-    transform: scale(.9);
-  }
-}
-
-.transition-entered {
-  .modal__overlay {
-    opacity: 1;
-  }
-
-  .modal__content {
-    transform: scale(1);
-  }
-}
-
-.transition-exiting {
-  .modal__overlay {
-    opacity: 0;
-  }
-
-  .modal__content {
-    transform: scale(.9);
-  }
-}

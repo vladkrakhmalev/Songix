@@ -134,27 +134,3 @@
     }
   }
 }
-
-.transition-entering {
-  .select__options {
-    visibility: hidden;
-    opacity: 0;
-    transform: translateY(-5px) scale(.95);
-  }
-}
-
-.transition-entered {
-  .select__options {
-    visibility: visible;
-    opacity: 1;
-    transform: translateY(5px);
-  }
-}
-
-.transition-exiting {
-  .select__options {
-    visibility: hidden;
-    opacity: 0;
-    transform: translateY(-5px) scale(.95);
-  }
-}

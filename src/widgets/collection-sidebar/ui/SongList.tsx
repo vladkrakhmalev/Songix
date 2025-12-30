@@ -7,7 +7,6 @@ import {
   useActiveCategoriesSelector,
   useSearchSelector,
 } from '@features/filter-songs'
-import { TransitionList } from '@shared/lib/transition'
 
 export const SongList: FC = () => {
   const { collectionId = '' } = useParams()
@@ -36,16 +35,25 @@ export const SongList: FC = () => {
 
   return (
     <div className='song-list'>
-      <TransitionList
-        items={filterSongs}
-        isLoading={isLoading}
-        className='song-list__items'
-        preloadItem={<SongCardSkeleton />}
-        renderItem={song => (
-          <SongCard song={song} likeSong={<LikeSong song={song} />} />
-        )}
-        renderKey={song => song.id}
-      />
+      {isLoading && (
+        <div className='song-list__items'>
+          {Array.from({ length: 5 }, (_, index) => (
+            <div key={`preload-${index}`}>
+              <SongCardSkeleton />
+            </div>
+          ))}
+        </div>
+      )}
+
+      {!isLoading && (
+        <div className='song-list__items'>
+          {filterSongs.map(song => (
+            <div key={song.id}>
+              <SongCard song={song} likeSong={<LikeSong song={song} />} />
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   )
 }

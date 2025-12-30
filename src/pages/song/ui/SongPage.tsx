@@ -13,7 +13,6 @@ import {
 import { useParams } from 'react-router-dom'
 import { ConfigurateList } from '@widgets/configurate-list'
 import { EditSongForm, useIsEditModeSelector } from '@features/edit-song'
-import { Transition } from '@shared/lib/transition'
 
 export const SongPage: FC = () => {
   const { speed, textSize } = useAppSelector(state => state.configurateSongs)
@@ -36,28 +35,24 @@ export const SongPage: FC = () => {
 
   return (
     <div className={clsx('song-page', isFullSize && '_full')} ref={songPageRef}>
-      <Transition in={isEditMode}>
-        <EditSongForm song={song!} />
-      </Transition>
+      {isEditMode && <EditSongForm song={song!} />}
 
-      <Transition in={!isEditMode}>
-        <Transition in={isLoading}>
-          <SongContentSkeleton />
-        </Transition>
+      {!isEditMode && (
+        <>
+          {isLoading && <SongContentSkeleton />}
 
-        <Transition in={!song && !isLoading}>
-          <SongContentEmtpy />
-        </Transition>
+          {!song && !isLoading && <SongContentEmtpy />}
 
-        <Transition in={!!song && !isLoading}>
-          <SongContent
-            song={song!}
-            textSize={textSize}
-            configurate={<ConfigurateList />}
-            actionButtons={actionButtons}
-          />
-        </Transition>
-      </Transition>
+          {!!song && !isLoading && (
+            <SongContent
+              song={song!}
+              textSize={textSize}
+              configurate={<ConfigurateList />}
+              actionButtons={actionButtons}
+            />
+          )}
+        </>
+      )}
     </div>
   )
 }
