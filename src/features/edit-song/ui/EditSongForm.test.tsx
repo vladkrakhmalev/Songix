@@ -43,7 +43,7 @@ describe('EditSongForm', () => {
 
     await userEvent.clear(screen.getByPlaceholderText('Название'))
     await userEvent.type(screen.getByPlaceholderText('Название'), 'Новая')
-    await userEvent.click(screen.getByRole('button', { name: 'Сохарнить' }))
+    await userEvent.click(screen.getByRole('button', { name: 'Сохранить' }))
 
     expect(updateSongMock).toHaveBeenCalledWith({
       id: song.id,

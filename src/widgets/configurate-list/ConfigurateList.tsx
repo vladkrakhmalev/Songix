@@ -19,6 +19,7 @@ import {
 import { setSpeed, setTonality, setTextSize } from '@features/configurate-songs'
 import { songApi } from '@entities/song'
 import { toggleEditMode } from '@features/edit-song'
+import { useTranslation } from 'react-i18next'
 
 interface IProps {
   songId: string
@@ -26,6 +27,7 @@ interface IProps {
 }
 
 export function ConfigurateList({ songId, collectionId }: IProps) {
+  const { t } = useTranslation()
   const dispatch = useAppDispatch()
 
   const speed = useAppSelector(selectSpeed)
@@ -39,21 +41,21 @@ export function ConfigurateList({ songId, collectionId }: IProps) {
   return (
     <Popup trigger={<Button icon='settings' />} align='right'>
       <div className='configurate-list'>
-        <ConfigurateItem icon='rr-tachometer-fastest' title='Скорость'>
+        <ConfigurateItem icon='rr-tachometer-fastest' title={t('Speed')}>
           <Counter
             values={SPEED_ARRAY}
             default={speed}
             onChange={item => dispatch(setSpeed(item))}
           />
         </ConfigurateItem>
-        <ConfigurateItem icon='rr-music-note' title='Тональность'>
+        <ConfigurateItem icon='rr-music-note' title={t('Tonality')}>
           <Counter
             values={TONALITY_ARRAY}
             default={tonality}
             onChange={item => dispatch(setTonality(item))}
           />
         </ConfigurateItem>
-        <ConfigurateItem icon='rr-text-size' title='Размер'>
+        <ConfigurateItem icon='rr-text-size' title={t('Size')}>
           <Counter
             values={TEXT_SIZE_ARRAY}
             default={textSize}
@@ -63,7 +65,7 @@ export function ConfigurateList({ songId, collectionId }: IProps) {
         <CopySongLink />
         <ConfigurateItem
           icon='rr-pencil'
-          title='Редактировать'
+          title={t('Edit')}
           onClick={() => dispatch(toggleEditMode())}
         />
         <DeleteSong song={song} collectionId={collectionId} />

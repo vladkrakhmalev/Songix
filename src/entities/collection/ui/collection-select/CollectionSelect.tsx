@@ -4,8 +4,10 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { Select } from '@shared/ui/select'
 import { Skeleton } from '@shared/ui/skeleton'
 import { routes } from '@infra/router'
+import { useTranslation } from 'react-i18next'
 
 export function CollectionSelect() {
+  const { t } = useTranslation()
   const navigate = useNavigate()
   const { collectionId = '' } = useParams()
 
@@ -33,7 +35,7 @@ export function CollectionSelect() {
     <Select
       options={collectionItems}
       value={aciveCollectionId}
-      optionsTitle='Ваши сборники:'
+      optionsTitle={t('Your collections:')}
       onChange={handlerChange}
     />
   )

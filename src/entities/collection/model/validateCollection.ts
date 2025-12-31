@@ -1,6 +1,7 @@
+import i18next from 'i18next'
+
 export function validateCollection(name: string) {
   if (!name.length) {
-    return 'Название должно быть заполнено'
+    return i18next.t('Title is required')
   }
-  return undefined
 }

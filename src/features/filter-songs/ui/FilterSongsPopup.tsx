@@ -8,8 +8,10 @@ import { CategoryCard } from '@entities/category'
 import { ICategory } from '@entities/category'
 import { Popup } from '@shared/ui/popup'
 import { selectCategories } from '../model/filterSongs.selectors'
+import { useTranslation } from 'react-i18next'
 
 export function FilterSongsPopup() {
+  const { t } = useTranslation()
   const dispatch = useAppDispatch()
   const categories = useAppSelector(selectCategories)
 
@@ -37,7 +39,7 @@ export function FilterSongsPopup() {
     <div className='filter-songs__popup'>
       <Popup trigger={triggerButton}>
         <div className='filter-songs__categories'>
-          <p className='filter-songs__title'>Категории</p>
+          <p className='filter-songs__title'>{t('Categories')}</p>
           {categoriesList}
         </div>
       </Popup>

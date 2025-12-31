@@ -7,8 +7,11 @@ import { Popup } from '@shared/ui/popup'
 import { PRIVACY_POLICY_TEXT } from '@shared/config/privacy-policy'
 import { authApi } from '@entities/auth'
 import { routes } from '@infra/router'
+import { useTranslation } from 'react-i18next'
+import { NAMESPACES } from '@infra/translations'
 
 export function RegistrationForm() {
+  const { t } = useTranslation(NAMESPACES.auth)
   const navigate = useNavigate()
   const [register] = authApi.useRegisterMutation()
 
@@ -37,12 +40,12 @@ export function RegistrationForm() {
   }
 
   const privacyPolicyTrigger = (
-    <div className='registration-form__link'>пользовательского соглашения</div>
+    <div className='registration-form__link'>{t('user agreement')}</div>
   )
 
   const helpText = (
     <p className='registration-form__message'>
-      Нажимая «Зарегистироваться», вы принимаете следующие условия
+      {t('By clicking "Sign up", you accept the terms of the')}{' '}
       <Popup size='full' trigger={privacyPolicyTrigger}>
         <div
           className='registration-form__pre'
@@ -58,7 +61,7 @@ export function RegistrationForm() {
         value={form.email}
         onChange={value => handlerChange('email', value)}
       >
-        Email
+        {t('Email')}
       </Input>
 
       <Input
@@ -66,7 +69,7 @@ export function RegistrationForm() {
         value={form.password}
         onChange={value => handlerChange('password', value)}
       >
-        Пароль
+        {t('Password')}
       </Input>
 
       <Input
@@ -74,7 +77,7 @@ export function RegistrationForm() {
         value={form.repeatPassword}
         onChange={value => handlerChange('repeatPassword', value)}
       >
-        Повторите пароль
+        {t('Repeat password')}
       </Input>
 
       {error && <p className='registration-form__error'>{error}</p>}
@@ -82,7 +85,7 @@ export function RegistrationForm() {
       {helpText}
 
       <Button disabled={idDisabled} type='submit'>
-        Зарегистироваться
+        {t('Sign up')}
       </Button>
     </form>
   )

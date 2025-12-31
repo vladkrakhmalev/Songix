@@ -1,4 +1,5 @@
 import { Button } from '@shared/ui/button'
+import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 
 interface IProps {
@@ -6,6 +7,7 @@ interface IProps {
 }
 
 export function BackButton({ to }: IProps) {
+  const { t } = useTranslation()
   const navigate = useNavigate()
 
   function handleClick() {
@@ -18,7 +20,7 @@ export function BackButton({ to }: IProps) {
 
   return (
     <Button icon='arrow-small-left' size='small' onClick={handleClick}>
-      Назад
+      {t('Back')}
     </Button>
   )
 }

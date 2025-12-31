@@ -6,8 +6,11 @@ import { authApi } from '@entities/auth'
 import { useNavigate } from 'react-router-dom'
 import { GoogleLoginButton } from './GoogleLoginButton'
 import { routes } from '@infra/router'
+import { useTranslation } from 'react-i18next'
+import { NAMESPACES } from '@infra/translations'
 
 export function LoginForm() {
+  const { t } = useTranslation(NAMESPACES.auth)
   const navigate = useNavigate()
   const [login, { isLoading }] = authApi.useLoginMutation()
 
@@ -22,7 +25,7 @@ export function LoginForm() {
     const response = await login(form)
 
     if (response.error) {
-      setError('Неверный email или пароль')
+      setError(t('Invalid email or password'))
     } else {
       navigate(routes.collections())
     }
@@ -40,7 +43,7 @@ export function LoginForm() {
         onChange={value => handlerChange('email', value)}
         disabled={isLoading}
       >
-        Email
+        {t('Email')}
       </Input>
 
       <Input
@@ -49,13 +52,13 @@ export function LoginForm() {
         onChange={value => handlerChange('password', value)}
         disabled={isLoading}
       >
-        Пароль
+        {t('Password')}
       </Input>
 
       {error && <p className='login-form__error'>{error}</p>}
 
       <Button disabled={idDisabled} onClick={handlerSubmit}>
-        Войти
+        {t('Sign in')}
       </Button>
 
       <GoogleLoginButton />

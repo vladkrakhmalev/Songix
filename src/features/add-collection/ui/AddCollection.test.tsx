@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event'
 import { screen } from '@testing-library/react'
 import { AddCollection } from './AddCollection'
 import { renderWithProviders } from '@shared/tests/test-utils'
+import i18next from 'i18next'
 
 const addCollectionMock = vi.fn()
 
@@ -35,7 +36,9 @@ describe('AddCollection', () => {
     await userEvent.click(createButton)
 
     expect(
-      await screen.findByText('* Название должно быть заполнено')
+      await screen.findByText(i18next.t('Title is required'), {
+        exact: false,
+      })
     ).toBeInTheDocument()
     expect(addCollectionMock).not.toHaveBeenCalled()
   })

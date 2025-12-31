@@ -7,8 +7,10 @@ import {
 import { RenameCollection } from '@features/rename-collection'
 import { DeleteCollection } from '@features/delete-collection'
 import { SKELETON_ARRAY } from '@shared/ui/skeleton'
+import { useTranslation } from 'react-i18next'
 
 export function CollectionList() {
+  const { t } = useTranslation()
   const { data: collections = [], isLoading } =
     collectionApi.useGetCollectionsQuery()
 
@@ -23,7 +25,7 @@ export function CollectionList() {
   }
 
   if (!collections.length) {
-    return <p className='collection-list__message'>Cборников нет</p>
+    return <p className='collection-list__message'>{t('No collections yet')}</p>
   }
 
   return (

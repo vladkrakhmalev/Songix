@@ -1,12 +1,14 @@
 import { ISongEditable, songApi, SongForm } from '@entities/song'
 import { useNavigate } from 'react-router-dom'
 import { routes } from '@infra/router'
+import { useTranslation } from 'react-i18next'
 
 interface IProps {
   collectionId: string
 }
 
 export function AddSongForm({ collectionId }: IProps) {
+  const { t } = useTranslation()
   const navigate = useNavigate()
 
   const [addSong, { isLoading }] = songApi.useAddSongMutation()
@@ -27,7 +29,7 @@ export function AddSongForm({ collectionId }: IProps) {
 
   return (
     <SongForm
-      title='Добавить песню'
+      title={t('Add song')}
       isLoading={isLoading}
       onSubmit={handleSubmit}
       onCancel={() => navigateToSongs()}

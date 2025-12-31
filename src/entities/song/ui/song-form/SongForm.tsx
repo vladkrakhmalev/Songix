@@ -4,6 +4,7 @@ import { EMPTY_SONG_OBJ, ISongEditable } from '@entities/song'
 import { Button } from '@shared/ui/button'
 import { Input } from '@shared/ui/input'
 import { Textarea } from '@shared/ui/textarea'
+import { useTranslation } from 'react-i18next'
 
 interface ISongForm {
   initialForm?: ISongEditable
@@ -20,6 +21,7 @@ export function SongForm({
   onSubmit,
   onCancel,
 }: ISongForm) {
+  const { t } = useTranslation()
   const [form, setForm] = useState<ISongEditable>(initialForm)
 
   function handleChange(field: keyof ISongEditable, value?: string | string[]) {
@@ -39,7 +41,7 @@ export function SongForm({
           className='song-form__button'
           onClick={() => onSubmit(form)}
         >
-          Сохарнить
+          {t('Save')}
         </Button>
 
         <Button
@@ -49,7 +51,7 @@ export function SongForm({
           className='song-form__button'
           onClick={onCancel}
         >
-          Отменить
+          {t('Cancel')}
         </Button>
       </div>
 
@@ -58,13 +60,13 @@ export function SongForm({
           value={form.title}
           onChange={value => handleChange('title', value)}
         >
-          Название
+          {t('Title')}
         </Input>
 
         {/* <Select
           options={CATEGORIES}
           value={form.categories}
-          placeholder='Категории'
+          placeholder={t('Categories')}
           isMultiselect
           className='song-form__column'
           onChange={value => handleChange('categories', value)}
@@ -73,14 +75,14 @@ export function SongForm({
         {/* <Select
           options={TONALITIES}
           value='C'
-          placeholder='Тональность'
+          placeholder={t('Tonality')}
           className='song-form__column'
           onChange={value => handleChange('tonalities', value)}
         /> */}
 
         <Textarea
           value={form.text}
-          placeholder='Текст'
+          placeholder={t('Text')}
           onChange={value => handleChange('text', value)}
         />
       </div>

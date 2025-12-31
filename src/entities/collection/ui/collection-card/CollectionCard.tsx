@@ -3,6 +3,7 @@ import './CollectionCard.scss'
 import { ICollection } from '../../model/collectionType'
 import { useNavigate } from 'react-router-dom'
 import { routes } from '@infra/router'
+import { useTranslation } from 'react-i18next'
 
 interface IProps {
   collection: ICollection
@@ -15,6 +16,7 @@ export function CollectionCard({
   deleteCollection,
   editCollection,
 }: IProps) {
+  const { t } = useTranslation()
   const navigate = useNavigate()
 
   function handleRedirect() {
@@ -29,7 +31,9 @@ export function CollectionCard({
         {editCollection}
         {deleteCollection}
       </div>
-      <p className='collection-card__count'>Песен: {collection.songsCount}</p>
+      <p className='collection-card__count'>
+        {t('Songs: {{value}}', { value: collection.songsCount })}
+      </p>
     </div>
   )
 }

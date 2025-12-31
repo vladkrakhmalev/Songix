@@ -7,12 +7,14 @@ import {
 } from '@entities/collection'
 import { Input } from '@shared/ui/input'
 import { Button } from '@shared/ui/button'
+import { useTranslation } from 'react-i18next'
 
 interface IProps extends React.HTMLAttributes<HTMLDivElement> {
   collection: ICollection
 }
 
 export function RenameCollection({ collection }: IProps) {
+  const { t } = useTranslation()
   const [renameCollection] = collectionApi.useUpdateCollectionMutation()
 
   const [isEdit, setIsEdit] = useState<boolean>(false)
@@ -61,7 +63,7 @@ export function RenameCollection({ collection }: IProps) {
         onSave={handleSave}
         onBlur={handleCancel}
       >
-        Название
+        {t('Title')}
       </Input>
     )
 

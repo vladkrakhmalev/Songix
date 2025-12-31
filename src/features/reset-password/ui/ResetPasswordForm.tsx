@@ -2,8 +2,11 @@ import { Button } from '@shared/ui/button'
 import { Input } from '@shared/ui/input'
 import { useState } from 'react'
 import './ResetPasswordForm.scss'
+import { useTranslation } from 'react-i18next'
+import { NAMESPACES } from '@infra/translations'
 
 export function ResetPasswordForm() {
+  const { t } = useTranslation(NAMESPACES.auth)
   const [form, setForm] = useState({ email: '' })
   const [error, setError] = useState<string>('')
   const idDisabled = error ? true : false
@@ -30,10 +33,12 @@ export function ResetPasswordForm() {
         value={form.email}
         onChange={value => handlerChange('email', value)}
       >
-        Email
+        {t('Email')}
       </Input>
+
       {error && <p className='reset-password-form__error'>{error}</p>}
-      <Button disabled={idDisabled}>Восстановить пароль</Button>
+
+      <Button disabled={idDisabled}>{t('Recover password')}</Button>
     </form>
   )
 }

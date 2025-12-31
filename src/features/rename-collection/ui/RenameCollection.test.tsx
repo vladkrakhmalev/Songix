@@ -4,6 +4,7 @@ import { screen } from '@testing-library/react'
 import { RenameCollection } from './RenameCollection'
 import { renderWithProviders } from '@shared/tests/test-utils'
 import type { ICollection } from '@entities/collection'
+import i18next from 'i18next'
 
 const renameMock = vi.fn()
 
@@ -41,7 +42,9 @@ describe('RenameCollection', () => {
     await userEvent.keyboard('{Enter}')
 
     expect(
-      await screen.findByText('* Название должно быть заполнено')
+      await screen.findByText(i18next.t('Title is required'), {
+        exact: false,
+      })
     ).toBeInTheDocument()
     expect(renameMock).not.toHaveBeenCalled()
   })

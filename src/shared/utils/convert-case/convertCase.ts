@@ -7,21 +7,19 @@ function snakeToCamel(str: string): string {
 }
 
 /**
- * Универсальная функция для рекурсивного преобразования ключей объекта
- * между snake_case и camelCase.
+ * Universal function for recursively converting object keys
+ * between snake_case and camelCase.
  *
- * @param obj - исходный объект (или массив)
- * @param mode - режим конвертации: 'snake' или 'camel'
+ * @param obj - source object (or array)
+ * @param mode - conversion mode: 'snake' or 'camel'
  */
 export function convertKeys<T>(obj: T, mode: 'snake' | 'camel'): T {
   const convertKey = mode === 'snake' ? camelToSnake : snakeToCamel
 
-  // Обработка массивов
   if (Array.isArray(obj)) {
     return obj.map(item => convertKeys(item, mode)) as T
   }
 
-  // Обработка объектов
   if (obj && typeof obj === 'object' && obj.constructor === Object) {
     const entries = Object.entries(obj as Record<string, unknown>)
 

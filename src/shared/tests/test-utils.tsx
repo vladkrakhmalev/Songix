@@ -5,6 +5,8 @@ import { Provider } from 'react-redux'
 import { configureStore } from '@reduxjs/toolkit'
 import { MemoryRouter, MemoryRouterProps } from 'react-router-dom'
 import { ThemeProvider } from '@infra/theme'
+import { I18nextProvider } from 'react-i18next'
+import { testI18n } from '@infra/translations/config/testI18n'
 import { collectionApi } from '@entities/collection'
 import { songApi } from '@entities/song'
 import { authApi } from '@entities/auth'
@@ -51,7 +53,9 @@ function Wrapper({
   return (
     <Provider store={store}>
       <MemoryRouter initialEntries={route}>
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <I18nextProvider i18n={testI18n}>{children}</I18nextProvider>
+        </ThemeProvider>
       </MemoryRouter>
     </Provider>
   )

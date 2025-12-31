@@ -1,8 +1,10 @@
 import './CopySongLink.scss'
 import { ConfigurateItem } from '../configurate-item'
 import { useLocation } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 export function CopySongLink() {
+  const { t } = useTranslation()
   const location = useLocation()
 
   function handleCopy() {
@@ -14,7 +16,7 @@ export function CopySongLink() {
     <>
       <ConfigurateItem
         icon='rr-share'
-        title='Поделиться'
+        title={t('Share')}
         onClick={handleCopy}
       />
     </>

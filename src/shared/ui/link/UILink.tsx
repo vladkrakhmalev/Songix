@@ -7,20 +7,15 @@ interface IUILink extends React.HTMLAttributes<HTMLAnchorElement> {
   children?: string
   icon?: string
   nav?: boolean
-  soon?: boolean
   className?: string
 }
 
 export function UILink(props: IUILink) {
-  const { to, children, icon, nav, soon, className, ...rest } = props
+  const { to, children, icon, nav, className, ...rest } = props
 
   if (nav)
     return (
-      <NavLink
-        className={clsx('link', className, soon && '_soon')}
-        to={to}
-        {...rest}
-      >
+      <NavLink className={clsx('link', className)} to={to} {...rest}>
         {icon && <i className={'link__icon fi fi-' + icon}></i>}
         {children}
       </NavLink>

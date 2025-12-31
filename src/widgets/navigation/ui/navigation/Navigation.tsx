@@ -1,6 +1,7 @@
 import './Navigation.scss'
 import { Button } from '@shared/ui/button'
 import { routes } from '@infra/router'
+import { useTranslation } from 'react-i18next'
 
 type TNavigationItem = {
   link: string
@@ -8,15 +9,17 @@ type TNavigationItem = {
   title: string
 }
 
-const NAVIGATION_ITEMS: TNavigationItem[] = [
-  { link: routes.collections(), icon: 'music-alt', title: 'Сборники' },
-  { link: routes.settings(), icon: 'settings', title: 'Настройки' },
-] as const
-
 export function Navigation() {
+  const { t } = useTranslation()
+
+  const navigationItems: TNavigationItem[] = [
+    { link: routes.collections(), icon: 'music-alt', title: t('Collections') },
+    { link: routes.settings(), icon: 'settings', title: t('Settings') },
+  ] as const
+
   return (
     <nav className='navigation'>
-      {NAVIGATION_ITEMS.map(item => (
+      {navigationItems.map(item => (
         <Button
           key={item.link}
           icon={item.icon}

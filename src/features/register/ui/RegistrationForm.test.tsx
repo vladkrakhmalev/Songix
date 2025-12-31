@@ -4,6 +4,8 @@ import { screen, waitFor } from '@testing-library/react'
 import { RegistrationForm } from './RegistrationForm'
 import { renderWithProviders } from '@shared/tests/test-utils'
 import { routes } from '@infra/router'
+import i18next from 'i18next'
+import { NAMESPACES } from '@infra/translations'
 
 const registerMock = vi.fn()
 const navigateMock = vi.fn()
@@ -42,10 +44,20 @@ describe('RegistrationForm', () => {
   })
 
   const fillForm = async () => {
-    await userEvent.type(screen.getByPlaceholderText('Email'), 'user@mail.com')
-    await userEvent.type(screen.getByPlaceholderText('Пароль'), 'secret123')
     await userEvent.type(
-      screen.getByPlaceholderText('Повторите пароль'),
+      screen.getByPlaceholderText(i18next.t('Email', { ns: NAMESPACES.auth })),
+      'user@mail.com'
+    )
+    await userEvent.type(
+      screen.getByPlaceholderText(
+        i18next.t('Password', { ns: NAMESPACES.auth })
+      ),
+      'secret123'
+    )
+    await userEvent.type(
+      screen.getByPlaceholderText(
+        i18next.t('Repeat password', { ns: NAMESPACES.auth })
+      ),
       'secret123'
     )
   }
@@ -57,7 +69,9 @@ describe('RegistrationForm', () => {
     renderWithProviders(<RegistrationForm />)
     await fillForm()
     await userEvent.click(
-      screen.getByRole('button', { name: 'Зарегистироваться' })
+      screen.getByRole('button', {
+        name: i18next.t('Sign up', { ns: NAMESPACES.auth }),
+      })
     )
 
     expect(navigateMock).toHaveBeenCalledWith(routes.collections())
@@ -70,7 +84,9 @@ describe('RegistrationForm', () => {
     const { container } = renderWithProviders(<RegistrationForm />)
     await fillForm()
     await userEvent.click(
-      screen.getByRole('button', { name: 'Зарегистироваться' })
+      screen.getByRole('button', {
+        name: i18next.t('Sign up', { ns: NAMESPACES.auth }),
+      })
     )
 
     await waitFor(() => {

@@ -2,6 +2,7 @@ import { useState, useMemo, useEffect, ChangeEvent } from 'react'
 import './Select.scss'
 import clsx from 'clsx'
 import { useOutsideClick } from '@shared/hooks'
+import { useTranslation } from 'react-i18next'
 
 export interface ISelectOption<T extends string> {
   label: string
@@ -27,6 +28,7 @@ export function Select<T extends string>({
   optionsTitle,
   onChange,
 }: IProps<T>) {
+  const { t } = useTranslation()
   const initialValue = value
     ? options.find(opt => opt.value === value)?.label
     : ''
@@ -111,7 +113,7 @@ export function Select<T extends string>({
           ))}
 
           {filteredOptions.length === 0 && (
-            <div className='select__options-message'>Список пуст</div>
+            <div className='select__options-message'>{t('List is empty')}</div>
           )}
         </div>
       )}

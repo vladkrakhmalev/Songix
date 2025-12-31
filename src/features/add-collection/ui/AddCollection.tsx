@@ -4,8 +4,10 @@ import { Button } from '@shared/ui/button'
 import { collectionApi, validateCollection } from '@entities/collection'
 import { Modal } from '@shared/ui/modal'
 import { Input } from '@shared/ui/input'
+import { useTranslation } from 'react-i18next'
 
 export function AddCollection() {
+  const { t } = useTranslation()
   const [addCollection] = collectionApi.useAddCollectionMutation()
 
   const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -37,11 +39,14 @@ export function AddCollection() {
         size='small'
         onClick={() => setIsOpen(true)}
       >
-        Добавить сборник
+        {t('Add collection')}
       </Button>
 
       {isOpen && (
-        <Modal title='Создать новый сборник' onClose={() => setIsOpen(false)}>
+        <Modal
+          title={t('Create new collection')}
+          onClose={() => setIsOpen(false)}
+        >
           <div className='add-collection__form'>
             <Input
               value={title}
@@ -50,10 +55,10 @@ export function AddCollection() {
               onChange={handleInputChange}
               onSave={handleSubmit}
             >
-              Название
+              {t('Title')}
             </Input>
             <Button icon='plus-small' variant='accent' onClick={handleSubmit}>
-              Создать
+              {t('Create')}
             </Button>
           </div>
         </Modal>

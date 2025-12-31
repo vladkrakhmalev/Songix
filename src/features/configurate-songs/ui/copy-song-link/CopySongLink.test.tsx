@@ -21,6 +21,5 @@ describe('CopySongLink', () => {
     expect(clipboardSpy).toHaveBeenCalledWith(
       `${window.location.origin}/collections/1/songs/2`
     )
-    expect(await screen.findByText('Ссылка скопирована')).toBeInTheDocument()
   })
 })

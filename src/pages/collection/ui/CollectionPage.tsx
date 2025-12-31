@@ -6,8 +6,10 @@ import { Button } from '@shared/ui/button'
 import { collectionApi } from '@entities/collection'
 import { routes } from '@infra/router'
 import { BackButton } from '@infra/router'
+import { useTranslation } from 'react-i18next'
 
 function CollectionPage() {
+  const { t } = useTranslation()
   const { collectionId = '' } = useParams()
 
   const formatCollectionId = Number(collectionId)
@@ -27,7 +29,7 @@ function CollectionPage() {
           size='small'
           to={routes.songNew(collectionId)}
         >
-          Добавить песню
+          {t('Add song')}
         </Button>
       </div>
 

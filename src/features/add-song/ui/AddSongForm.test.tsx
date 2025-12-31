@@ -4,6 +4,7 @@ import { screen } from '@testing-library/react'
 import { AddSongForm } from './AddSongForm'
 import { renderWithProviders } from '@shared/tests/test-utils'
 import { routes } from '@infra/router'
+import i18next from 'i18next'
 
 const addSongMock = vi.fn()
 const navigateMock = vi.fn()
@@ -40,10 +41,15 @@ describe('AddSongForm', () => {
 
     const { container } = renderWithProviders(<AddSongForm collectionId='10' />)
 
-    await userEvent.type(screen.getByPlaceholderText('Название'), 'Новая песня')
+    await userEvent.type(
+      screen.getByPlaceholderText(i18next.t('Title')),
+      'Новая песня'
+    )
     const textarea = container.querySelector('.textarea__field') as HTMLElement
     await userEvent.type(textarea, 'Текст песни')
-    await userEvent.click(screen.getByRole('button', { name: 'Сохарнить' }))
+    await userEvent.click(
+      screen.getByRole('button', { name: i18next.t('Save') })
+    )
 
     expect(addSongMock).toHaveBeenCalledTimes(1)
     const payload = addSongMock.mock.calls[0][0]

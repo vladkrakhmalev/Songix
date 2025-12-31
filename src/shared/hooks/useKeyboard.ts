@@ -3,13 +3,9 @@ import { useEffect, useCallback, RefObject } from 'react'
 export type KeyboardHandler = (event: KeyboardEvent) => void
 
 export interface KeyboardConfig {
-  /** Элемент, на котором слушать события (по умолчанию document) */
   target?: RefObject<HTMLElement> | HTMLElement | null
-  /** Слушать события только когда элемент в фокусе */
   focusOnly?: boolean
-  /** Условие для активации слушателя */
   enabled?: boolean
-  /** Предотвращать стандартное поведение браузера */
   preventDefault?: boolean
 }
 
@@ -18,28 +14,10 @@ export interface KeyboardHandlers {
 }
 
 /**
- * Универсальный хук для обработки клавиатурных событий
+ * Universal hook for handling keyboard events.
  *
- * @param handlers - объект с обработчиками клавиш
- * @param config - конфигурация хука
- *
- * @example
- * // Простое использование
- * useKeyboard({
- *   'Escape': () => onClose(),
- *   'Enter': () => onSubmit()
- * })
- *
- * @example
- * // С конфигурацией
- * useKeyboard({
- *   'Escape': () => onClose(),
- *   'Enter': () => onSubmit()
- * }, {
- *   target: inputRef,
- *   focusOnly: true,
- *   enabled: isOpen
- * })
+ * @param handlers - map of key handlers
+ * @param config - hook configuration
  */
 export function useKeyboard(
   handlers: KeyboardHandlers,

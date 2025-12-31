@@ -3,6 +3,7 @@ import { renderWithProviders } from '@shared/tests/test-utils'
 import { screen } from '@testing-library/react'
 import { CollectionList } from './CollectionList'
 import type { ICollection } from '@entities/collection'
+import i18next from 'i18next'
 
 const getCollectionsMock = vi.fn()
 
@@ -48,7 +49,9 @@ describe('CollectionList', () => {
     getCollectionsMock.mockReturnValue({ data: [], isLoading: false })
 
     renderWithProviders(<CollectionList />)
-    expect(screen.getByText('Cборников нет')).toBeInTheDocument()
+    expect(
+      screen.getByText(i18next.t('No collections yet'))
+    ).toBeInTheDocument()
   })
 
   it('renders collection cards with counters', () => {

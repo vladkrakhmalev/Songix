@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import { ISong, songApi } from '@entities/song'
 import { Modal } from '@shared/ui/modal'
 import { routes } from '@infra/router'
+import { useTranslation } from 'react-i18next'
 
 interface IProps extends React.HTMLAttributes<HTMLDivElement> {
   song: ISong
@@ -13,9 +14,12 @@ interface IProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export function DeleteSong({ song, collectionId }: IProps) {
-  const [isOpenModal, setIsOpenModal] = useState<boolean>(false)
-  const [deleteSong] = songApi.useDeleteSongMutation()
+  const { t } = useTranslation()
   const navigate = useNavigate()
+
+  const [isOpenModal, setIsOpenModal] = useState<boolean>(false)
+
+  const [deleteSong] = songApi.useDeleteSongMutation()
 
   async function handleDelete() {
     await deleteSong(song.id)
@@ -27,24 +31,26 @@ export function DeleteSong({ song, collectionId }: IProps) {
     <>
       <ConfigurateItem
         icon='rr-trash'
-        title='Удалить'
+        title={t('Remove')}
         clickable={true}
         onClick={() => setIsOpenModal(true)}
       />
 
       {isOpenModal && (
-        <Modal title='Удалить песню?' onClose={() => setIsOpenModal(false)}>
+        <Modal title={t('Remove song')} onClose={() => setIsOpenModal(false)}>
           <div className='configurate-list__popup'>
             <p className='configurate-list__popup-text'>
-              Вы точно хотите удалить песню "{song.title}"?
+              {t('Are you sure you want to delete the song "{{title}}"?', {
+                title: song.title,
+              })}
             </p>
 
             <p className='configurate-list__popup-text'>
-              Это действие нельзя будет отменить
+              {t('This action cannot be undone')}
             </p>
 
             <Button icon='trash' variant='danger' onClick={handleDelete}>
-              Удалить
+              {t('Remove')}
             </Button>
 
             <Button
@@ -52,7 +58,7 @@ export function DeleteSong({ song, collectionId }: IProps) {
               color='light'
               onClick={() => setIsOpenModal(false)}
             >
-              Отменить
+              {t('Cancel')}
             </Button>
           </div>
         </Modal>

@@ -5,8 +5,10 @@ import { useParams } from 'react-router-dom'
 import { selectActiveCategories, selectSearch } from '@features/filter-songs'
 import { SKELETON_ARRAY } from '@shared/ui/skeleton'
 import { useAppSelector } from '@shared/hooks'
+import { useTranslation } from 'react-i18next'
 
 export function SongList() {
+  const { t } = useTranslation()
   const { collectionId = '' } = useParams()
 
   const activeCategories = useAppSelector(selectActiveCategories)
@@ -38,7 +40,7 @@ export function SongList() {
   }
 
   if (!filterSongs.length) {
-    return <p className='message'>Ничего не найдено</p>
+    return <p className='message'>{t('Nothing found')}</p>
   }
 
   return (

@@ -1,13 +1,13 @@
 import '@testing-library/jest-dom'
 import { vi } from 'vitest'
-
-// Provide a root element for portals (e.g., Modal).
-const mainRootId = 'main'
-if (!document.getElementById(mainRootId)) {
-  const main = document.createElement('div')
-  main.setAttribute('id', mainRootId)
-  document.body.appendChild(main)
-}
+import i18next from 'i18next'
+import { testI18n } from '@infra/translations/config/testI18n'
+import {
+  DEFAULT_LANGUAGE,
+  LANGUAGES_CODES,
+  NAMESPACES,
+  NAMESPACES_LIST,
+} from '@infra/translations/config/translations.constants'
 
 // Mock matchMedia for components relying on system theme detection.
 if (!window.matchMedia) {
@@ -32,5 +32,21 @@ if (!navigator.clipboard) {
     value: {
       writeText: vi.fn(),
     },
+  })
+}
+
+if (!i18next.isInitialized) {
+  i18next.init({
+    resources: testI18n.options.resources,
+    lng: DEFAULT_LANGUAGE,
+    fallbackLng: DEFAULT_LANGUAGE,
+    supportedLngs: LANGUAGES_CODES,
+    defaultNS: NAMESPACES.default,
+    ns: NAMESPACES_LIST,
+    keySeparator: false,
+    interpolation: {
+      escapeValue: false,
+    },
+    initImmediate: false,
   })
 }
