@@ -13,9 +13,9 @@ import { authApi } from '@entities/auth'
 import { filterSongsReducer } from '@features/filter-songs'
 import { configurateSongsReducer } from '@features/configurate-songs'
 import { editSongReducer } from '@features/edit-song'
-import type { RootState } from '@app/store/store'
+import type { AppState } from '@shared/config/redux'
 
-export function setupStore(preloadedState?: Partial<RootState>) {
+export function setupStore(preloadedState?: Partial<AppState>) {
   return configureStore({
     reducer: {
       [collectionApi.reducerPath]: collectionApi.reducer,
@@ -25,7 +25,7 @@ export function setupStore(preloadedState?: Partial<RootState>) {
       configurateSongs: configurateSongsReducer,
       editSong: editSongReducer,
     },
-    preloadedState: preloadedState as RootState,
+    preloadedState: preloadedState as AppState,
     middleware: getDefaultMiddleware =>
       getDefaultMiddleware().concat(
         collectionApi.middleware,

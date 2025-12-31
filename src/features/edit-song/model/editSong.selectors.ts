@@ -1,7 +1,7 @@
 import { createSelector } from '@reduxjs/toolkit'
-import type { RootState } from '@app/store/store'
+import type { AppState } from '@shared/config/redux'
 
-export const selectEditSongState = (state: RootState) => state.editSong
+export const selectEditSongState = (state: AppState) => state.editSong
 
 export const selectIsEditMode = createSelector(
   selectEditSongState,

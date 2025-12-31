@@ -1,7 +1,7 @@
 import { createSelector } from '@reduxjs/toolkit'
-import type { RootState } from '@app/store/store'
+import type { AppState } from '@shared/config/redux'
 
-export const selectConfigurateSongsState = (state: RootState) =>
+export const selectConfigurateSongsState = (state: AppState) =>
   state.configurateSongs
 
 export const selectSpeed = createSelector(

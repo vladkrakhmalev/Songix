@@ -11,7 +11,7 @@ interface IProps {
 }
 
 export function Modal({ children, title, onClose }: IProps) {
-  const RootElem = document.getElementById('main')
+  const RootElem = document.body
 
   const handleClose = useCallback(
     (event: MouseEvent | KeyboardEvent) => {

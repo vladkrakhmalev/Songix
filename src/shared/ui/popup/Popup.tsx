@@ -44,7 +44,7 @@ export function Popup(props: IPopup) {
     if (onToggle) onToggle(true)
   }
 
-  const rootElem = document.getElementById('main')
+  const rootElem = document.body
 
   const popup = (
     <div
