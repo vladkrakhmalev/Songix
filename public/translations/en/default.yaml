@@ -1,44 +1,44 @@
-"Collections": "Collections"
+Collections: Collections
 "Your collections:": "Your collections:"
-"No collections yet": "No collections yet"
-"Add collection": "Add collection"
-"Create new collection": "Create new collection"
-"Remove collection": "Remove collection"
-"Are you sure you want to delete the collection \"{{title}}\"?": "Are you sure you want to delete the collection \"{{title}}\"?"
+No collections yet: No collections yet
+Add collection: Add collection
+Create new collection: Create new collection
+Remove collection: Remove collection
+Are you sure you want to delete the collection "{{title}}"?: Are you sure you want to delete the collection "{{title}}"?
 
 "Songs: {{value}}": "Songs: {{value}}"
-"Add song": "Add song"
-"Edit song": "Edit song"
-"Remove song": "Remove song"
-"Something went wrong while loading the song": "Something went wrong while loading the song"
-"This song does not exist or is not available to you": "This song does not exist or is not available to you"
-"Are you sure you want to delete the song \"{{title}}\"?": "Are you sure you want to delete the song \"{{title}}\"?"
+Add song: Add song
+Edit song: Edit song
+Remove song: Remove song
+Something went wrong while loading the song: Something went wrong while loading the song
+This song does not exist or is not available to you: This song does not exist or is not available to you
+Are you sure you want to delete the song "{{title}}"?: Are you sure you want to delete the song "{{title}}"?
 
-"Title": "Title"
-"Text": "Text"
-"Categories": "Categories"
-"Tonality": "Tonality"
-"Speed": "Speed"
-"Size": "Size"
+Title: Title
+Text: Text
+Categories: Categories
+Tonality: Tonality
+Speed: Speed
+Size: Size
 
-"Search": "Search"
-"Nothing found": "Nothing found"
-"List is empty": "List is empty"
-"Settings": "Settings"
-"Title is required": "Title is required"
-"This action cannot be undone": "This action cannot be undone"
-"Theme": "Theme"
-"Light": "Light"
-"Dark": "Dark"
-"System": "System"
-"Language": "Language"
-"English": "English"
-"Russian": "Russian"
+Search: Search
+Nothing found: Nothing found
+List is empty: List is empty
+Settings: Settings
+Title is required: Title is required
+This action cannot be undone: This action cannot be undone
+Theme: Theme
+Light: Light
+Dark: Dark
+System: System
+Language: Language
+English: English
+Russian: Russian
 
-"Create": "Create"
-"Edit": "Edit"
-"Save": "Save"
-"Cancel": "Cancel"
-"Remove": "Remove"
-"Back": "Back"
-"Share": "Share"
+Create: Create
+Edit: Edit
+Save: Save
+Cancel: Cancel
+Remove: Remove
+Back: Back
+Share: Share
