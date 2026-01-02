@@ -19,12 +19,14 @@
   &__content {
     position: relative;
     width: 100%;
-    max-height: 500px;
+    max-height: 95vh;
     max-width: 500px;
     background-color: var(--bg-secondary);
     border-radius: 10px;
     padding: 20px;
     transition: .2s;
+    display: grid;
+    grid-template-rows: auto 1fr;
   }
 
   &__header {
@@ -37,5 +39,9 @@
 
   &__title {
     font-size: 20px;
+  }
+
+  &__body {
+    overflow: auto;
   }
 }

@@ -14,6 +14,9 @@ interface IPopup {
   onToggle?: (value: boolean) => void
 }
 
+// TODO Переделать компонент под контекстное меню, будет использвоаться только для этого
+// BUG: При повторном клике на тригер не закрывается компонент
+
 export function Popup(props: IPopup) {
   const {
     trigger,

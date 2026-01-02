@@ -12,7 +12,13 @@ export function GoogleLoginButton() {
   }
 
   return (
-    <Button icon='brands-google' color='light' onClick={handleGoogleLogin}>
+    <Button
+      icon='google'
+      iconStyle='brands'
+      color='light'
+      shouldFullWidth
+      onClick={handleGoogleLogin}
+    >
       {t('Sign in with Google')}
     </Button>
   )

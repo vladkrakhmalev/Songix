@@ -1,10 +1,11 @@
-.registration-form {
+.auth-form {
   width: 100%;
   display: grid;
   gap: 20px;
 
   &__error {
-    color: var(--color-error);
+    color: var(--color-negative);
+    font-size: var(--text-size-small);
   }
 
   &__message {
@@ -17,6 +18,7 @@
     padding-left: 4px;
     cursor: pointer;
     transition: .2s;
+    font-size: var(--text-size-smaller);
     max-width: max-content;
 
     &:hover {

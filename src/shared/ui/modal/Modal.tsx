@@ -40,7 +40,7 @@ export function Modal({ children, title, onClose }: IProps) {
           </div>
         )}
 
-        {children}
+        <div className='modal__body'>{children}</div>
       </div>
     </div>
   )

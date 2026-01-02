@@ -1,47 +1,51 @@
+import '../AuthForm.scss'
+import { authApi } from '@entities/auth'
+import { useAuthForm } from '@features/auth/model/useAuthForm'
+import { routes } from '@infra/router'
+import { NAMESPACES } from '@infra/translations'
 import { Button } from '@shared/ui/button'
 import { Input } from '@shared/ui/input'
-import { useState } from 'react'
-import './LoginForm.scss'
-import { authApi } from '@entities/auth'
-import { useNavigate } from 'react-router-dom'
-import { GoogleLoginButton } from './GoogleLoginButton'
-import { routes } from '@infra/router'
 import { useTranslation } from 'react-i18next'
-import { NAMESPACES } from '@infra/translations'
+import { useNavigate } from 'react-router-dom'
+
+const LOGIN_ERRORS = {
+  400: 'Incorrect email or password',
+  500: 'An error occurred on the server side',
+} as const
+
+type LoginDto = { email: string; password: string }
+
+// TODO: Добавить валидацию
 
 export function LoginForm() {
   const { t } = useTranslation(NAMESPACES.auth)
   const navigate = useNavigate()
-  const [login, { isLoading }] = authApi.useLoginMutation()
 
-  const [form, setForm] = useState({
-    email: '',
-    password: '',
+  const [login, state] = authApi.useLoginMutation()
+
+  const {
+    form,
+    change,
+    handleSubmit,
+    errorMessage,
+    isLoading,
+    isSubmitDisabled,
+  } = useAuthForm<LoginDto>({
+    initialValues: { email: '', password: '' },
+    isLoading: state.isLoading,
+    isSuccess: state.isSuccess,
+    serverError: state.error,
+    errorsMap: LOGIN_ERRORS,
+    submit: values => void login(values),
+    onSuccess: () => navigate(routes.collections()),
   })
-  const [error, setError] = useState<string>('')
-  const idDisabled = !!error || isLoading
-
-  async function handlerSubmit() {
-    const response = await login(form)
-
-    if (response.error) {
-      setError(t('Invalid email or password'))
-    } else {
-      navigate(routes.collections())
-    }
-  }
-
-  function handlerChange(field: string, value: string) {
-    setForm({ ...form, [field]: value })
-    setError('')
-  }
 
   return (
-    <form onSubmit={event => event.preventDefault()} className='login-form'>
+    <form onSubmit={handleSubmit} className='auth-form'>
       <Input
         value={form.email}
-        onChange={value => handlerChange('email', value)}
         disabled={isLoading}
+        onChange={v => change('email', v)}
       >
         {t('Email')}
       </Input>
@@ -49,19 +53,17 @@ export function LoginForm() {
       <Input
         type='password'
         value={form.password}
-        onChange={value => handlerChange('password', value)}
         disabled={isLoading}
+        onChange={v => change('password', v)}
       >
         {t('Password')}
       </Input>
 
-      {error && <p className='login-form__error'>{error}</p>}
+      {errorMessage && <p className='auth-form__error'>{errorMessage}</p>}
 
-      <Button disabled={idDisabled} onClick={handlerSubmit}>
+      <Button variant='accent' disabled={isSubmitDisabled} type='submit'>
         {t('Sign in')}
       </Button>
-
-      <GoogleLoginButton />
     </form>
   )
 }

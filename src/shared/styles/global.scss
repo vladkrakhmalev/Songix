@@ -18,6 +18,11 @@ html {
   background-color: var(--bg-secondary);
 }
 
+button {
+  background-color: transparent;
+  border: none;
+}
+
 ._hide {
   display: none;
 }

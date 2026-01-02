@@ -1,29 +1,36 @@
 .auth-layout {
   display: grid;
   align-items: center;
-  justify-content: center;
+  justify-items: center;
   height: 100vh;
   padding: 20px;
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-primary);
+
+  @media (max-width: 576px) {
+    background-color: var(--bg-secondary);
+  }
   
   &__container {
+    background-color: var(--bg-secondary);
+    padding: 2rem;
+    border-radius: 1rem;
+    max-width: 500px;
+    width: 100%;
     display: grid;
-    gap: 20px;
-    background-color: var(--bg-primary);
-    padding: 20px;
-    border-radius: 20px;
-    width: 500px;
-    box-shadow: var(--shadow-primary);
+    gap: 1rem;
+    text-align: center;
+    justify-items: center;
 
-    @media (max-width: 768px) {
-      width: 100%;
+    @media (max-width: 576px) {
+      padding: 0;
     }
   }
 
   &__logo {
-    font-size: var(--text-size-big);
+    font-size: 3rem;
     font-weight: 600;
     text-decoration: none;
-    color: var(--text-primary);
+    color: var(--bg-primary);
+    max-width: max-content;
   }
 }

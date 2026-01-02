@@ -1,5 +1,5 @@
 import { UILink } from '@shared/ui/link'
-import { RegistrationForm } from '@features/register'
+import { RegistrationForm } from '@features/auth'
 import { routes } from '@infra/router'
 import { useTranslation } from 'react-i18next'
 import { NAMESPACES } from '@infra/translations'

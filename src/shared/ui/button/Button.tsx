@@ -10,6 +10,7 @@ type TProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   icon?: string
   iconStyle?: TIconStyle
   to?: string
+  shouldFullWidth?: boolean
   shouldIconBehindText?: boolean
 }
 
@@ -23,6 +24,7 @@ export function Button({
   icon,
   iconStyle,
   to,
+  shouldFullWidth,
   shouldIconBehindText,
   onClick,
   ...props
@@ -33,7 +35,10 @@ export function Button({
     'button',
     variant && '_' + variant,
     size && '_' + size,
-    { '_only-icon': !children && icon },
+    {
+      '_only-icon': !children && icon,
+      _full: shouldFullWidth,
+    },
     className
   )
 
