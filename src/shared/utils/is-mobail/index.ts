@@ -1,1 +1,0 @@
-export { isMobail } from './isMobail'
