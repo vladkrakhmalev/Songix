@@ -1,9 +1,18 @@
 .song-content {
   display: grid;
   grid-template-rows: auto 1fr;
-  height: 100%;
   gap: 20px;
-  transition: .2s;
+  height: 100%;
+  overflow-y: auto;
+
+  &._full {
+    position: fixed;
+    inset: 0;
+    background-color: var(--bg-secondary);
+    padding: 1rem;
+    overflow-y: auto;
+    z-index: 100;
+  }
 
   @media (max-width: 768px) {
     gap: 10px;
@@ -13,12 +22,7 @@
     display: flex;
     align-items: center;
     gap: 1rem;
-  }
-
-  &__body._full {
-    background-color: var(--bg-primary);
-    padding: 1rem;
-  }
+  }  
 
   &__title {
     font-size: var(--text-size-big);
@@ -26,17 +30,11 @@
     margin-right: auto;
   }
 
-  &__text {
-    font-size: 16px;
-    font-family: sans-serif;
-    overflow-y: auto;
-  }
-
   &__buttons {
     display: grid;
+    justify-content: end;
     gap: 10px;
-    position: absolute;
+    position: sticky;
     bottom: 20px;
-    right: 20px;
   }
 }

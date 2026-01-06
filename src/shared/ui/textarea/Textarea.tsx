@@ -1,30 +1,38 @@
-import { useCallback, useRef, useState } from 'react'
+import { CSSProperties, useCallback, useRef, useState } from 'react'
 import './Textarea.scss'
 import ContentEditable from 'react-contenteditable'
-import sanitizeHtml from 'sanitize-html'
 import clsx from 'clsx'
+import { sanitize } from '@shared/utils/sanitize'
 
-interface ITextarea {
+type TextareaBaseProps = {
   value: string
-  disabled?: boolean
   placeholder?: string
-  onChange: (value: string) => void
+  style?: CSSProperties
   onFocus?: () => void
   onBlur?: () => void
 }
 
-const sanitizeOptions = {
-  allowedTags: ['br', 'div'],
+type TextareaEditableProps = TextareaBaseProps & {
+  readonly?: false
+  onChange: (value: string) => void
 }
+
+type TextareaReadonlyProps = TextareaBaseProps & {
+  readonly: true
+  onChange?: (value: string) => void
+}
+
+type TextareaProps = TextareaEditableProps | TextareaReadonlyProps
 
 export function Textarea({
   value,
-  disabled,
+  readonly,
   placeholder,
-  onChange,
+  style,
   onFocus,
   onBlur,
-}: ITextarea) {
+  onChange,
+}: TextareaProps) {
   const showPlaceholder = placeholder && !value
 
   const textareaRef = useRef<HTMLInputElement>(null)
@@ -32,11 +40,11 @@ export function Textarea({
   const [isFocused, setIsFocused] = useState<boolean>(false)
 
   const handleFocus = useCallback(() => {
-    if (disabled) return
+    if (readonly) return
     textareaRef.current?.focus()
     setIsFocused(true)
     onFocus?.()
-  }, [disabled, onFocus])
+  }, [readonly, onFocus])
 
   function handleBlur() {
     textareaRef.current?.blur()
@@ -45,19 +53,28 @@ export function Textarea({
   }
 
   function handleChange(value: string) {
-    const cleanText = sanitizeHtml(value, sanitizeOptions)
+    if (readonly) return
+    const cleanText = sanitize(value)
     onChange(cleanText)
   }
 
   return (
-    <div className={clsx('textarea', isFocused && '_focused')}>
+    <div
+      className={clsx(
+        'textarea',
+        isFocused && '_focused',
+        readonly && '_readonly'
+      )}
+    >
       {showPlaceholder && (
         <span className='textarea__placeholder'>{placeholder}</span>
       )}
 
       <ContentEditable
         className='textarea__field'
+        style={style}
         html={value}
+        disabled={readonly}
         onChange={event => handleChange(event.target.value)}
         onFocus={handleFocus}
         onBlur={handleBlur}
