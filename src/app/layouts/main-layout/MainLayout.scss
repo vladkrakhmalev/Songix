@@ -1,8 +1,13 @@
 .main-layout {
-  height: 100vh;
+  height: 100dvh;
   width: 100vw;
   display: grid;
   gap: 1rem;
   grid-template-rows: 1fr auto;
   padding: 1rem;
+
+  &__content {
+    height: 100%;
+    overflow-y: auto;
+  }
 }
