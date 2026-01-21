@@ -1,6 +1,5 @@
 import './SongList.scss'
 import { ISong, songApi, SongCard, SongCardSkeleton } from '@entities/song'
-import { LikeSong } from '@features/like-song'
 import { useParams } from 'react-router-dom'
 import { selectActiveCategories, selectSearch } from '@features/filter-songs'
 import { SKELETON_ARRAY } from '@shared/ui/skeleton'
@@ -46,11 +45,7 @@ export function SongList() {
   return (
     <div className='song-list'>
       {filterSongs.map(song => (
-        <SongCard
-          key={song.id}
-          song={song}
-          likeSong={<LikeSong song={song} />}
-        />
+        <SongCard key={song.id} song={song} />
       ))}
     </div>
   )

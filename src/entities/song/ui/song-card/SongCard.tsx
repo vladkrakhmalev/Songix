@@ -6,7 +6,7 @@ import { routes } from '@infra/router'
 
 interface ISongCard {
   song: ISong
-  likeSong: ReactNode
+  likeSong?: ReactNode
 }
 
 export function SongCard({ song, likeSong }: ISongCard) {
