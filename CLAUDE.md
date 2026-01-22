@@ -66,17 +66,7 @@ Use `useAppDispatch` and `useAppSelector` from `@shared/config/redux`. The type 
 
 ## Code Style
 
-### Functions
-- Use **function declarations** (not arrow functions) for React components: `export function ComponentName() {}`
-- Prefer `function handleXxx()` declarations for in-component handlers, unless wrapped in `useCallback`
-- Arrow functions are fine for inline callbacks (`map`, `filter`, `useEffect`, single-expression handlers like `onClick={() => setOpen(false)}`)
-- If an event handler performs 2+ actions, extract it as a named `function handleXxx` — do not inline it
-
-### Selectors
-- Selector files: `{segmentName}.selectors.ts`, co-located with the slice
-- Always use `createSelector`; build from the base segment selector
-- Selectors receive `AppState`, never call `useAppSelector` in selector files
-- Reuse already-declared selectors instead of accessing fields directly
+See [CODESTYLE.md](./CODESTYLE.md) for full code style rules with examples and antipatterns.
 
 ## Testing
 
