@@ -1,4 +1,13 @@
 Collections: Collections
+Concerts: Concerts
+Create concert: Create concert
+Create new concert: Create new concert
+Edit concert: Edit concert
+Remove concert: Remove concert
+No concerts yet: No concerts yet
+Are you sure you want to delete the concert "{{title}}"?: Are you sure you want to delete the concert "{{title}}"?
+"Date: {{value}}": "Date: {{value}}"
+Date: Date
 "Your collections:": "Your collections:"
 No collections yet: No collections yet
 Add collection: Add collection

@@ -1,0 +1,30 @@
+.concert-card {
+  background-color: var(--bg-primary);
+  padding: 20px;
+  border-radius: 20px;
+  display: grid;
+  gap: 10px;
+  align-content: start;
+  transition: .2s;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  &__title {
+    flex: 1;
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  &__date {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+  }
+}

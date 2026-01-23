@@ -14,7 +14,7 @@ import { useKeyboard } from '@shared/hooks'
 interface IInput {
   value: string
   children?: string
-  type?: 'text' | 'password' | 'search' | 'independent'
+  type?: 'text' | 'password' | 'search' | 'independent' | 'date'
   error?: string
   disabled?: boolean
   className?: string

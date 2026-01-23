@@ -6,6 +6,7 @@ import { SongPage } from '@pages/song'
 import { AuthLayout } from '@app/layouts/auth-layout'
 import { MainLayout } from '@app/layouts/main-layout'
 import { CollectionsPage } from '@pages/collections'
+import { ConcertsPage } from '@pages/concerts'
 import { CollectionPage } from '@pages/collection'
 import { SongNewPage } from '@pages/song-new'
 import { SettingsPage } from '@pages/settings'
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
       {
         path: routes.songNew(),
         element: <SongNewPage />,
+      },
+      {
+        path: routes.concerts(),
+        element: <ConcertsPage />,
       },
       {
         path: routes.settings(),

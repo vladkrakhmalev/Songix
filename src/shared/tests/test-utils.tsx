@@ -10,6 +10,7 @@ import { testI18n } from '@infra/translations/config/testI18n'
 import { collectionApi } from '@entities/collection'
 import { songApi } from '@entities/song'
 import { authApi } from '@entities/auth'
+import { concertApi } from '@entities/concert'
 import { filterSongsReducer } from '@features/filter-songs'
 import { configurateSongsReducer } from '@features/configurate-songs'
 import { editSongReducer } from '@features/edit-song'
@@ -21,6 +22,7 @@ export function setupStore(preloadedState?: Partial<AppState>) {
       [collectionApi.reducerPath]: collectionApi.reducer,
       [songApi.reducerPath]: songApi.reducer,
       [authApi.reducerPath]: authApi.reducer,
+      [concertApi.reducerPath]: concertApi.reducer,
       filterSongs: filterSongsReducer,
       configurateSongs: configurateSongsReducer,
       editSong: editSongReducer,
@@ -30,7 +32,8 @@ export function setupStore(preloadedState?: Partial<AppState>) {
       getDefaultMiddleware().concat(
         collectionApi.middleware,
         songApi.middleware,
-        authApi.middleware
+        authApi.middleware,
+        concertApi.middleware
       ),
   })
 }

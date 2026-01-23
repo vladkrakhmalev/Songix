@@ -1,4 +1,13 @@
 Collections: Сборники
+Concerts: Выступления
+Create concert: Создать выступление
+Create new concert: Создать новое выступление
+Edit concert: Редактировать выступление
+Remove concert: Удалить выступление
+No concerts yet: Выступлений нет
+Are you sure you want to delete the concert "{{title}}"?: Вы точно хотите удалить выступление "{{title}}"?
+"Date: {{value}}": "Дата: {{value}}"
+Date: Дата
 "Your collections:": "Ваши сборники:"
 No collections yet: Сборников нет
 Add collection: Добавить сборник

@@ -5,12 +5,14 @@ import { configurateSongsReducer } from '@features/configurate-songs'
 import { songApi } from '@entities/song'
 import { editSongReducer } from '@features/edit-song'
 import { authApi } from '@entities/auth'
+import { concertApi } from '@entities/concert'
 
 export const store = configureStore({
   reducer: {
     [collectionApi.reducerPath]: collectionApi.reducer,
     [songApi.reducerPath]: songApi.reducer,
     [authApi.reducerPath]: authApi.reducer,
+    [concertApi.reducerPath]: concertApi.reducer,
     filterSongs: filterSongsReducer,
     configurateSongs: configurateSongsReducer,
     editSong: editSongReducer,
@@ -19,7 +21,8 @@ export const store = configureStore({
     getDefaultMiddleware().concat(
       collectionApi.middleware,
       songApi.middleware,
-      authApi.middleware
+      authApi.middleware,
+      concertApi.middleware
     ),
 })
 

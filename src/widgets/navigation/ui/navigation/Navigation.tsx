@@ -14,6 +14,7 @@ export function Navigation() {
 
   const navigationItems: TNavigationItem[] = [
     { link: routes.collections(), icon: 'music-alt', title: t('Collections') },
+    { link: routes.concerts(), icon: 'calendar', title: t('Concerts') },
     { link: routes.settings(), icon: 'settings', title: t('Settings') },
   ] as const
 
